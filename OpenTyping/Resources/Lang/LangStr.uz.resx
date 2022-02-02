@@ -360,8 +360,8 @@
   <data name="Anonymous" xml:space="preserve">
     <value>Anonim</value>
   </data>
-  <data name="CongratMsg" xml:space="preserve">
-    <value>O'ringa kirganingiz bilan tabriklaymiz.</value>
+  <data name="CongratLocalMsg" xml:space="preserve">
+    <value>Lokal ichida o'ringa kirganingiz bilan tabriklaymiz.</value>
   </data>
   <data name="ElapsedTime" xml:space="preserve">
     <value>O'tilgan soniya</value>
@@ -386,5 +386,17 @@
   </data>
   <data name="ErrMsg24" xml:space="preserve">
     <value>DB fayli buzilgan. Dasturni qayta o'rnating yoki buzilgan DB faylini o'chirib tashlang.</value>
+  </data>
+  <data name="CongratServerMsg" xml:space="preserve">
+    <value>Server ichida o'ringa kirganingiz bilan tabriklaymiz.</value>
+  </data>
+  <data name="FetchServerData" xml:space="preserve">
+    <value>Serverdan maʼlumotlar olinishi kutilmoqda...</value>
+  </data>
+  <data name="NoInternet" xml:space="preserve">
+    <value>Internet yo'q!</value>
+  </data>
+  <data name="NoInternetWarn" xml:space="preserve">
+    <value>Internet yo'q! Internetga ulaning.</value>
   </data>
 </root>

@@ -1,8 +1,10 @@
-﻿using SQLite;
+﻿using Google.Cloud.Firestore;
+using SQLite;
 using System;
 
 namespace OpenTyping
 {
+    [FirestoreData]
     [Table("Users")]
     public class User : IComparable<User>
     {
@@ -18,12 +20,19 @@ namespace OpenTyping
             this.Time = time;
         }
 
+        [FirestoreProperty]
         public string Name { get; set; }
+        [FirestoreProperty]
         public string Org { get; set; }
+        [FirestoreProperty]
         public int Accuracy { get; set; }
+        [FirestoreProperty]
         public int Speed { get; set; }
+        [FirestoreProperty]
         public int Count { get; set; }
+
         private double time;
+        [FirestoreProperty]
         public double Time
         {
             // Add this to fix sqlite datatype-conversion

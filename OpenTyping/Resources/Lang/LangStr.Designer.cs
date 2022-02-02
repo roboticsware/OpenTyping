@@ -160,11 +160,20 @@ namespace OpenTyping.Resources.Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Congratulations. Your new record!! .
+        ///   Looks up a localized string similar to Congratulations. Your new record in local!! .
         /// </summary>
-        internal static string CongratMsg {
+        internal static string CongratLocalMsg {
             get {
-                return ResourceManager.GetString("CongratMsg", resourceCulture);
+                return ResourceManager.GetString("CongratLocalMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Congratulations. Your new record in server!! .
+        /// </summary>
+        internal static string CongratServerMsg {
+            get {
+                return ResourceManager.GetString("CongratServerMsg", resourceCulture);
             }
         }
         
@@ -448,6 +457,15 @@ namespace OpenTyping.Resources.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Waiting for feching data from Server....
+        /// </summary>
+        internal static string FetchServerData {
+            get {
+                return ResourceManager.GetString("FetchServerData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Practice is finished..
         /// </summary>
         internal static string FinishedPrac {
@@ -588,6 +606,24 @@ namespace OpenTyping.Resources.Lang {
         internal static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Internet!.
+        /// </summary>
+        internal static string NoInternet {
+            get {
+                return ResourceManager.GetString("NoInternet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Internet! Please connect to Internet..
+        /// </summary>
+        internal static string NoInternetWarn {
+            get {
+                return ResourceManager.GetString("NoInternetWarn", resourceCulture);
             }
         }
         

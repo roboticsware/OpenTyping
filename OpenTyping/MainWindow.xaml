@@ -55,7 +55,7 @@
                         </Rectangle.OpacityMask>
                     </Rectangle>
                     <Label x:Name="MenuLbl1" Style="{StaticResource TabItemLabel}"
-                           Content="홈" TabIndex="2147483645"/>
+                           Content="홈"/>
                 </StackPanel>
             </TabItem.Header>
             <local:HomeMenu x:Name="HomeMenu"/>

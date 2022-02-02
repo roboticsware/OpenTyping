@@ -266,14 +266,14 @@ namespace OpenTyping
             WordPracticeMenu.StartBtn.Text = LangStr.StartPrac;
             WordPracticeMenu.TabLbl1.Content = LangStr.Local;
             WordPracticeMenu.TabLbl2.Content = LangStr.Server;
-            WordPracticeMenu.Header1.Header = LangStr.Rank;
-            WordPracticeMenu.Header2.Header = LangStr.Name;
-            WordPracticeMenu.Header3.Header = LangStr.Org;
-            WordPracticeMenu.Header4.Header = LangStr.Accuracy;
-            WordPracticeMenu.Header5.Header = LangStr.Speed;
-            WordPracticeMenu.Header6.Header = LangStr.WordCount;
-            WordPracticeMenu.Header7.Header = LangStr.ElapsedTime;
-            WordPracticeMenu.NotSupport.Text = LangStr.NotSupport;
+            WordPracticeMenu.Header1.Header = WordPracticeMenu.Header8.Header = LangStr.Rank;
+            WordPracticeMenu.Header2.Header = WordPracticeMenu.Header9.Header = LangStr.Name;
+            WordPracticeMenu.Header3.Header = WordPracticeMenu.Header10.Header = LangStr.Org;
+            WordPracticeMenu.Header4.Header = WordPracticeMenu.Header11.Header = LangStr.Accuracy;
+            WordPracticeMenu.Header5.Header = WordPracticeMenu.Header12.Header = LangStr.Speed;
+            WordPracticeMenu.Header6.Header = WordPracticeMenu.Header13.Header = LangStr.WordCount;
+            WordPracticeMenu.Header7.Header = WordPracticeMenu.Header14.Header = LangStr.ElapsedTime;
+            WordPracticeMenu.NoInternet.Content = LangStr.NoInternet;
             WordPracticeMenu.TBlblName.Text = LangStr.Name;
             WordPracticeMenu.TBlblOrg.Text = LangStr.Org;
 
