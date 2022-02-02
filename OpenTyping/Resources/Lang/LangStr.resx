@@ -363,8 +363,8 @@
   <data name="Anonymous" xml:space="preserve">
     <value>Anonymous</value>
   </data>
-  <data name="CongratMsg" xml:space="preserve">
-    <value>Congratulations. Your new record!! </value>
+  <data name="CongratServerMsg" xml:space="preserve">
+    <value>Congratulations. Your new record in server!! </value>
   </data>
   <data name="WordCount" xml:space="preserve">
     <value>Words</value>
@@ -389,5 +389,17 @@
   </data>
   <data name="ErrMsg24" xml:space="preserve">
     <value>DB file is broken. Please reinstall this App or delete the broken DB file.</value>
+  </data>
+  <data name="CongratLocalMsg" xml:space="preserve">
+    <value>Congratulations. Your new record in local!! </value>
+  </data>
+  <data name="FetchServerData" xml:space="preserve">
+    <value>Waiting for feching data from Server...</value>
+  </data>
+  <data name="NoInternet" xml:space="preserve">
+    <value>No Internet!</value>
+  </data>
+  <data name="NoInternetWarn" xml:space="preserve">
+    <value>No Internet! Please connect to Internet.</value>
   </data>
 </root>

@@ -357,8 +357,8 @@
   <data name="Anonymous" xml:space="preserve">
     <value>무명</value>
   </data>
-  <data name="CongratMsg" xml:space="preserve">
-    <value>새로운 기록갱신을 축하합니다!!</value>
+  <data name="CongratLocalMsg" xml:space="preserve">
+    <value>로컬에서 새로운 기록갱신을 축하합니다!!</value>
   </data>
   <data name="ElapsedTime" xml:space="preserve">
     <value>소요시간(초)</value>
@@ -380,5 +380,17 @@
   </data>
   <data name="ErrMsg24" xml:space="preserve">
     <value>DB 파일이 손상되었습니다. 앱을 재설치 하거나 손상된 DB 파일을 지워주세요.</value>
+  </data>
+  <data name="CongratServerMsg" xml:space="preserve">
+    <value>서버에서 새로운 기록갱신을 축하합니다!!</value>
+  </data>
+  <data name="FetchServerData" xml:space="preserve">
+    <value>서버에서 데이터를 가져오는 중입니다. 잠시만 기다려 주세요...</value>
+  </data>
+  <data name="NoInternet" xml:space="preserve">
+    <value>인터넷 연결 없음!</value>
+  </data>
+  <data name="NoInternetWarn" xml:space="preserve">
+    <value>인터넷 연결 없음! 인터넷에 연결해 주세요.</value>
   </data>
 </root>

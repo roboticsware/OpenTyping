@@ -77,5 +77,18 @@ namespace OpenTyping.Properties {
                 return ResourceManager.GetStream("Pressed", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///  &quot;type&quot;: &quot;service_account&quot;,
+        ///  &quot;project_id&quot;: &quot;roboticsware-uz&quot;,
+        ///  &quot;private_key_id&quot;: &quot;a2380f964307131cce70330b9d916f78d12aca3a&quot;,
+        ///  &quot;private_key&quot;: &quot;-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCcA3gUfhse6SZo\nA3SOE4xQBuSXa/PHO65Z57fMqbYotCU6Fy1si5N8wAV3fjM834QRbvR8iy7jVQrE\nped+8I++KbDQJxuowjd2uBgiu0Gdt+I7N8u4lKhsp+jDc1/2sETmTTqZZFN0LeEo\nrHxCjH6nSd57cfoBHj2flpDwvbYjC75Jq2qbrzPc2X7tWVMDBaKeAyRNBTy45H/O\npqhT0Fi/NB/c6Dii2S24ACpnSz/WDZSvoEQ+065EZTw7HsO+gTn/4hiWaQAylZq7\nv [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string private_key_for_firestore {
+            get {
+                return ResourceManager.GetString("private_key_for_firestore", resourceCulture);
+            }
+        }
     }
 }

@@ -23,6 +23,7 @@ namespace OpenTyping
         public int Accuracy { get; set; }
         public int Speed { get; set; }
         public int Count { get; set; }
+
         private double time;
         public double Time
         {

@@ -45,13 +45,15 @@
                            FontSize="14pt"/>
             </StackPanel>
             <Grid DockPanel.Dock="Bottom">
-                <mah:MetroAnimatedTabControl x:Name="MenuTabControl" mah:TabControlHelper.Underlined="TabPanel">
-                    <TabItem>
+                <mah:MetroAnimatedTabControl x:Name="RankTabControl" mah:TabControlHelper.Underlined="TabPanel"
+                                             SelectionChanged="Tab_SelectionChanged">
+                    <TabItem Name="TabLocal">
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
-                                <Rectangle Style="{StaticResource TabItemIconRectangle}" 
+                                <Rectangle Name="RectLocal"
+                                           Style="{StaticResource TabItemIconRectangle}" 
                                            Width="25" 
-                                           Height="15" Fill="#1c7ed6">
+                                           Height="15">
                                     <Rectangle.OpacityMask>
                                         <VisualBrush Stretch="Uniform"
                                                      Visual="{iconPacks:FontAwesome Kind=DatabaseSolid}"/>
@@ -60,7 +62,7 @@
                                 <Label x:Name="TabLbl1" Style="{StaticResource MahApps.Styles.Label}" Content="Local"/>
                             </StackPanel>
                         </TabItem.Header>
-                        <ListView Name="LVusers"
+                        <ListView Name="LVlocal"
                                   Margin="2"
                                   BorderThickness="0"
                                   SelectedIndex="0"
@@ -80,12 +82,13 @@
                             </ListView.View>
                         </ListView>
                     </TabItem>
-                    <TabItem>
+                    <TabItem Name="TabServer">
                         <TabItem.Header>
                             <StackPanel Orientation="Horizontal">
-                                <Rectangle Style="{StaticResource TabItemIconRectangle}" 
+                                <Rectangle Name="RectServer"
+                                           Style="{StaticResource TabItemIconRectangle}" 
                                            Width="25" 
-                                           Height="15" Fill="#868e96">
+                                           Height="15">
                                     <Rectangle.OpacityMask>
                                         <VisualBrush Stretch="Uniform"
                                                      Visual="{iconPacks:FontAwesome Kind=ServerSolid}"/>
@@ -94,9 +97,43 @@
                                 <Label x:Name="TabLbl2" Style="{StaticResource MahApps.Styles.Label}" Content="Server"/>
                             </StackPanel>
                         </TabItem.Header>
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Name="NotSupport" FontSize="20"/>
-                        </StackPanel>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" 
+                                        HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center" 
+                                        Opacity="0"
+                                        Name="NoNetwork">
+                                <Rectangle Style="{StaticResource TabItemIconRectangle}" 
+                                           Width="50" 
+                                           Height="35" Fill="#f03e3e">
+                                    <Rectangle.OpacityMask>
+                                        <VisualBrush Stretch="Uniform"
+                                                     Visual="{iconPacks:FontAwesome Kind=UnlinkSolid}"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                                <Label x:Name="NoInternet" FontWeight="Bold" FontSize="25" Content="No Internet"/>
+                            </StackPanel>
+                            <ListView Name="LVserver"
+                                      Background="Transparent"
+                                      Margin="2"
+                                      BorderThickness="0"
+                                      SelectedIndex="0"
+                                      AlternationCount="10"
+                                      Style="{StaticResource MahApps.Styles.ListView.Virtualized}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn x:Name="Header8"  DisplayMemberBinding="{Binding Converter={StaticResource IndexConverter},
+                                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}}" Header="Rank" Width="50"/>
+                                        <GridViewColumn x:Name="Header9" DisplayMemberBinding="{Binding Name}" Header="Name" Width="150"/>
+                                        <GridViewColumn x:Name="Header10" DisplayMemberBinding="{Binding Org}" Header="Org" Width="250"/>
+                                        <GridViewColumn x:Name="Header11" DisplayMemberBinding="{Binding Accuracy}" Header="Accuracy" Width="50"/>
+                                        <GridViewColumn x:Name="Header12" DisplayMemberBinding="{Binding Speed}" Header="Speed" Width="50"/>
+                                        <GridViewColumn x:Name="Header13" DisplayMemberBinding="{Binding Count}" Header="Count" Width="50"/>
+                                        <GridViewColumn x:Name="Header14" DisplayMemberBinding="{Binding Time, StringFormat='{}{0:0.0}'}" Header="Time" Width="80"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
                     </TabItem>
                 </mah:MetroAnimatedTabControl>
             </Grid>
