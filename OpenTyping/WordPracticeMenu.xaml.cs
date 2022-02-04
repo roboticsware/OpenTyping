@@ -9,6 +9,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using FamFamFam.Flags.Wpf;
+using System.Windows.Media.Imaging;
+using System.Windows.Resources;
 
 namespace OpenTyping
 {
@@ -31,12 +34,44 @@ namespace OpenTyping
             InitializeComponent();
             SetTextBylanguage();
 
+            if ((string)Settings.Default["Country"] == "")
+            {
+                string country = (string)Settings.Default["ProgramLang"];
+                if ((string)Settings.Default["ProgramLang"] == "en")
+                {
+                    country = "gb";
+                }
+                else if ((string)Settings.Default["ProgramLang"] == "ko")
+                {
+                    country = "kr";
+                }
+                CountryPicker.SelectedItem = GetCountryData(country);
+            }
+            else
+            {
+                CountryPicker.SelectedItem = GetCountryData((string)Settings.Default["Country"]);
+            }
+            
+
             RankLocal = new RankLocal();
             RankServer = new RankServer();
 
             LVusers = LVlocal;
             Rank = RankLocal;
             LoadDatabase();
+        }
+
+        private CountryData? GetCountryData(string countryName)
+        {
+            foreach (var country in CountryData.AllCountries)
+            {
+                if (country.Iso2.ToLower() == countryName)
+                {
+                    return country;
+                }
+            }
+
+            return null;
         }
 
         private void SetTextBylanguage()
@@ -81,6 +116,8 @@ namespace OpenTyping
         {
             Settings.Default["Name"] = TBname.Text;
             Settings.Default["Org"] = TBorg.Text;
+            CountryData country = (CountryData)CountryPicker.SelectedValue;
+            Settings.Default["Country"] = country.Iso2.ToLower();
 
             WordPracticeWindow wordPracticeWindow = new WordPracticeWindow();
             wordPracticeWindow.Closed += new EventHandler(WordPracticeWindow_Closed);
@@ -196,6 +233,53 @@ namespace OpenTyping
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public class KeyLayoutToFlagImgConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string text = value as string;
+            if (text == null)
+            {
+                return null;
+            }
+
+            if (text == "QWERTY")
+            {
+                text = "us";
+            }
+            else if(text == "두벌식")
+            {
+                text = "kr";
+            }
+
+            try
+            {
+                string uriString = "/FamFamFam.Flags.Wpf;component/Images/" + text.ToLower() + ".png";
+                Uri uriResource = new Uri(uriString, UriKind.Relative);
+                StreamResourceInfo resourceStream = Application.GetResourceStream(uriResource);
+                if (resourceStream == null)
+                {
+                    return null;
+                }
+
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = resourceStream.Stream;
+                bitmapImage.EndInit();
+                return bitmapImage;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotSupportedException();
         }
     }
 }

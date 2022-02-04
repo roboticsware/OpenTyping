@@ -399,4 +399,10 @@
   <data name="NoInternetWarn" xml:space="preserve">
     <value>Internet yo'q! Internetga ulaning.</value>
   </data>
+  <data name="Country" xml:space="preserve">
+    <value>Fuqarolik</value>
+  </data>
+  <data name="Keyboard" xml:space="preserve">
+    <value>Klaviatura</value>
+  </data>
 </root>

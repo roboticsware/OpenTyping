@@ -10,10 +10,12 @@ namespace OpenTyping
     {
         public User() { }
 
-        public User(string name, string org, int accuracy, int speed, int count, double time)
+        public User(string name, string country, string org, string keylayout, int accuracy, int speed, int count, double time)
         {
             this.Name = name;
+            this.Country = country;
             this.Org = org;
+            this.KeyLayout = keylayout;
             this.Accuracy = accuracy;
             this.Speed = speed;
             this.Count = count;
@@ -23,7 +25,11 @@ namespace OpenTyping
         [FirestoreProperty]
         public string Name { get; set; }
         [FirestoreProperty]
+        public string Country { get; set; }
+        [FirestoreProperty]
         public string Org { get; set; }
+        [FirestoreProperty]
+        public string KeyLayout { get; set; }
         [FirestoreProperty]
         public int Accuracy { get; set; }
         [FirestoreProperty]

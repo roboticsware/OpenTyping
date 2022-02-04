@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -135,6 +134,7 @@ namespace OpenTyping
                     Path = new PropertyPath("Name"),
                     Source = CurrentKeyLayout,
                 };
+                CurrentKeyLayoutName.SetBinding(TextBlock.TextProperty, currentKeyLayoutNameBinding);
                 HomeMenu.CurrentKeyLayoutName.SetBinding(TextBlock.TextProperty, currentKeyLayoutNameBinding);
 
                 var currentKeyLayoutCharBinding = new Binding
@@ -268,7 +268,9 @@ namespace OpenTyping
             WordPracticeMenu.TabLbl2.Content = LangStr.Server;
             WordPracticeMenu.Header1.Header = WordPracticeMenu.Header8.Header = LangStr.Rank;
             WordPracticeMenu.Header2.Header = WordPracticeMenu.Header9.Header = LangStr.Name;
+            WordPracticeMenu.Header15.Header = WordPracticeMenu.Header17.Header = LangStr.Country;
             WordPracticeMenu.Header3.Header = WordPracticeMenu.Header10.Header = LangStr.Org;
+            WordPracticeMenu.Header16.Header = WordPracticeMenu.Header18.Header = LangStr.Keyboard;
             WordPracticeMenu.Header4.Header = WordPracticeMenu.Header11.Header = LangStr.Accuracy;
             WordPracticeMenu.Header5.Header = WordPracticeMenu.Header12.Header = LangStr.Speed;
             WordPracticeMenu.Header6.Header = WordPracticeMenu.Header13.Header = LangStr.WordCount;

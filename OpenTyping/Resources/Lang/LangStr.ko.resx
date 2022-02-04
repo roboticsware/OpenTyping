@@ -393,4 +393,10 @@
   <data name="NoInternetWarn" xml:space="preserve">
     <value>인터넷 연결 없음! 인터넷에 연결해 주세요.</value>
   </data>
+  <data name="Country" xml:space="preserve">
+    <value>국적</value>
+  </data>
+  <data name="Keyboard" xml:space="preserve">
+    <value>자판</value>
+  </data>
 </root>

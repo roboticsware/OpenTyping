@@ -199,7 +199,9 @@ namespace OpenTyping
 
             User user = new User(
                 (string)Settings.Default["Name"],
+                (string)Settings.Default["Country"],
                 (string)Settings.Default["Org"],
+                (string)Settings.Default["KeyLayout"],
                 averageAccuracy,
                 averageTypingSpeed,
                 (int)currentSentenceIndex,

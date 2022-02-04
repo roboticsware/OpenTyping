@@ -187,6 +187,15 @@ namespace OpenTyping.Resources.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Country.
+        /// </summary>
+        internal static string Country {
+            get {
+                return ResourceManager.GetString("Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current Keyboard.
         /// </summary>
         internal static string CurKeyboard {
@@ -507,6 +516,15 @@ namespace OpenTyping.Resources.Lang {
         internal static string InPage {
             get {
                 return ResourceManager.GetString("InPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keyboard.
+        /// </summary>
+        internal static string Keyboard {
+            get {
+                return ResourceManager.GetString("Keyboard", resourceCulture);
             }
         }
         
