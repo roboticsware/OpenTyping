@@ -14,10 +14,10 @@ namespace OpenTyping
 
         public RestfulProvider()
         {
-            _baseUrl = "http://api.roboticsware.uz:30001";
+            _baseUrl = "https://api.roboticsware.uz:30001";
         }
 
-        public bool OpenDatabase()
+        public async Task<bool> GetTokenAsync()
         {
             string endpoint = this._baseUrl + "/auth";
             string method = "POST";
@@ -31,7 +31,7 @@ namespace OpenTyping
             {
                 WebClient wc = new WebClient();
                 wc.Headers["Content-Type"] = "application/json";
-                string response = wc.UploadString(endpoint, method, json);
+                string response = await wc.UploadStringTaskAsync(endpoint, method, json);
                 Dictionary<string, dynamic> convertedRes = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(response);
                 this._jwt = convertedRes["token"];
             }
@@ -50,10 +50,11 @@ namespace OpenTyping
             WebClient wc = new WebClient();
             wc.Headers["Content-Type"] = "application/json";
             wc.Headers["Authorization"] = "Bearer " + this._jwt;
-            
+            wc.Encoding = System.Text.Encoding.UTF8;
+
             string response = await wc.DownloadStringTaskAsync(endpoint);
             Dictionary<string, dynamic> convertedRes = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(response);
-            users = JsonConvert.DeserializeObject<List<User>>(convertedRes["data"]);
+            users = convertedRes["data"].ToObject<List<User>>();
             return users;
         }
 
@@ -65,8 +66,8 @@ namespace OpenTyping
             WebClient wc = new WebClient();
             wc.Headers["Content-Type"] = "application/json";
             wc.Headers["Authorization"] = "Bearer " + this._jwt;
-            string json = JsonConvert.SerializeObject(user);
-
+            wc.Encoding = System.Text.Encoding.UTF8;
+            string json = JsonConvert.SerializeObject(new Dictionary<string, User>{{"user", user}});
             return await wc.UploadStringTaskAsync(endpoint, method, json);
         }
     }

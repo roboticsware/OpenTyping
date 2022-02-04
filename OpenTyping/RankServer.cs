@@ -16,17 +16,14 @@ namespace OpenTyping
         {
             try
             {
-                if (Restful.OpenDatabase())
+                users = await Restful.GetUsersAsync();
+                if (users.Count == 0) // If first insertion
                 {
-                    users = await Restful.GetUsersAsync();
-                    if (users.Count == 0) // If first insertion
-                    {
-                        users = new List<User>();
-                    }
-                    users.Sort();
-
-                    return users;
+                    users = new List<User>();
                 }
+                users.Sort();
+
+                return users;
             }
             catch (Exception ex)
             {
@@ -58,7 +55,10 @@ namespace OpenTyping
 
             try
             {
-                await Restful.AddAsync(user);
+                if (await Restful.GetTokenAsync()) // Get a jwt to add
+                {
+                    await Restful.AddAsync(user);
+                }
             }
             catch (Exception ex)
             {

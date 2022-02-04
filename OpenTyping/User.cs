@@ -8,10 +8,12 @@ namespace OpenTyping
     {
         public User() { }
 
-        public User(string name, string org, int accuracy, int speed, int count, double time)
+        public User(string name, string country, string org, string keylayout, int accuracy, int speed, int count, double time)
         {
             this.Name = name;
+            this.Country = country;
             this.Org = org;
+            this.KeyLayout = keylayout;
             this.Accuracy = accuracy;
             this.Speed = speed;
             this.Count = count;
@@ -19,7 +21,9 @@ namespace OpenTyping
         }
 
         public string Name { get; set; }
+        public string Country { get; set; }
         public string Org { get; set; }
+        public string KeyLayout { get; set; }
         public int Accuracy { get; set; }
         public int Speed { get; set; }
         public int Count { get; set; }

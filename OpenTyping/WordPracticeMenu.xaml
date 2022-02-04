@@ -6,12 +6,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:local="clr-namespace:OpenTyping"
+             xmlns:local="clr-namespace:OpenTyping" 
+             xmlns:flags="clr-namespace:FamFamFam.Flags.Wpf;assembly=FamFamFam.Flags.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="500"
              d:DesignWidth="800">
     <UserControl.Resources>
         <local:IndexConverter x:Key="IndexConverter"/>
+        <local:KeyLayoutToFlagImgConverter x:Key="KeyLayoutToFlagImgConverter"/>
+        <flags:CountryIdToFlagImageSourceConverter x:Key="CountryIdToFlagImageSourceConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -70,10 +73,26 @@
                                   Style="{StaticResource MahApps.Styles.ListView.Virtualized}">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn x:Name="Header1"  DisplayMemberBinding="{Binding Converter={StaticResource IndexConverter},
+                                    <GridViewColumn x:Name="Header1" DisplayMemberBinding="{Binding Converter={StaticResource IndexConverter},
                                             RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}}" Header="Rank" Width="50"/>
                                     <GridViewColumn x:Name="Header2" DisplayMemberBinding="{Binding Name}" Header="Name" Width="150"/>
+                                    <GridViewColumn x:Name="Header15" Header="Country" Width="25">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding Path=Country, Converter={StaticResource CountryIdToFlagImageSourceConverter}}"
+                                                                RenderOptions.BitmapScalingMode="HighQuality"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
                                     <GridViewColumn x:Name="Header3" DisplayMemberBinding="{Binding Org}" Header="Org" Width="250"/>
+                                    <GridViewColumn x:Name="Header16" Header="KeyLayout" Width="25">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding Path=KeyLayout, Converter={StaticResource KeyLayoutToFlagImgConverter}}"
+                                                                RenderOptions.BitmapScalingMode="HighQuality"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
                                     <GridViewColumn x:Name="Header4" DisplayMemberBinding="{Binding Accuracy}" Header="Accuracy" Width="50"/>
                                     <GridViewColumn x:Name="Header5" DisplayMemberBinding="{Binding Speed}" Header="Speed" Width="50"/>
                                     <GridViewColumn x:Name="Header6" DisplayMemberBinding="{Binding Count}" Header="Count" Width="50"/>
@@ -122,10 +141,26 @@
                                       Style="{StaticResource MahApps.Styles.ListView.Virtualized}">
                                 <ListView.View>
                                     <GridView>
-                                        <GridViewColumn x:Name="Header8"  DisplayMemberBinding="{Binding Converter={StaticResource IndexConverter},
-                                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}}" Header="Rank" Width="50"/>
+                                        <GridViewColumn x:Name="Header8" DisplayMemberBinding="{Binding Converter={StaticResource IndexConverter},
+                                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}}" Header="Rank" Width="50"/>
                                         <GridViewColumn x:Name="Header9" DisplayMemberBinding="{Binding Name}" Header="Name" Width="150"/>
+                                        <GridViewColumn x:Name="Header17" Header="Country" Width="25">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Image Source="{Binding Path=Country, Converter={StaticResource CountryIdToFlagImageSourceConverter}}"
+                                                                RenderOptions.BitmapScalingMode="HighQuality"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
                                         <GridViewColumn x:Name="Header10" DisplayMemberBinding="{Binding Org}" Header="Org" Width="250"/>
+                                        <GridViewColumn x:Name="Header18" Header="KeyLayout" Width="25">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Image Source="{Binding Path=KeyLayout, Converter={StaticResource KeyLayoutToFlagImgConverter}}"
+                                                                RenderOptions.BitmapScalingMode="HighQuality"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
                                         <GridViewColumn x:Name="Header11" DisplayMemberBinding="{Binding Accuracy}" Header="Accuracy" Width="50"/>
                                         <GridViewColumn x:Name="Header12" DisplayMemberBinding="{Binding Speed}" Header="Speed" Width="50"/>
                                         <GridViewColumn x:Name="Header13" DisplayMemberBinding="{Binding Count}" Header="Count" Width="50"/>
@@ -141,7 +176,7 @@
 
         <DockPanel Grid.Row="1"
                    LastChildFill="False"
-                   Margin="10 0 10 10">
+                   Margin="0 0 10 5">
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
                 <Rectangle Style="{StaticResource TabItemIconRectangle}" 
                            Width="35" 
@@ -153,8 +188,19 @@
                     </Rectangle.OpacityMask>
                 </Rectangle>
                 <TextBlock Name="TBlblName" Margin="5" FontWeight="Bold" FontSize="15" Text="Name:"/>
-                <TextBox Name="TBname" MaxLength="30" Width="130" Margin="0 0 20 0" FontSize="20"></TextBox>
+                <TextBox Name="TBname" MaxLength="30" Width="130" Margin="0 0 5 0" FontSize="20"></TextBox>
 
+                <ComboBox Width="60" x:Name="CountryPicker" ItemsSource="{Binding Source={x:Static flags:CountryData.AllCountries}}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="flags:CountryData">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding Path=Iso2, Converter={StaticResource CountryIdToFlagImageSourceConverter}}"
+                                       Stretch="None" Width="35" Height="30" RenderOptions.BitmapScalingMode="HighQuality" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                
                 <Rectangle Style="{StaticResource TabItemIconRectangle}" 
                            Width="35" 
                            Height="25">

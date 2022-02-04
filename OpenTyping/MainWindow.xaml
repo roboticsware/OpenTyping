@@ -17,6 +17,26 @@
                  Icon="{StaticResource AppIcon}">
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
+            <StackPanel Orientation="Horizontal">
+                <Rectangle Style="{StaticResource TabItemIconRectangle}" 
+                            Width="28" 
+                            Height="15"
+                            Fill="White"
+                            VerticalAlignment="Center">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Uniform" 
+                                     Visual="{iconPacks:FontAwesome KeyboardSolid}"/>
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+                <TextBlock x:Name="CurrentKeyLayoutName"
+                           Text="{Binding Path=Name, 
+                                  Source={x:Static local:MainWindow.CurrentKeyLayout}}"
+                           Foreground="White"
+                           FontFamily="{StaticResource NanumBarunGothic}"
+                           FontSize="10pt"
+                           Margin="5 0 10 0"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
             <Button x:Name="SettingsButton" 
                     Click="SettingsButton_Click">
                 <StackPanel Orientation="Horizontal">

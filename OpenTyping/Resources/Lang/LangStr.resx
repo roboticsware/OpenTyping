@@ -402,4 +402,10 @@
   <data name="NoInternetWarn" xml:space="preserve">
     <value>No Internet! Please connect to Internet.</value>
   </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="Keyboard" xml:space="preserve">
+    <value>Keyboard</value>
+  </data>
 </root>
