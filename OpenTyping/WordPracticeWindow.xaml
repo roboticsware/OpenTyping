@@ -30,7 +30,7 @@
                        Grid.Column="0"
                        Style="{StaticResource NormalTextBlock}"
                        x:Name="PreviousTextBlock"
-                       FontSize="30pt"
+                       FontSize="20pt"
                        Foreground="#adb5bd"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center"/>
@@ -44,7 +44,7 @@
                        Style="{StaticResource NormalTextBlock}"
                        x:Name="CurrentTextBlock"
                        Text="{Binding CurrentText}"
-                       FontSize="50pt"
+                       FontSize="40pt"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"/>
             <Rectangle Grid.Column="3"
@@ -57,7 +57,7 @@
                        Style="{StaticResource NormalTextBlock}"
                        x:Name="NextTextBlock"
                        Text="{Binding NextText}"
-                       FontSize="30pt"
+                       FontSize="20pt"
                        Foreground="#adb5bd"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"/>
@@ -151,24 +151,23 @@
             
             <StackPanel Grid.Column="2" 
                         DataContext="{Binding ElementName=SelfWindow}"
-                        Margin="0 0 20 5"    
+                        Margin="-30 0 20 5"    
                         Orientation="Horizontal"
                         HorizontalAlignment="Right">
-                <Border Background="#1c7ed6" Margin="0 0 5 0">
+                <Border Background="#1c7ed6" Margin="5 0 5 0">
                     <StackPanel Margin="5 2 5 2"
                                 Orientation="Horizontal">
                         <TextBlock Text="타속 "
                                    Name="Speed"
                                    Foreground="White"
                                    FontFamily="{StaticResource NanumGothic}"
-                                   FontSize="11pt"
+                                   FontSize="10pt"
                                    VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding Path=AverageTypingSpeed, Mode=OneWay}"
                                    Foreground="White"
                                    FontFamily="{StaticResource NanumBarunGothic}"
-                                   FontSize="16pt"
-                                   VerticalAlignment="Center"
-                                   Margin="0 3 0 0"/>
+                                   FontSize="13pt"
+                                   VerticalAlignment="Center"/>
                     </StackPanel>
                 </Border>
                 <Border Background="#f03e3e">
@@ -178,16 +177,15 @@
                                    Name="Accuracy"
                                    Foreground="White"
                                    FontFamily="{StaticResource NanumGothic}"
-                                   FontSize="11pt"
+                                   FontSize="10pt"
                                    VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding Path=AverageAccuracy,
                                                     StringFormat={}{0}%,
                                                     Mode=OneWay}"
                                     Foreground="White"
                                     FontFamily="{StaticResource NanumBarunGothic}"
-                                    FontSize="16pt"
-                                    VerticalAlignment="Center"
-                                    Margin="0 3 0 0"/>
+                                    FontSize="13pt"
+                                    VerticalAlignment="Center"/>
                     </StackPanel>
                 </Border>
             </StackPanel>

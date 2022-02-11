@@ -3,6 +3,7 @@ using MahApps.Metro.Controls.Dialogs;
 using OpenTyping.Properties;
 using OpenTyping.Resources.Lang;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,8 +25,8 @@ namespace OpenTyping
         private RankLocal RankLocal;
         private RankServer RankServer;
 
-        private User newUser;
         private ListView LVusers;
+        private Dictionary<string, string> rtnUserRecord;
 
         private ProgressDialogController pdController;
 
@@ -36,6 +37,7 @@ namespace OpenTyping
 
             if ((string)Settings.Default["Country"] == "")
             {
+                // Lang code is not same as Country code
                 string country = (string)Settings.Default["ProgramLang"];
                 if ((string)Settings.Default["ProgramLang"] == "en")
                 {
@@ -86,7 +88,7 @@ namespace OpenTyping
 
             var users = await Rank.GetUsersAsync();
             LVusers.ItemsSource = users;
-            if (users == null)
+            if (LVusers == LVserver && users == null)
             {
                 NoNetwork.Opacity = 0.5;
                 await pdController.CloseAsync();
@@ -121,54 +123,94 @@ namespace OpenTyping
 
             WordPracticeWindow wordPracticeWindow = new WordPracticeWindow();
             wordPracticeWindow.Closed += new EventHandler(WordPracticeWindow_Closed);
-            wordPracticeWindow.RtnNewUser += value => this.newUser = value;
+            wordPracticeWindow.RtnUserRecord += value => this.rtnUserRecord = value;
             wordPracticeWindow.ShowDialog();
         }
 
         private void WordPracticeWindow_Closed(object sender, EventArgs e)
         {
-            this.FinishPracticeAsync();
+            if ((string)Settings.Default["Name"] == "")
+            {
+                Settings.Default["Name"] = LangStr.Anonymous;
+            }
+            if ((string)Settings.Default["Org"] == "")
+            {
+                Settings.Default["Org"] = LangStr.Anonymous;
+            }
+
+            User user = new User(
+                (string)Settings.Default["Name"],
+                (string)Settings.Default["Country"],
+                (string)Settings.Default["Org"],
+                (string)Settings.Default["KeyLayout"],
+                int.Parse(rtnUserRecord["averageAccuracy"]),
+                int.Parse(rtnUserRecord["averageTypingSpeed"]),
+                int.Parse(rtnUserRecord["currentWordIndex"]),
+                double.Parse(rtnUserRecord["elapsedTime"])
+            );
+
+            this.FinishPracticeAsync(user, int.Parse(rtnUserRecord["practiceTotal"]));
         }
 
-        private async void FinishPracticeAsync()
+        private async void FinishPracticeAsync(User newUser, int practiceTotal)
         {
             string congMsg = "";
             int curPosServer = -1;
 
-            int curPosLocal = await RankLocal.AddSync(newUser);
-            var users = await RankServer.GetUsersAsync();  // Always try to add from recent rank
-            if ( users != null)
+            // To rank in local, the count of practiece words should be over 10% of the total
+            if (newUser.Count >= (practiceTotal * 0.1))
             {
-                NoNetwork.Opacity = 0;
-                curPosServer = await RankServer.AddSync(newUser);
-            }
-            else
-            {
-                NoNetwork.Opacity = 0.5;
-            }
-            LVserver.ItemsSource = users;
-            LVusers.Items.Refresh();
-
-            if (curPosLocal >= 0 && curPosLocal <= 9)
-            {
-                congMsg = LangStr.CongratLocalMsg;
-                LVlocal.SelectedIndex = curPosLocal;
-            }
-            if (curPosServer >= 0 && curPosServer <= 9)
-            {
-                congMsg = LangStr.CongratServerMsg;
-                LVserver.SelectedIndex = curPosServer;
-
-                // Open a server tab if your rank records server rank and you're in local tab
-                if (RankTabControl.SelectedItem == TabLocal)
+                int curPosLocal = await RankLocal.AddSync(newUser);
+                if (curPosLocal >= 0 && curPosLocal <= 9)
                 {
-                    RankTabControl.SelectedItem = TabServer;
-                    ((TabItem)RankTabControl.SelectedItem).Focus();
+                    congMsg = LangStr.CongratLocalMsg;
+                    LVlocal.SelectedIndex = curPosLocal;
                 }
             }
 
-            // Open a local tab if no rank update in server tab where you're and local update instead
-            if (RankTabControl.SelectedItem == TabServer && congMsg == LangStr.CongratLocalMsg)
+            // To rank in server, the count of practiece words should be over 30% of the total
+            if (newUser.Count >= (practiceTotal * 0.3))
+            {
+                var users = await RankServer.GetUsersAsync();  // Always try to add from recent rank
+                LVserver.ItemsSource = users;
+
+                if (users != null)
+                {
+                    NoNetwork.Opacity = 0;
+                    curPosServer = await RankServer.AddSync(newUser);
+                }
+                else
+                {
+                    NoNetwork.Opacity = 0.5;
+                }
+                
+                if (curPosServer >= 0 && curPosServer <= 9)
+                {
+                    congMsg = LangStr.CongratServerMsg;
+                    LVserver.SelectedIndex = curPosServer;
+
+                    // Open a server tab if your rank records server rank and you're in local tab
+                    if (RankTabControl.SelectedItem == TabLocal)
+                    {
+                        RankTabControl.SelectedItem = TabServer;
+                        ((TabItem)RankTabControl.SelectedItem).Focus();
+                    }
+                }
+            }
+            else if (congMsg == LangStr.CongratLocalMsg)
+            {
+                congMsg = congMsg + 
+                            LangStr.RankLimit2 + " (" + practiceTotal * 0.3 + " / " + practiceTotal + ")";
+            }
+            else if (congMsg == "")
+            {
+                congMsg = LangStr.RankLimit1 + " (" + practiceTotal * 0.1 + " / " + practiceTotal + ") " +
+                            LangStr.RankLimit2 + " (" + practiceTotal * 0.3 + " / " + practiceTotal + ")";
+            }
+
+            LVusers.Items.Refresh();
+            // Open a local tab if no rank update in server tab where you're but if rank update in local
+            if (RankTabControl.SelectedItem == TabServer && congMsg.Contains(LangStr.CongratLocalMsg))
             {
                 RankTabControl.SelectedItem = TabLocal;
                 ((TabItem)RankTabControl.SelectedItem).Focus();
@@ -181,7 +223,7 @@ namespace OpenTyping
                                         + LangStr.ElapsedTime + ": " 
                                         + newUser.Time.ToString(CultureInfo.GetCultureInfo("en-US")),
                                          MessageDialogStyle.Affirmative,
-                                         new MetroDialogSettings { AnimateHide = false });
+                                         new MetroDialogSettings { AnimateHide = false, DialogTitleFontSize = 20});
         }
 
         private void Tab_SelectionChanged(object sender, SelectionChangedEventArgs e)

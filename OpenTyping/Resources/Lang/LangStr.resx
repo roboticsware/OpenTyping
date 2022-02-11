@@ -151,7 +151,7 @@
     <value>Delete</value>
   </data>
   <data name="ErrMsg1" xml:space="preserve">
-<value>Please select 2 or more keys to practice</value>
+    <value>Please select 2 or more keys to practice</value>
   </data>
   <data name="ErrMsg10" xml:space="preserve">
     <value>Duplicate names exist</value>
@@ -313,7 +313,7 @@
     <value>Are you sure you want to delete?</value>
   </data>
   <data name="WarnMsg4" xml:space="preserve">
-    <value>Are you sure you want to delete statistical information?</value>
+    <value>Are you sure you want to reset statistical information?</value>
   </data>
   <data name="ErrMsg23" xml:space="preserve">
     <value>Forth row</value>
@@ -390,6 +390,9 @@
   <data name="ErrMsg24" xml:space="preserve">
     <value>DB file is broken. Please reinstall this App or delete the broken DB file.</value>
   </data>
+  <data name="RankLimit1" xml:space="preserve">
+    <value>To rank your record in local, the count of practiced words should be over 10% of the total</value>
+  </data>
   <data name="CongratLocalMsg" xml:space="preserve">
     <value>Congratulations. Your new record in local!! </value>
   </data>
@@ -407,5 +410,8 @@
   </data>
   <data name="Keyboard" xml:space="preserve">
     <value>Keyboard</value>
+  </data>
+  <data name="RankLimit2" xml:space="preserve">
+    <value>For server, over 30% of the total</value>
   </data>
 </root>

@@ -27,7 +27,7 @@ namespace OpenTyping
 
         // Practice data
         private PracticeData practiceData;
-        private int? currentSentenceIndex;
+        private int? currentWordIndex;
 
         private string currentText;
         public string CurrentText
@@ -99,7 +99,7 @@ namespace OpenTyping
         private uint milisecond = 0;
 
         // Event for returning UserRecord value
-        public event Action<User> RtnNewUser;
+        public event Action<Dictionary<string, string>> RtnUserRecord;
 
         public WordPracticeWindow()
         {
@@ -163,7 +163,7 @@ namespace OpenTyping
         {
             practiceData = new PracticeMenuBase().loadWordData();
             var wordIndexRandom = new Random();
-            
+
             // UI code for progress bar
             ProgressBar.Maximum = practiceData.TextData.Count;
             MaxCnt.Text = practiceData.TextData.Count.ToString();
@@ -188,26 +188,15 @@ namespace OpenTyping
                 });
             }
 
-            if ((string)Settings.Default["Name"] == "")
+            // Event return
+            this.RtnUserRecord(new Dictionary<string, string>() 
             {
-                Settings.Default["Name"] = LangStr.Anonymous;
-            }
-            if ((string)Settings.Default["Org"] == "")
-            {
-                Settings.Default["Org"] = LangStr.Anonymous;
-            }
-
-            User user = new User(
-                (string)Settings.Default["Name"],
-                (string)Settings.Default["Country"],
-                (string)Settings.Default["Org"],
-                (string)Settings.Default["KeyLayout"],
-                averageAccuracy,
-                averageTypingSpeed,
-                (int)currentSentenceIndex,
-                (double)elapsedTime / (double)10 // Unit change: 100ms -> 1s
-            );
-            this.RtnNewUser(user);
+                {"averageAccuracy", averageAccuracy.ToString()},
+                {"averageTypingSpeed", averageTypingSpeed.ToString()},
+                {"currentWordIndex", currentWordIndex.ToString()},
+                {"elapsedTime", ((double)elapsedTime / (double)10).ToString()}, // Unit change: 100ms -> 1s
+                {"practiceTotal", practiceData.TextData.Count.ToString()}
+            });
         }
 
         private void NextWord()
@@ -266,32 +255,32 @@ namespace OpenTyping
                 AverageTypingSpeed = Convert.ToInt32(TypingSpeedList.Average());
             }
 
-            if (!string.IsNullOrEmpty(CurrentTextBox.Text) || currentSentenceIndex is null) // 입력이 비어있지 않거나 첫 번째 호출인 경우
+            if (!string.IsNullOrEmpty(CurrentTextBox.Text) || currentWordIndex is null) // 입력이 비어있지 않거나 첫 번째 호출인 경우
             {
-                if (currentSentenceIndex is null) currentSentenceIndex = 0; // 첫 호출인 경우
-                else currentSentenceIndex++;
+                if (currentWordIndex is null) currentWordIndex = 0; // 첫 호출인 경우
+                else currentWordIndex++;
 
-                if (currentSentenceIndex == practiceData.TextData.Count)
+                if (currentWordIndex == practiceData.TextData.Count)
                 {
                     // UI code for progress bar
-                    ProgressBar.Value = (int)currentSentenceIndex;
-                    CurrCnt.Text = currentSentenceIndex.ToString();
+                    ProgressBar.Value = (int)currentWordIndex;
+                    CurrCnt.Text = currentWordIndex.ToString();
 
                     timer.Stop();
                     this.Close();
                     return;
                 }
 
-                CurrentText = practiceData.TextData[currentSentenceIndex.Value];
+                CurrentText = practiceData.TextData[currentWordIndex.Value];
                 NextText = "";
-                if (currentSentenceIndex != practiceData.TextData.Count - 1)
+                if (currentWordIndex != practiceData.TextData.Count - 1)
                 {
-                    NextText = practiceData.TextData[currentSentenceIndex.Value + 1];
+                    NextText = practiceData.TextData[currentWordIndex.Value + 1];
                 }
 
                 // UI code for progress bar
-                ProgressBar.Value = (int)currentSentenceIndex;
-                CurrCnt.Text = currentSentenceIndex.ToString();
+                ProgressBar.Value = (int)currentWordIndex;
+                CurrCnt.Text = currentWordIndex.ToString();
             }
         }
 
@@ -304,7 +293,7 @@ namespace OpenTyping
             if (e.Key == System.Windows.Input.Key.LeftShift ||
                 e.Key == System.Windows.Input.Key.RightShift ||
                 (e.Key != System.Windows.Input.Key.Enter && currKeyPos == null))
-                    return;
+                return;
 
             if (e.Key == System.Windows.Input.Key.Enter)
             {
@@ -313,7 +302,7 @@ namespace OpenTyping
                 e.Handled = true;
 
                 return;
-            } 
+            }
             else
             {
                 if (CurrentTextBox.Text == "")

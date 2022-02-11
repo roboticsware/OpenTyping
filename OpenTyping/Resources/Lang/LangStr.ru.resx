@@ -313,7 +313,7 @@
     <value>Вы хотите удалить это </value>
   </data>
   <data name="WarnMsg4" xml:space="preserve">
-    <value>ning statistik maʼlumotlarni oʻchirib tashlamoqchimisiz?</value>
+    <value>Вы уверены, что хотите сбросить статистическую информацию?</value>
   </data>
   <data name="ErrMsg23" xml:space="preserve">
     <value>Четвёртая строка</value>
@@ -388,6 +388,30 @@
     <value>Server</value>
   </data>
   <data name="ErrMsg24" xml:space="preserve">
-    <value>DB file is broken. Please reinstall this App or delete the broken DB file.</value>
+    <value>Файл ДБ поврежден. Пожалуйста, переустановите это приложение или удалите поврежденный файл ДБ.</value>
+  </data>
+  <data name="RankLimit1" xml:space="preserve">
+    <value>Чтобы ваш рекорд попал в местный рейтинг, количество отрабатываемых слов должно составлять более 10% от общего количества</value>
+  </data>
+  <data name="CongratLocalMsg" xml:space="preserve">
+    <value>Поздравляем. Ваш новый рекорд в местном!! </value>
+  </data>
+  <data name="FetchServerData" xml:space="preserve">
+    <value>Ожидание получения данных с сервера...</value>
+  </data>
+  <data name="NoInternet" xml:space="preserve">
+    <value>Нет интернета!</value>
+  </data>
+  <data name="NoInternetWarn" xml:space="preserve">
+    <value>Нет интернета! Пожалуйста, подключитесь к Интернету.</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Страна</value>
+  </data>
+  <data name="Keyboard" xml:space="preserve">
+    <value>Клавиатура</value>
+  </data>
+  <data name="RankLimit2" xml:space="preserve">
+    <value>Для сервера более 30% от общего</value>
   </data>
 </root>

@@ -241,7 +241,7 @@
     <value>ni oʻchirib tashlamoqchimisiz?</value>
   </data>
   <data name="WarnMsg4" xml:space="preserve">
-    <value>ning statistik maʼlumotlarni oʻchirib tashlamoqchimisiz?</value>
+    <value>ning statistik maʼlumotlarni qayta tiklamoqchimisiz?</value>
   </data>
   <data name="Accuracy" xml:space="preserve">
     <value>Aniqlik</value>
@@ -361,7 +361,7 @@
     <value>Anonim</value>
   </data>
   <data name="CongratLocalMsg" xml:space="preserve">
-    <value>Lokal ichida o'ringa kirganingiz bilan tabriklaymiz.</value>
+    <value>Lokaldagi reytingga kirganingiz bilan tabriklaymiz!!</value>
   </data>
   <data name="ElapsedTime" xml:space="preserve">
     <value>O'tilgan soniya</value>
@@ -387,8 +387,11 @@
   <data name="ErrMsg24" xml:space="preserve">
     <value>DB fayli buzilgan. Dasturni qayta o'rnating yoki buzilgan DB faylini o'chirib tashlang.</value>
   </data>
+  <data name="RankLimit1" xml:space="preserve">
+    <value>Lokaldagi reytingga kirish uchun, mashq qilgan so'zlar soni jami so'zlarning 10% dan oshishi kerak</value>
+  </data>
   <data name="CongratServerMsg" xml:space="preserve">
-    <value>Server ichida o'ringa kirganingiz bilan tabriklaymiz.</value>
+    <value>Serverdagi reytingga kirganingiz bilan tabriklaymiz!!</value>
   </data>
   <data name="FetchServerData" xml:space="preserve">
     <value>Serverdan maʼlumotlar olinishi kutilmoqda...</value>
@@ -404,5 +407,8 @@
   </data>
   <data name="Keyboard" xml:space="preserve">
     <value>Klaviatura</value>
+  </data>
+  <data name="RankLimit2" xml:space="preserve">
+    <value>Serverga kirish uchun esa jamining 30% dan oshish kerak</value>
   </data>
 </root>

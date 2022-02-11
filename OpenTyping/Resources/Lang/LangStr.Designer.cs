@@ -718,6 +718,24 @@ namespace OpenTyping.Resources.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To rank your record in local, the count of practiced words should be over 10% of the total.
+        /// </summary>
+        internal static string RankLimit1 {
+            get {
+                return ResourceManager.GetString("RankLimit1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For server, over 30% of the total.
+        /// </summary>
+        internal static string RankLimit2 {
+            get {
+                return ResourceManager.GetString("RankLimit2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Random arrangement of sentences.
         /// </summary>
         internal static string RanSenLoc {
@@ -898,7 +916,7 @@ namespace OpenTyping.Resources.Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to delete statistical information?.
+        ///   Looks up a localized string similar to Are you sure you want to reset statistical information?.
         /// </summary>
         internal static string WarnMsg4 {
             get {
