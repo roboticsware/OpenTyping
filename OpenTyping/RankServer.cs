@@ -29,7 +29,13 @@ namespace OpenTyping
             {
                 if (ex.Message.Contains("Unable to connect"))
                 {
+                    Debug.WriteLine("Failed to get users from Server. Server is unavailable!");
+                    throw new Exception("Server unavailable");
+                }
+                else if (ex.Message.Contains("could not be resolved"))
+                {
                     Debug.WriteLine("Failed to get users from Server. Network is unavailable!");
+                    throw new Exception("Network unavailable");
                 }
             }
 
@@ -65,6 +71,12 @@ namespace OpenTyping
                 if (ex.Message.Contains("Unavailable"))
                 {
                     Debug.WriteLine("Failed to add to Server. Network is unavailable!");
+                    throw new Exception("Network unavailable");
+                }
+                else if (ex.Message.Contains("key"))
+                {
+                    Debug.WriteLine("Wrong JWT error, Failed to Auth!");
+                    throw new Exception("Auth fail");
                 }
             }
             

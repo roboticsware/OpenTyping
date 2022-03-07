@@ -646,6 +646,24 @@ namespace OpenTyping.Resources.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Server reponse!.
+        /// </summary>
+        internal static string NoServerResponse {
+            get {
+                return ResourceManager.GetString("NoServerResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Server reponse! Please wait until server is avaliable..
+        /// </summary>
+        internal static string NoServerResWarn {
+            get {
+                return ResourceManager.GetString("NoServerResWarn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to It&apos;ll be supported later..
         /// </summary>
         internal static string NotSupport {
@@ -777,6 +795,15 @@ namespace OpenTyping.Resources.Lang {
         internal static string Server {
             get {
                 return ResourceManager.GetString("Server", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server Authentication is failed! Please retry after install the lastest App version..
+        /// </summary>
+        internal static string ServerAuthFail {
+            get {
+                return ResourceManager.GetString("ServerAuthFail", resourceCulture);
             }
         }
         

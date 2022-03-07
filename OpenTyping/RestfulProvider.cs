@@ -14,7 +14,7 @@ namespace OpenTyping
 
         public RestfulProvider()
         {
-            _baseUrl = "https://api.roboticsware.uz:30001";
+            _baseUrl = "https://server_url";
         }
 
         public async Task<bool> GetTokenAsync()
@@ -23,23 +23,15 @@ namespace OpenTyping
             string method = "POST";
             string json = JsonConvert.SerializeObject(new
             {
-                username = "RoboticsWare",
-                password = "YourPwd"
+                username = "YourServer",
+                password = "ServerPWD"
             });
 
-            try
-            {
-                WebClient wc = new WebClient();
-                wc.Headers["Content-Type"] = "application/json";
-                string response = await wc.UploadStringTaskAsync(endpoint, method, json);
-                Dictionary<string, dynamic> convertedRes = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(response);
-                this._jwt = convertedRes["token"];
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-
+            WebClient wc = new WebClient();
+            wc.Headers["Content-Type"] = "application/json";
+            string response = await wc.UploadStringTaskAsync(endpoint, method, json);
+            Dictionary<string, dynamic> convertedRes = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(response);
+            this._jwt = convertedRes["token"];
             return true;
         }
 
@@ -49,7 +41,6 @@ namespace OpenTyping
 
             WebClient wc = new WebClient();
             wc.Headers["Content-Type"] = "application/json";
-            wc.Headers["Authorization"] = "Bearer " + this._jwt;
             wc.Encoding = System.Text.Encoding.UTF8;
 
             string response = await wc.DownloadStringTaskAsync(endpoint);

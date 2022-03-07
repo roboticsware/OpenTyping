@@ -414,4 +414,16 @@
   <data name="RankLimit2" xml:space="preserve">
     <value>Для сервера более 30% от общего</value>
   </data>
+  <data name="KeyLayoutDesc" xml:space="preserve">
+    <value>Чтобы использовать UZB (Lotincha), вам необходимо установить UZB (Lotincha) setup.exe в папку layouts, где установлено это приложение.</value>
+  </data>
+  <data name="NoServerResponse" xml:space="preserve">
+    <value>Нет ответа сервера!</value>
+  </data>
+  <data name="NoServerResWarn" xml:space="preserve">
+    <value>Пожалуйста, подождите, пока сервер не будет доступен.</value>
+  </data>
+  <data name="ServerAuthFail" xml:space="preserve">
+    <value>Аутентификация сервера не удалась! Повторите попытку после установки последней версии приложения.</value>
+  </data>
 </root>

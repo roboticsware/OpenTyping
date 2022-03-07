@@ -411,4 +411,16 @@
   <data name="RankLimit2" xml:space="preserve">
     <value>Serverga kirish uchun esa jamining 30% dan oshish kerak</value>
   </data>
+  <data name="KeyLayoutDesc" xml:space="preserve">
+    <value>UZB (Lotincha) dan foydalanish uchun ushbu ilova o'rnatilgan layouts papkasida UZB (Lotincha) setup.exe faylini o'rnatishingiz kerak.</value>
+  </data>
+  <data name="NoServerResponse" xml:space="preserve">
+    <value>Server javobi yo'q!</value>
+  </data>
+  <data name="NoServerResWarn" xml:space="preserve">
+    <value>Server yana ishlaguncha kutib bering.</value>
+  </data>
+  <data name="ServerAuthFail" xml:space="preserve">
+    <value>Server autentifikatsiyasi amalga oshmadi! Iltimos, ilovaning soʻnggi versiyasini oʻrnatgandan soʻng qayta urinib koʻring.</value>
+  </data>
 </root>

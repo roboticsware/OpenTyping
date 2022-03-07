@@ -405,4 +405,16 @@
   <data name="RankLimit2" xml:space="preserve">
     <value>서버에 등재를 위해서는 전체 단어 수의 30% 이상 되어야 합니다.</value>
   </data>
+  <data name="KeyLayoutDesc" xml:space="preserve">
+    <value>UZB(Lotincha)를 사용하려면 이 앱이 설치된 layouts 폴더에 UZB(Lotincha) setup.exe를 설치해야 합니다.</value>
+  </data>
+  <data name="NoServerResponse" xml:space="preserve">
+    <value>서버가 응답하지 않습니다.</value>
+  </data>
+  <data name="NoServerResWarn" xml:space="preserve">
+    <value>죄송하지만, 서버문제가 해결될 때까지 기다려 주세요.</value>
+  </data>
+  <data name="ServerAuthFail" xml:space="preserve">
+    <value>서버 인증 실패! 죄송하지만, 앱 최신 버전 설치 후 다시 이용해 주세요.</value>
+  </data>
 </root>

@@ -511,7 +511,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Imgs\typing_tutorial.png" />
-    <Resource Include="Resources\private-key-for-firestore.txt" />
     <Content Include="Resources\Sounds\Bell.wav" />
     <Content Include="Resources\Sounds\Pressed.wav" />
     <Resource Include="Resources\Fonts\LabDigital.ttf" />

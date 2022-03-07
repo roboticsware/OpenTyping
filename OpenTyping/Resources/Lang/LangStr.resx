@@ -414,4 +414,16 @@
   <data name="RankLimit2" xml:space="preserve">
     <value>For server, over 30% of the total</value>
   </data>
+  <data name="KeyLayoutDesc" xml:space="preserve">
+    <value>To use the UZB(Lotincha), you have to install UZB(Lotincha) setup.exe in layouts folder where this App is installed.</value>
+  </data>
+  <data name="NoServerResponse" xml:space="preserve">
+    <value>No Server reponse!</value>
+  </data>
+  <data name="NoServerResWarn" xml:space="preserve">
+    <value>No Server reponse! Please wait until server is avaliable.</value>
+  </data>
+  <data name="ServerAuthFail" xml:space="preserve">
+    <value>Server Authentication is failed! Please retry after install the lastest App version.</value>
+  </data>
 </root>

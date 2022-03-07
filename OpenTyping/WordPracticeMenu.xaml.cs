@@ -86,22 +86,40 @@ namespace OpenTyping
         {
             await OpenProgressDialog();
 
-            var users = await Rank.GetUsersAsync();
-            LVusers.ItemsSource = users;
-            if (LVusers == LVserver && users == null)
+            try
+            {
+                var users = await Rank.GetUsersAsync();
+                LVusers.ItemsSource = users;
+
+                if (LVusers == LVserver && users == null)
+                {
+                    NoNetwork.Opacity = 0.5;
+                    await pdController.CloseAsync();
+                    pdController = null;
+                }
+
+                if (pdController != null)
+                {
+                    NoNetwork.Opacity = 0;
+                    await pdController.CloseAsync();
+                    pdController = null;
+                }
+            }
+            catch (Exception ex)
             {
                 NoNetwork.Opacity = 0.5;
                 await pdController.CloseAsync();
                 pdController = null;
 
-                await this.TryFindParent<MetroWindow>().ShowMessageAsync(LangStr.NoInternetWarn, "");
-            }
-
-            if (pdController != null)
-            {
-                NoNetwork.Opacity = 0;
-                await pdController.CloseAsync();
-                pdController = null;
+                if (ex.Message.Contains("Server unavailable"))
+                {
+                    NoInternet.Content = LangStr.NoServerResponse;
+                    await this.TryFindParent<MetroWindow>().ShowMessageAsync(LangStr.NoServerResWarn, "");
+                }
+                else if (ex.Message.Contains("Network unavailable"))
+                {
+                    await this.TryFindParent<MetroWindow>().ShowMessageAsync(LangStr.NoInternetWarn, "");
+                }
             }
         }
 
@@ -171,30 +189,37 @@ namespace OpenTyping
             // To rank in server, the count of practiece words should be over 30% of the total
             if (newUser.Count >= (practiceTotal * 0.3))
             {
-                var users = await RankServer.GetUsersAsync();  // Always try to add from recent rank
-                LVserver.ItemsSource = users;
+                try
+                {
+                    var users = await RankServer.GetUsersAsync();  // Always try to add from recent rank
+                    LVserver.ItemsSource = users;
 
-                if (users != null)
-                {
-                    NoNetwork.Opacity = 0;
-                    curPosServer = await RankServer.AddSync(newUser);
-                }
-                else
-                {
-                    NoNetwork.Opacity = 0.5;
-                }
-                
-                if (curPosServer >= 0 && curPosServer <= 9)
-                {
-                    congMsg = LangStr.CongratServerMsg;
-                    LVserver.SelectedIndex = curPosServer;
-
-                    // Open a server tab if your rank records server rank and you're in local tab
-                    if (RankTabControl.SelectedItem == TabLocal)
+                    if (users != null)
                     {
-                        RankTabControl.SelectedItem = TabServer;
-                        ((TabItem)RankTabControl.SelectedItem).Focus();
+                        NoNetwork.Opacity = 0;
+                        curPosServer = await RankServer.AddSync(newUser);
                     }
+                    else
+                    {
+                        NoNetwork.Opacity = 0.5;
+                    }
+
+                    if (curPosServer >= 0 && curPosServer <= 9)
+                    {
+                        congMsg = LangStr.CongratServerMsg;
+                        LVserver.SelectedIndex = curPosServer;
+
+                        // Open a server tab if your rank records server rank and you're in local tab
+                        if (RankTabControl.SelectedItem == TabLocal)
+                        {
+                            RankTabControl.SelectedItem = TabServer;
+                            ((TabItem)RankTabControl.SelectedItem).Focus();
+                        }
+                    }
+                } 
+                catch
+                {
+                    congMsg = LangStr.ServerAuthFail;
                 }
             }
             else if (congMsg == LangStr.CongratLocalMsg)
