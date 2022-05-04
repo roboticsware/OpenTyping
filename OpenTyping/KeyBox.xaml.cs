@@ -37,7 +37,7 @@ namespace OpenTyping
 
         public bool Pressed { get; private set; } = false;
 
-        private const double PressDiff = 1.7;
+        private const double PressDiff = 0.0000001;
         private Brush defaultKeyColor;
         private Brush defaultShadowColor;
 
@@ -56,7 +56,6 @@ namespace OpenTyping
             handPopup.IsOpen = false;
             Loaded += OnLoaded;
         }
-
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             defaultKeyColor = KeyColor;
@@ -65,7 +64,6 @@ namespace OpenTyping
             Uri resourceUri = new Uri("Resources/imgs/" + Key.FingerPosition + ".png", UriKind.Relative);
             handImg.Source = new BitmapImage(resourceUri);
         }
-
         private void Press(Brush keyColor, Brush shadowColor, bool isHandPopup = false)
         {
             if (!Pressed)
@@ -78,12 +76,34 @@ namespace OpenTyping
 
             KeyColor = keyColor;
             ShadowColor = shadowColor;
-
             handPopup.IsOpen = isHandPopup;
-            if (handPopup.IsOpen) 
+            if (handPopup.IsOpen)
             {
                 // Re-positioning on Spacebar
-                if (Key.KeyData == " ") 
+                if (Key.KeyData == " ")
+                {
+                    handPopup.VerticalOffset = 0;
+                }
+                // Re-positioning when KeyPracticeWindow LocChanged
+                handPopup.HorizontalOffset += 1;
+                handPopup.HorizontalOffset -= 1;
+            }
+            Pressed = true;
+        }
+        private void Press(bool Press, bool isHandPopup = false)
+        {
+            if (!Pressed && Press)
+            {
+                KeyTop.Height += PressDiff;
+                Canvas.SetTop(KeyTop, PressDiff);
+                KeyBack.Height -= PressDiff;
+                Canvas.SetTop(KeyBack, PressDiff);
+            }
+            handPopup.IsOpen = isHandPopup;
+            if (handPopup.IsOpen)
+            {
+                // Re-positioning on Spacebar
+                if (Key.KeyData == " ")
                 {
                     handPopup.VerticalOffset = 0;
                 }
@@ -95,17 +115,18 @@ namespace OpenTyping
 
             Pressed = true;
         }
-
-        public void PressCorrect(bool isHandPopup = false)
+        public void PressCorrect( bool isHandPopup = false)
         {
-            Press(CorrectKeyColor, CorrectKeyShadowColor, isHandPopup);
+            Press(CorrectKeyColor, CorrectKeyShadowColor, isHandPopup); 
         }
-
+        public void PressCorrect(bool isButtonClicked, bool isHandPopup = false)
+        {
+            Press(isButtonClicked, isHandPopup);
+        }
         public void PressIncorrect()
         {
             Press(IncorrectKeyColor, IncorrectKeyShadowColor);
         }
-
         public void Release()
         {
             if (Pressed)
@@ -115,14 +136,36 @@ namespace OpenTyping
                 KeyBack.Height += PressDiff;
                 Canvas.SetTop(KeyBack, 0);
             }
-
+            
             KeyColor = defaultKeyColor;
             ShadowColor = defaultShadowColor;
             handPopup.IsOpen = false;
 
             Pressed = false;
         }
-
+        public void Release(bool pressed)
+        {
+            if (Pressed && pressed)
+            {
+                KeyTop.Height -= PressDiff;
+                Canvas.SetTop(KeyTop, 0);
+                KeyBack.Height += PressDiff;
+                Canvas.SetTop(KeyBack, 0);
+                handPopup.IsOpen = false;
+                Pressed = false;
+            }
+            else
+            {
+                KeyTop.Height -= PressDiff;
+                Canvas.SetTop(KeyTop, 0);
+                KeyBack.Height += PressDiff;
+                Canvas.SetTop(KeyBack, 0);
+                KeyColor = defaultKeyColor;
+                ShadowColor = defaultShadowColor;
+                handPopup.IsOpen = false;
+                Pressed = false;
+            }
+        }
         public void PressToggle()
         {
             if (Pressed) Release();
