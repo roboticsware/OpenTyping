@@ -37,7 +37,8 @@ namespace OpenTyping
 
         public bool Pressed { get; private set; } = false;
 
-        private const double PressDiff = 0.0000001;
+        private const double PressDiff = 1.7;
+        private const double PressDiffBtn = 0.000001;
         private Brush defaultKeyColor;
         private Brush defaultShadowColor;
 
@@ -50,7 +51,6 @@ namespace OpenTyping
         public KeyBox()
         {
             InitializeComponent();
-
             defaultKeyColor = KeyColor;
             defaultShadowColor = ShadowColor;
             handPopup.IsOpen = false;
@@ -68,10 +68,10 @@ namespace OpenTyping
         {
             if (!Pressed)
             {
-                KeyTop.Height += PressDiff;
-                Canvas.SetTop(KeyTop, PressDiff);
-                KeyBack.Height -= PressDiff;
-                Canvas.SetTop(KeyBack, PressDiff);
+                KeyTop.Height += PressDiffBtn;
+                Canvas.SetTop(KeyTop, PressDiffBtn);
+                KeyBack.Height -= PressDiffBtn;
+                Canvas.SetTop(KeyBack, PressDiffBtn);
             }
 
             KeyColor = keyColor;
@@ -94,10 +94,10 @@ namespace OpenTyping
         {
             if (!Pressed && Press)
             {
-                KeyTop.Height += PressDiff;
-                Canvas.SetTop(KeyTop, PressDiff);
-                KeyBack.Height -= PressDiff;
-                Canvas.SetTop(KeyBack, PressDiff);
+                KeyTop.Height += PressDiffBtn;
+                Canvas.SetTop(KeyTop, PressDiffBtn);
+                KeyBack.Height -= PressDiffBtn;
+                Canvas.SetTop(KeyBack, PressDiffBtn);
             }
             handPopup.IsOpen = isHandPopup;
             if (handPopup.IsOpen)
@@ -131,9 +131,9 @@ namespace OpenTyping
         {
             if (Pressed)
             {
-                KeyTop.Height -= PressDiff;
+                KeyTop.Height -= PressDiffBtn;
                 Canvas.SetTop(KeyTop, 0);
-                KeyBack.Height += PressDiff;
+                KeyBack.Height += PressDiffBtn;
                 Canvas.SetTop(KeyBack, 0);
             }
             
@@ -147,18 +147,18 @@ namespace OpenTyping
         {
             if (Pressed && pressed)
             {
-                KeyTop.Height -= PressDiff;
-                Canvas.SetTop(KeyTop, 0);
-                KeyBack.Height += PressDiff;
-                Canvas.SetTop(KeyBack, 0);
+                KeyTop.Height -= PressDiffBtn;
+                Canvas.SetTop(KeyTop, PressDiffBtn);
+                KeyBack.Height += PressDiffBtn;
+                Canvas.SetTop(KeyBack, PressDiffBtn);
                 handPopup.IsOpen = false;
                 Pressed = false;
             }
             else
             {
-                KeyTop.Height -= PressDiff;
+                KeyTop.Height -= PressDiffBtn;
                 Canvas.SetTop(KeyTop, 0);
-                KeyBack.Height += PressDiff;
+                KeyBack.Height += PressDiffBtn;
                 Canvas.SetTop(KeyBack, 0);
                 KeyColor = defaultKeyColor;
                 ShadowColor = defaultShadowColor;
