@@ -18,6 +18,8 @@ namespace OpenTyping
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
+            // throw new System.NotImplementedException(); //for testing logger
+
             if (selectedPracticeData is null)
             {
                 MessageBox.Show(LangStr.InfoMsg1,
