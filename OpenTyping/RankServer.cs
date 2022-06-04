@@ -32,6 +32,11 @@ namespace OpenTyping
                     Debug.WriteLine("Failed to get users from Server. Server is unavailable!");
                     throw new Exception("Server unavailable");
                 }
+                else if (ex.Message.Contains("SSL/TLS"))
+                {
+                    Debug.WriteLine("Failed to get users from Server. Server is unavailable!");
+                    throw new Exception("Server unavailable");
+                }
                 else if (ex.Message.Contains("could not be resolved"))
                 {
                     Debug.WriteLine("Failed to get users from Server. Network is unavailable!");
