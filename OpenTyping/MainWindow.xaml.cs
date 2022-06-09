@@ -11,6 +11,7 @@ using System.Windows.Data;
 using MahApps.Metro.Controls;
 using OpenTyping.Properties;
 using OpenTyping.Resources.Lang;
+using System.Threading.Tasks;
 
 namespace OpenTyping
 {
@@ -94,6 +95,8 @@ namespace OpenTyping
                 Settings.Default[ProgramLang] = "uz"; // App default language
             }
 
+            ErrorReport.SendErrorLogs();
+           
             InitializeComponent();
             this.SetTextBylanguage(Settings.Default[ProgramLang].ToString());
 
