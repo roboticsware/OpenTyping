@@ -94,6 +94,8 @@ namespace OpenTyping
                 Settings.Default[ProgramLang] = "uz"; // App default language
             }
 
+            ErrorReport.SendErrorLogs();
+           
             InitializeComponent();
             this.SetTextBylanguage(Settings.Default[ProgramLang].ToString());
 
