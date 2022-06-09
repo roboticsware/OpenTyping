@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System;
+using System.Reflection;
 
 namespace OpenTyping
 {
@@ -20,13 +21,14 @@ namespace OpenTyping
                     using (WebClient wc = new WebClient())
                     {
                         var os = System.Environment.OSVersion;
+                        var version = Assembly.GetEntryAssembly().GetName().Version;
 
-                        string osInfo =
-                            $"\nCurrent OS Information:\n" +
+                        string platformInfo =
+                            $"\nApp version: {version}\n" +
                             $"Platform: {os.Platform}\n" +
-                            $"Version: {os.VersionString}\n";
+                            $"OS version string: {os.VersionString}\n";
 
-                        File.AppendAllText(errorFile, osInfo);
+                        File.AppendAllText(errorFile, platformInfo);
 
                         byte[] response = wc.UploadFile(new Uri(errorServerUri), "POST", errorFile);
 
@@ -44,7 +46,6 @@ namespace OpenTyping
                 catch (Exception ex)
                 {
                     System.Diagnostics.Trace.Write(ex.Message);
-                    File.AppendAllText(errorFile, ex.Message);
                 }
         }
     }
