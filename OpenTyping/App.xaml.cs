@@ -1,6 +1,7 @@
 ﻿using NLog;
 using System.Windows;
 using System.Windows.Threading;
+using System.Threading.Tasks;
 
 namespace OpenTyping
 {
@@ -21,8 +22,10 @@ namespace OpenTyping
         {
             var exception = e.Exception;          // get exception
             logger.Error(exception.ToString()); ; // leave the log to file
+            ErrorReport.SendErrorLogs();
             e.Handled = true;                     // prevent the application from crashing
-            Shutdown();                           // quit the application in a controlled way
+            Shutdown(); // quit the application in a controlled way
+
         }
     }
 }
