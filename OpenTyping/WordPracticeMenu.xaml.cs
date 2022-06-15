@@ -114,12 +114,12 @@ namespace OpenTyping
                 await pdController.CloseAsync();
                 pdController = null;
 
-                if (ex.InnerException.ToString().Contains("Server unavailable"))
+                if (ex.Message.Contains("Server unavailable"))
                 {
                     NoInternet.Content = LangStr.NoServerResponse;
                     await this.TryFindParent<MetroWindow>().ShowMessageAsync(LangStr.NoServerResWarn, "");
                 }
-                else if (ex.InnerException.ToString().Contains("Network unavailable"))
+                else if (ex.Message.Contains("Network unavailable"))
                 {
                     await this.TryFindParent<MetroWindow>().ShowMessageAsync(LangStr.NoInternetWarn, "");
                 }
