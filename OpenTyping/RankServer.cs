@@ -30,17 +30,20 @@ namespace OpenTyping
             }
             catch (Exception ex)
             {
-                if (ex.InnerException.ToString().Contains("Unable to connect"))
+                if (ex.InnerException != null && 
+                    ex.InnerException.ToString().Contains("Unable to connect"))
                 {
                     Debug.WriteLine("Failed to get users from Server. Server is unavailable!");
                     throw new Exception("Server unavailable");
                 }
-                else if (ex.InnerException.ToString().Contains("SSL/TLS"))
+                else if (ex.InnerException != null && 
+                    ex.InnerException.ToString().Contains("SSL/TLS"))
                 {
                     Debug.WriteLine("Failed to get users from Server. Server is unavailable!");
                     throw new Exception("Server unavailable");
                 }
-                else if (ex.InnerException.ToString().Contains("could not be resolved"))
+                else if (ex.InnerException != null && 
+                    ex.InnerException.ToString().Contains("could not be resolved"))
                 {
                     Debug.WriteLine("Failed to get users from Server. Network is unavailable!");
                     throw new Exception("Network unavailable");
@@ -73,7 +76,8 @@ namespace OpenTyping
             }
             catch (Exception ex)
             {
-                if (ex.InnerException.ToString().Contains("Unavailable"))
+                if (ex.InnerException != null && 
+                    ex.InnerException.ToString().Contains("Unavailable"))
                 {
                     Debug.WriteLine("Failed to add to Server. Network is unavailable!");
                     throw new Exception("Network unavailable");

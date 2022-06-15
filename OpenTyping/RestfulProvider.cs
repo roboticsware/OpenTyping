@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -99,25 +100,30 @@ namespace OpenTyping
             }
         }
 
-        public async Task<bool> SendErrorData(Dictionary<string, string> errorData)
+        public async Task<bool> SendErrorData(string filePath)
         {
             string endpoint = "/errors";
             if (await GetTokenAsync())
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken);
 
-                string stringData = JsonConvert.SerializeObject(errorData);
-                StringContent contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PostAsync(endpoint, contentData);
-                string responseStr = await response.Content.ReadAsStringAsync();
-                Dictionary<string, dynamic> convertedRes = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(responseStr);
-
-                if (convertedRes.ContainsKey("error"))
+                using (var multipartFormContent = new MultipartFormDataContent())
                 {
-                    Debug.WriteLine(JsonConvert.SerializeObject(convertedRes)); // to dump object
-                    return false;
+                    var fileStreamContent = new StreamContent(File.OpenRead(filePath));
+                    fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
+                    multipartFormContent.Add(fileStreamContent, name: "file", fileName: Path.GetFileName(filePath));
+
+                    HttpResponseMessage response = await client.PostAsync(endpoint, multipartFormContent);
+                    string responseStr = await response.Content.ReadAsStringAsync();
+                    Dictionary<string, dynamic> convertedRes = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(responseStr);
+
+                    if (convertedRes.ContainsKey("error"))
+                    {
+                        Debug.WriteLine(JsonConvert.SerializeObject(convertedRes)); // to dump object
+                        return false;
+                    }
+                    return true;
                 }
-                return true;
             }
             else
             {
