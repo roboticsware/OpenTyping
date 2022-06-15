@@ -27,7 +27,7 @@ namespace OpenTyping
             return null;
         }
 
-        public async Task<int> AddSync(User user)
+        public async Task<int> AddAsync(User user)
         {
             users.Add(user);
             users.Sort();

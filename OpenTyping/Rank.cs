@@ -6,6 +6,6 @@ namespace OpenTyping
     public interface IRank
     {
         Task<List<User>> GetUsersAsync();
-        Task<int> AddSync(User user);
+        Task<int> AddAsync(User user);
     }
 }

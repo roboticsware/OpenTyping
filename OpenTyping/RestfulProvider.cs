@@ -1,65 +1,128 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Diagnostics;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace OpenTyping
 {
     public class RestfulProvider
     {
-        private string _baseUrl;
-        private string _jwt;
+        private readonly string baseUrl = "https://your_server_url";
+        private string jwtToken;
+        private static HttpClient client;
         public List<User> users;
 
         public RestfulProvider()
         {
-            _baseUrl = "https://server_url";
+            if (RestfulProvider.client == null) // one time initialization is enough
+            {
+                client = new HttpClient();
+                client.BaseAddress = new Uri(baseUrl);
+                var contentType = new MediaTypeWithQualityHeaderValue("application/json");
+                client.DefaultRequestHeaders.Accept.Add(contentType);
+            }
         }
 
         public async Task<bool> GetTokenAsync()
         {
-            string endpoint = this._baseUrl + "/auth";
-            string method = "POST";
-            string json = JsonConvert.SerializeObject(new
+            string endpoint = "/auth";
+            string stringData = JsonConvert.SerializeObject(new
             {
                 username = "YourServer",
                 password = "ServerPWD"
             });
 
-            WebClient wc = new WebClient();
-            wc.Headers["Content-Type"] = "application/json";
-            string response = await wc.UploadStringTaskAsync(endpoint, method, json);
-            Dictionary<string, dynamic> convertedRes = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(response);
-            this._jwt = convertedRes["token"];
+            StringContent contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync(endpoint, contentData);
+            string stringJWT = response.Content.ReadAsStringAsync().Result;
+            Dictionary<string, dynamic> convertedRes = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(stringJWT);
+
+            if (convertedRes.ContainsKey("error"))
+            {
+                Debug.WriteLine(JsonConvert.SerializeObject(convertedRes)); // to dump object
+                return false;
+            }
+
+            jwtToken = convertedRes["token"];
             return true;
         }
 
         public async Task<List<User>> GetUsersAsync()
         {
-            Uri endpoint = new Uri(this._baseUrl + "/users");
+            string endpoint = "/users";
 
-            WebClient wc = new WebClient();
-            wc.Headers["Content-Type"] = "application/json";
-            wc.Encoding = System.Text.Encoding.UTF8;
+            HttpResponseMessage response = await client.GetAsync(endpoint);
+            string stringData = await response.Content.ReadAsStringAsync();
+            Dictionary<string, dynamic> convertedRes = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(stringData);
 
-            string response = await wc.DownloadStringTaskAsync(endpoint);
-            Dictionary<string, dynamic> convertedRes = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(response);
+            if (convertedRes.ContainsKey("error"))
+            {
+                Debug.WriteLine(JsonConvert.SerializeObject(convertedRes)); // to dump object
+                return null;
+            }
+           
             users = convertedRes["data"].ToObject<List<User>>();
             return users;
         }
 
         public async Task<string> AddAsync(User user)
         {
-            Uri endpoint = new Uri(this._baseUrl + "/users");
-            string method = "POST";
+            string endpoint = "/users";
+            if (await GetTokenAsync())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken);
 
-            WebClient wc = new WebClient();
-            wc.Headers["Content-Type"] = "application/json";
-            wc.Headers["Authorization"] = "Bearer " + this._jwt;
-            wc.Encoding = System.Text.Encoding.UTF8;
-            string json = JsonConvert.SerializeObject(new Dictionary<string, User>{{"user", user}});
-            return await wc.UploadStringTaskAsync(endpoint, method, json);
+                string stringData = JsonConvert.SerializeObject(new Dictionary<string, User> { { "user", user } });
+                StringContent contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(endpoint, contentData);
+                string responseStr = await response.Content.ReadAsStringAsync();
+                Dictionary<string, dynamic> convertedRes = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(responseStr);
+
+                if (convertedRes.ContainsKey("error"))
+                {
+                    Debug.WriteLine(JsonConvert.SerializeObject(convertedRes)); // to dump object
+                    if (convertedRes["error"] == "Unauthorized") // wrong jwt token error
+                    {
+                        App.logger.Error(endpoint + " : " +JsonConvert.SerializeObject(convertedRes)); // leave to file
+                        throw new Exception("Auth fail");
+                    }
+                    return null;
+                }
+                return convertedRes["data"];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<bool> SendErrorData(Dictionary<string, string> errorData)
+        {
+            string endpoint = "/errors";
+            if (await GetTokenAsync())
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken);
+
+                string stringData = JsonConvert.SerializeObject(errorData);
+                StringContent contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(endpoint, contentData);
+                string responseStr = await response.Content.ReadAsStringAsync();
+                Dictionary<string, dynamic> convertedRes = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(responseStr);
+
+                if (convertedRes.ContainsKey("error"))
+                {
+                    Debug.WriteLine(JsonConvert.SerializeObject(convertedRes)); // to dump object
+                    return false;
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

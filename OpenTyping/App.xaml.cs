@@ -10,7 +10,7 @@ namespace OpenTyping
     /// </summary>
     public partial class App : Application
     {
-        private readonly static Logger logger = LogManager.GetCurrentClassLogger();
+        public readonly static Logger logger = LogManager.GetCurrentClassLogger();
 
         public App()
         {

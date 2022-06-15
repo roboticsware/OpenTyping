@@ -96,6 +96,9 @@ namespace OpenTyping
                     NoNetwork.Opacity = 0.5;
                     await pdController.CloseAsync();
                     pdController = null;
+
+                    NoInternet.Content = LangStr.NoServerResponse;
+                    await this.TryFindParent<MetroWindow>().ShowMessageAsync(LangStr.NoServerResWarn, "");
                 }
 
                 if (pdController != null)
@@ -111,12 +114,12 @@ namespace OpenTyping
                 await pdController.CloseAsync();
                 pdController = null;
 
-                if (ex.Message.Contains("Server unavailable"))
+                if (ex.InnerException.ToString().Contains("Server unavailable"))
                 {
                     NoInternet.Content = LangStr.NoServerResponse;
                     await this.TryFindParent<MetroWindow>().ShowMessageAsync(LangStr.NoServerResWarn, "");
                 }
-                else if (ex.Message.Contains("Network unavailable"))
+                else if (ex.InnerException.ToString().Contains("Network unavailable"))
                 {
                     await this.TryFindParent<MetroWindow>().ShowMessageAsync(LangStr.NoInternetWarn, "");
                 }
@@ -178,7 +181,7 @@ namespace OpenTyping
             // To rank in local, the count of practiece words should be over 10% of the total
             if (newUser.Count >= (practiceTotal * 0.1))
             {
-                int curPosLocal = await RankLocal.AddSync(newUser);
+                int curPosLocal = await RankLocal.AddAsync(newUser);
                 if (curPosLocal >= 0 && curPosLocal <= 9)
                 {
                     congMsg = LangStr.CongratLocalMsg;
@@ -197,14 +200,15 @@ namespace OpenTyping
                     if (users != null)
                     {
                         NoNetwork.Opacity = 0;
-                        curPosServer = await RankServer.AddSync(newUser);
+                        curPosServer = await RankServer.AddAsync(newUser);
                     }
                     else
                     {
                         NoNetwork.Opacity = 0.5;
+                        congMsg = LangStr.NoServerResWarn;
                     }
 
-                    if (curPosServer >= 0 && curPosServer <= 9)
+                    if (curPosServer >= 0 && curPosServer <= 9) // In rank
                     {
                         congMsg = LangStr.CongratServerMsg;
                         LVserver.SelectedIndex = curPosServer;
@@ -216,10 +220,10 @@ namespace OpenTyping
                             ((TabItem)RankTabControl.SelectedItem).Focus();
                         }
                     }
-                } 
+                }
                 catch
                 {
-                    congMsg = LangStr.ServerAuthFail;
+                    congMsg = LangStr.NoServerResWarn;
                 }
             }
             else if (congMsg == LangStr.CongratLocalMsg)
