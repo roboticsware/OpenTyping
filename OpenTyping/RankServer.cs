@@ -17,22 +17,33 @@ namespace OpenTyping
             try
             {
                 users = await Restful.GetUsersAsync();
-                if (users.Count == 0) // If first insertion
+                if (users != null)
                 {
-                    users = new List<User>();
+                    if (users.Count == 0) // If first insertion
+                    {
+                        users = new List<User>();
+                    }
+                    users.Sort();
                 }
-                users.Sort();
 
                 return users;
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("Unable to connect"))
+                if (ex.InnerException != null && 
+                    ex.InnerException.ToString().Contains("Unable to connect"))
                 {
                     Debug.WriteLine("Failed to get users from Server. Server is unavailable!");
                     throw new Exception("Server unavailable");
                 }
-                else if (ex.Message.Contains("could not be resolved"))
+                else if (ex.InnerException != null && 
+                    ex.InnerException.ToString().Contains("SSL/TLS"))
+                {
+                    Debug.WriteLine("Failed to get users from Server. Server is unavailable!");
+                    throw new Exception("Server unavailable");
+                }
+                else if (ex.InnerException != null && 
+                    ex.InnerException.ToString().Contains("could not be resolved"))
                 {
                     Debug.WriteLine("Failed to get users from Server. Network is unavailable!");
                     throw new Exception("Network unavailable");
@@ -42,7 +53,7 @@ namespace OpenTyping
             return null;
         }
 
-        public async Task<int> AddSync(User user)
+        public async Task<int> AddAsync(User user)
         {
             users.Add(user);
             users.Sort();
@@ -61,25 +72,23 @@ namespace OpenTyping
 
             try
             {
-                if (await Restful.GetTokenAsync()) // Get a jwt to add
-                {
-                    await Restful.AddAsync(user);
-                }
+                if (await Restful.AddAsync(user) == null) return -1;
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("Unavailable"))
+                if (ex.InnerException != null && 
+                    ex.InnerException.ToString().Contains("Unavailable"))
                 {
                     Debug.WriteLine("Failed to add to Server. Network is unavailable!");
                     throw new Exception("Network unavailable");
                 }
-                else if (ex.Message.Contains("key"))
+                else if (ex.Message.Contains("Auth fail"))
                 {
                     Debug.WriteLine("Wrong JWT error, Failed to Auth!");
                     throw new Exception("Auth fail");
                 }
             }
-            
+
             return curPos;
         }
     }

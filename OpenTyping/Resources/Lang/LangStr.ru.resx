@@ -396,6 +396,9 @@
   <data name="CongratLocalMsg" xml:space="preserve">
     <value>Поздравляем. Ваш новый рекорд в местном!! </value>
   </data>
+  <data name="UnhandledError" xml:space="preserve">
+    <value>Произошла непредвиденная ошибка. Если ошибка повторится, пожалуйста, сообщите об этом в Telegram @entry_uz, спасибо.</value>
+  </data>
   <data name="FetchServerData" xml:space="preserve">
     <value>Ожидание получения данных с сервера...</value>
   </data>

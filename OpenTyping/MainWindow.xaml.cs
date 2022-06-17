@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Management;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -104,10 +107,55 @@ namespace OpenTyping
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(nationCode);
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             CheckSyllablePractice();
             CheckTutorial();
+            await SendErrLogToServer();
+        }
+
+        private async Task<bool> SendErrLogToServer()
+        {
+            string errorFile = "./errors.log";
+
+            if (File.Exists(errorFile))
+            {
+                string edition = "";
+                ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_OperatingSystem");
+                foreach (ManagementObject managementObject in mos.Get())
+                {
+                    if (managementObject["Caption"] != null)
+                    {
+                        edition = managementObject["Caption"].ToString();
+                    }
+                }
+            
+                string platformInfo =
+                            $"\nMachineId: {SqliteProvider.machineId}\n" +
+                            $"AppVersion: {Assembly.GetEntryAssembly().GetName().Version}\n" +
+                            $"Edition: {edition}\n" +
+                            $"osBuild: {System.Runtime.InteropServices.RuntimeInformation.OSDescription}\n";
+
+                File.AppendAllText(errorFile, platformInfo);
+
+                try
+                {
+                    var provider = new RestfulProvider();
+                    if (await provider.SendErrorData(errorFile))
+                    {
+                        File.Delete(errorFile); // delete log file
+                        return true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // ignore all exceptions
+                    Debug.WriteLine(ex.Message, "SendErrLogToServer");
+                    Debug.WriteLine(ex.InnerException?.ToString(), "SendErrLogToServer"); 
+                }
+            }
+
+            return false;
         }
 
         private static void MainWindow_Closed(object sender, EventArgs e)

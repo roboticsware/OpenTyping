@@ -396,6 +396,9 @@
   <data name="CongratLocalMsg" xml:space="preserve">
     <value>Congratulations. Your new record in local!! </value>
   </data>
+  <data name="UnhandledError" xml:space="preserve">
+    <value>An unexpected error has occurred. If the error repeats, please report it on Telegram @enty_uz, thank you</value>
+  </data>
   <data name="FetchServerData" xml:space="preserve">
     <value>Waiting for feching data from Server...</value>
   </data>

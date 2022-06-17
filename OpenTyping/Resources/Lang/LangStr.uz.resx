@@ -393,6 +393,9 @@
   <data name="CongratServerMsg" xml:space="preserve">
     <value>Serverdagi reytingga kirganingiz bilan tabriklaymiz!!</value>
   </data>
+  <data name="UnhandledError" xml:space="preserve">
+    <value>Kutilmagan error yuz berdi. Error yana takrorlansa Telegram @entry_uz ga xabar bering, rahmat.</value>
+  </data>
   <data name="FetchServerData" xml:space="preserve">
     <value>Serverdan maʼlumotlar olinishi kutilmoqda...</value>
   </data>

@@ -13,13 +13,16 @@ namespace OpenTyping
     public class SqliteProvider
     {
         private SQLiteAsyncConnection _db;
+        public static string machineId;
 
-        public SqliteProvider() { }
+        public SqliteProvider() {
+            GetMachineID();
+        }
 
         public async Task<bool> OpenDatabase()
         {
             string filename = Directory.GetCurrentDirectory() + @"\Resources\db.db";
-            string password = GetMachineID() + "AddYourSalt";
+            string password = machineId + "AddYourSalt";
             Debug.WriteLine(password);
 
             var options = new SQLiteConnectionString(filename, true, key: password);
@@ -56,18 +59,15 @@ namespace OpenTyping
             return true;
         } 
 
-        private string GetMachineID()
+        private void GetMachineID()
         {
-            string id = "";
             ManagementObjectCollection mbsList;
             mbsList= new ManagementObjectSearcher("Select * From Win32_processor").Get();
             
             foreach (ManagementObject mo in mbsList)
             {
-                id = mo["ProcessorID"].ToString();
+                machineId = mo["ProcessorID"].ToString();
             }
-
-            return id;
         }
 
         public async Task<int> AddUserAsync(User user)

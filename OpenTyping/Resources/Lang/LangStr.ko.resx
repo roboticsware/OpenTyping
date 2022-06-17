@@ -384,6 +384,9 @@
   <data name="RankLimit1" xml:space="preserve">
     <value>당신의 기록을 로컬에 등재하기 위해선 연습한 단어 수가 전체 단어 수의 10% 이상</value>
   </data>
+  <data name="UnhandledError" xml:space="preserve">
+    <value>예기치 않은 에러가 발생하였습니다. 에러가 반복되면 텔레그램 @entry_uz로 신고해 주시면 감사합니다.</value>
+  </data>	
   <data name="CongratServerMsg" xml:space="preserve">
     <value>서버에서 새로운 기록갱신을 축하합니다!!</value>
   </data>
