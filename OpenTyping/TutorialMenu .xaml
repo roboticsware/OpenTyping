@@ -46,7 +46,7 @@
                         <Bold>3) Klaviaturada 2 ta shift tugmasi bor!</Bold> Koʻpchilik eʻtibor bermaydigan yana bir qoida shuki, siz shift tugmasini asosiy tugmani bosayotgan qoʻlingiz bilan emas, narigi qoʻlingiz bilan bosishingiz kerak. Misol uchun siz katta “A” termoqchi boʻlsangiz, oʻng qoʻlingiz bilan shiftni bosasiz, agar “L” ni bosmoqchi boʻlsangiz shiftni chap qoʻlingiz bilan bosishingiz kerak.
                         <LineBreak/>
                         <LineBreak/>
-                        <Bold>4) Mashq muvaffaqiyat kalitidir!</Bold> Tepadagi qoidalarga amal qilgan holda koʻp mashq qilsangiz, klaviaturada yozish tezligingiz oshish aniq. Mashq qilishda matn tanlashga ham eʻtibor berish kerak. Siz tanlagan matn faqatgina harflardan emas, katta va kichik harflar, sonlar va belgilardan iborat boʻlishi kerak.
+                        <Bold>4) Mashq muvaffaqiyat kalitidir!</Bold> Tepadagi qoidalarga amal qilgan holda koʻp mashq qilsangiz, klaviaturada yozish tezligingiz oshishi aniq. Mashq qilishda matn tanlashga ham eʻtibor berish kerak. Siz tanlagan matn faqatgina harflardan emas, katta va kichik harflar, sonlar va belgilardan iborat boʻlishi kerak.
                 </TextBlock>
             </Grid>
         </mah:FlipView.Items>

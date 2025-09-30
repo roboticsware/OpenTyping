@@ -328,7 +328,7 @@
     <value>Mashq tugadi.</value>
   </data>
   <data name="LastSpeed" xml:space="preserve">
-    <value>Sizning oxirgi tezligingiz</value>
+    <value> O'rtacha tezlik</value>
   </data>
   <data name="UserDefined" xml:space="preserve">
     <value>Foydalanuvchi aniqlagan</value>
@@ -364,7 +364,7 @@
     <value>O'ringa kirganingiz bilan tabriklaymiz.</value>
   </data>
   <data name="ElapsedTime" xml:space="preserve">
-    <value>O'tilgan soniya</value>
+    <value>Umumiy vaqt (Soniya)</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Ism</value>
