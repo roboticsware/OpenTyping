@@ -105,7 +105,7 @@ namespace OpenTyping
         private uint second = 0;
         private uint minute = 0;
         private uint hour = 0;
-        private uint milisecond = 0;
+        private uint decisecond = 0;
         private TimeSpan timeSpan;
         private int countdownTime;
 
@@ -234,14 +234,26 @@ namespace OpenTyping
                 Settings.Default["Org"] = LangStr.Anonymous;
             }
 
+            // Calc elapsedTime
+            if (countdownTime != 0)
+            {
+                if (elapsedTime != 0)
+                {
+                    elapsedTime--; // timing issue, Should be -1
+                }
+            } 
+            else 
+            {
+                elapsedTime = elapsedTime / 10; // Unit change to second
+            }
 
             // Event return
-           this.RtnUserRecord(new Dictionary<string, string>() 
+            this.RtnUserRecord(new Dictionary<string, string>()
             {
                 {"averageAccuracy", averageAccuracy.ToString()},
                 {"averageTypingSpeed", averageTypingSpeed.ToString()},
                 {"currentWordIndex", currentWordIndex.ToString()},
-                {"elapsedTime", (countdownTime != 0) ? elapsedTime.ToString() : ((double)elapsedTime / (double)10).ToString()}, // Unit change: 100ms -> 1s
+                {"elapsedTime", elapsedTime.ToString()},
                 {"practiceTotal", practiceData.TextData.Count.ToString()}
             });
 
@@ -411,15 +423,15 @@ namespace OpenTyping
         private void StopWatchTick(object sender, EventArgs e)
         {
             elapsedTime++;
-            milisecond = elapsedTime % 10;
+            decisecond = elapsedTime % 10;
 
             TBstopWatch.Text = string.Format("{0:D2}", hour) + ":" + string.Format("{0:D2}", minute)
-                                + ":" + string.Format("{0:D2}", second) + "." + string.Format("{0:D2}", milisecond);
+                                + ":" + string.Format("{0:D2}", second) + "." + string.Format("{0:D2}", decisecond);
 
-            if (milisecond == 0)
+            if (decisecond == 0)
             {
                 second++;
-                milisecond = 0;
+                decisecond = 0;
             }
             if (second == 60)
             {
