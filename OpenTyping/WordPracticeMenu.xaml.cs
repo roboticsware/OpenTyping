@@ -39,6 +39,7 @@ namespace OpenTyping
         private int countdownTime;
         static public List<Timer> Timers = new List<Timer>
         {
+            new Timer("1M"),
             new Timer("3M"),
             new Timer("5M"),
             new Timer("10M"),
