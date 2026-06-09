@@ -1,0 +1,41 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Only",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "${workspaceFolder}\\OpenTyping\\OpenTyping.csproj",
+                "-c",
+                "Debug",
+                "-p:Platform=x86"
+            ],
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "compile",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "dotnet build '${workspaceFolder}/OpenTyping/OpenTyping.csproj' -c Debug -p:Platform=x86; if ($LASTEXITCODE -eq 0) { Start-Process -FilePath '${workspaceFolder}/OpenTyping/bin/x86/Debug/TezTer.exe' -WorkingDirectory '${workspaceFolder}/OpenTyping/bin/x86/Debug' }"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

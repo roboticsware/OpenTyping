@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Framework Launch (WPF)",
+            "type": "clr",
+            "request": "launch",
+            "program": "${workspaceFolder}/OpenTyping/bin/x86/Debug/TezTer.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}/OpenTyping/bin/x86/Debug",
+            "preLaunchTask": "Build Only",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        }
+    ]
+}

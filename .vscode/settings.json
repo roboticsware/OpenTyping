@@ -1,0 +1,5 @@
+{
+    "omnisharp.useModernNet": false,
+    "omnisharp.autoStart": true,
+    "dotnet.preferCSharpExtension": true
+}
