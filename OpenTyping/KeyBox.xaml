@@ -1,4 +1,4 @@
-﻿<UserControl x:Name="SelfControl"
+<UserControl x:Name="SelfControl"
              x:Class="OpenTyping.KeyBox"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -45,18 +45,5 @@
                 </Viewbox>
             </StackPanel>
         </Border>
-        <Popup Name="handPopup" AllowsTransparency="True"
-               PlacementTarget="{Binding ElementName=KeyTop}" 
-               Placement="Center" 
-               DataContext="{Binding ElementName=SelfControl}"
-               VerticalOffset="{Binding ActualHeight,
-                                Converter={local:MathConverter},
-                                ConverterParameter=@VALUE*1.2}">
-            <Image Name="handImg"
-                   DataContext="{Binding ElementName=SelfControl}"
-                   Width="{Binding ActualHeight,
-                           Converter={local:MathConverter},
-                           ConverterParameter=@VALUE*2.5}"/>
-        </Popup>
     </Canvas>
 </UserControl>

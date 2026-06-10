@@ -1,4 +1,4 @@
-﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls;
 using OpenTyping.Properties;
 using OpenTyping.Resources.Lang;
 using System;
@@ -202,7 +202,7 @@ namespace OpenTyping
             }
 
             CurrentKey = NextKey;
-            KeyLayoutBox.PressCorrectKey(CurrentKey.Pos, this.isHandPopup);
+            KeyLayoutBox.PressCorrectKey(CurrentKey.Pos, this.isHandPopup, CurrentKey.IsShift);
             if (CurrentKey.IsShift)
             {
                 KeyLayoutBox.LShiftKey.PressCorrect();
@@ -259,7 +259,7 @@ namespace OpenTyping
 
                     if (CurrentKey.Pos == pos)
                     {
-                        KeyLayoutBox.PressCorrectKey(pos, this.isHandPopup);
+                        KeyLayoutBox.PressCorrectKey(pos, this.isHandPopup, CurrentKey.IsShift);
                     }
                     else
                     {
@@ -297,7 +297,7 @@ namespace OpenTyping
         {
             if (CurrentKey != null)
             {
-                KeyLayoutBox.PressCorrectKey(CurrentKey.Pos, this.isHandPopup);
+                KeyLayoutBox.PressCorrectKey(CurrentKey.Pos, this.isHandPopup, CurrentKey.IsShift);
             }
         }
 
@@ -311,7 +311,7 @@ namespace OpenTyping
         {
             if (CurrentKey != null)
             {
-                KeyLayoutBox.PressCorrectKey(CurrentKey.Pos, this.isHandPopup);
+                KeyLayoutBox.PressCorrectKey(CurrentKey.Pos, this.isHandPopup, CurrentKey.IsShift);
             }
         }
 
@@ -325,7 +325,7 @@ namespace OpenTyping
                     this.isHandPopup = true;
                     if (KeyLayoutBox != null)
                     {
-                        KeyLayoutBox.PressCorrectKey(CurrentKey.Pos, true);
+                        KeyLayoutBox.PressCorrectKey(CurrentKey.Pos, true, CurrentKey.IsShift);
                     }
                 }
                 else
@@ -409,7 +409,7 @@ namespace OpenTyping
                 KeyLayoutBox.ToggleColoredKeys(false, CurrentKey.Pos);
             }
 
-            KeyLayoutBox.PressCorrectKey(CurrentKey.Pos, this.isHandPopup); // Refresh current key
+            KeyLayoutBox.PressCorrectKey(CurrentKey.Pos, this.isHandPopup, CurrentKey.IsShift); // Refresh current key
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
