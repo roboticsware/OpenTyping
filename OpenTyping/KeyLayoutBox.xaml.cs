@@ -39,19 +39,108 @@ namespace OpenTyping
             keyLayoutBox?.UpdateHandsTransform();
         }
 
+        private static readonly System.Collections.Generic.Dictionary<string, double> HandCalibrationX = new System.Collections.Generic.Dictionary<string, double>
+        {
+            { "a", -119.92 },
+            { "b", -91.64 },
+            { "backslash", -55.14 },
+            { "c", -105.00 },
+            { "close_bracket", -47.24 },
+            { "comma", -93.28 },
+            { "d", -121.00 },
+            { "dot", -66.12 },
+            { "e", -108.54 },
+            { "enter", -27.36 },
+            { "equal", -52.17 },
+            { "f", -119.96 },
+            { "g", -79.05 },
+            { "h", -97.57 },
+            { "i", -91.96 },
+            { "j", -97.45 },
+            { "k", -83.76 },
+            { "key_0", -71.57 },
+            { "key_1", -134.79 },
+            { "key_2", -135.30 },
+            { "key_3", -120.12 },
+            { "key_4", -125.21 },
+            { "key_5", -126.90 },
+            { "key_6", -106.08 },
+            { "key_7", -96.08 },
+            { "key_8", -91.41 },
+            { "key_9", -86.89 },
+            { "l", -78.79 },
+            { "m", -81.24 },
+            { "minus", -64.97 },
+            { "n", -99.37 },
+            { "neutral_left", -117.9 },
+            { "neutral_right", -75.0 },
+            { "o", -77.37 },
+            { "open_bracket", -60.19 },
+            { "p", -72.41 },
+            { "q", -126.02 },
+            { "quote", -52.32 },
+            { "r", -109.79 },
+            { "s", -123.53 },
+            { "semicolon", -60.96 },
+            { "shift_left", -140.43 },
+            { "shift_right", -28.75 },
+            { "slash", -76.09 },
+            { "space", -42.96 },
+            { "t", -83.67 },
+            { "tab", -145.91 },
+            { "tilda", -151.15 },
+            { "u", -92.34 },
+            { "v", -95.00 },
+            { "w", -127.41 },
+            { "x", -81.26 },
+            { "y", -106.18 },
+            { "z", -104.42 }
+        };
+
         private void UpdateHandsTransform()
         {
             if (HandsOverlay == null) return;
             
-            double scale = 1.868 * WidthRatio;
-            double tx = -223.4 * WidthRatio;
-            double ty = -160.7 * WidthRatio;
+            var leftContainer = HandsOverlay.FindName("LeftHandContainer") as UIElement;
+            var rightContainer = HandsOverlay.FindName("RightHandContainer") as UIElement;
 
-            var group = new TransformGroup();
-            group.Children.Add(new ScaleTransform(scale, scale));
-            group.Children.Add(new TranslateTransform(tx, ty));
-            
-            HandsOverlay.RenderTransform = group;
+            if (leftContainer != null)
+            {
+                double scaleX = 1.479 * WidthRatio;
+                double scaleY = 1.86 * WidthRatio;
+
+                double tx_base = -117.9;
+                if (currentLeftActive != null && HandCalibrationX.ContainsKey(currentLeftActive))
+                {
+                    tx_base = HandCalibrationX[currentLeftActive];
+                }
+                double tx = tx_base * WidthRatio;
+                double ty = -180.0 * WidthRatio;
+
+                var group = new TransformGroup();
+                group.Children.Add(new ScaleTransform(scaleX, scaleY));
+                group.Children.Add(new TranslateTransform(tx, ty));
+                leftContainer.RenderTransform = group;
+            }
+
+            if (rightContainer != null)
+            {
+                double scaleX = 1.479 * WidthRatio;
+                double scaleY = 1.86 * WidthRatio;
+
+                double tx_base = -75.0;
+                if (currentRightActive != null && HandCalibrationX.ContainsKey(currentRightActive))
+                {
+                    tx_base = HandCalibrationX[currentRightActive];
+                }
+                double tx = tx_base * WidthRatio;
+                double ty = -180.0 * WidthRatio;
+
+                var group = new TransformGroup();
+                group.Children.Add(new ScaleTransform(scaleX, scaleY));
+                group.Children.Add(new TranslateTransform(tx, ty));
+                rightContainer.RenderTransform = group;
+            }
         }
 
         private string currentLeftActive = null;
@@ -198,6 +287,7 @@ namespace OpenTyping
                     currentLeftActive = targetLeftId;
                 }
             }
+            UpdateHandsTransform();
         }
 
         private void HideHand(string key)
@@ -222,6 +312,7 @@ namespace OpenTyping
                 SetElementVisibility("neutral_right", Visibility.Visible);
                 currentRightActive = null;
             }
+            UpdateHandsTransform();
         }
 
         private void ResetAllHands()
@@ -248,6 +339,8 @@ namespace OpenTyping
 
             SetElementVisibility("neutral_left", Visibility.Visible);
             SetElementVisibility("neutral_right", Visibility.Visible);
+
+            UpdateHandsTransform();
         }
 
         private void KeyLayoutBox_Loaded(object sender, RoutedEventArgs e)

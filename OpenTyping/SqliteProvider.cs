@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -18,7 +18,7 @@ namespace OpenTyping
 
         public async Task<bool> OpenDatabase()
         {
-            string filename = Directory.GetCurrentDirectory() + @"\Resources\db.db";
+            string filename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "db.db");
             string password = GetMachineID() + "AddYourSalt";
             Debug.WriteLine(password);
 
@@ -35,7 +35,7 @@ namespace OpenTyping
                 try
                 {
                     await _db.GetTableInfoAsync("Users");
-                } 
+                }
                 catch (Exception ex)
                 {
                     if (ex.Message.Contains("file is not a database"))
@@ -54,14 +54,14 @@ namespace OpenTyping
             await _db.CloseAsync();
 
             return true;
-        } 
+        }
 
         private string GetMachineID()
         {
             string id = "";
             ManagementObjectCollection mbsList;
-            mbsList= new ManagementObjectSearcher("Select * From Win32_processor").Get();
-            
+            mbsList = new ManagementObjectSearcher("Select * From Win32_processor").Get();
+
             foreach (ManagementObject mo in mbsList)
             {
                 id = mo["ProcessorID"].ToString();

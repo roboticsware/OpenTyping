@@ -12,7 +12,7 @@
                  Style="{StaticResource WindowTitleStyle}"
                  FontFamily="{StaticResource NanumGothic}"
                  Width="800" 
-                 Height="510" 
+                 Height="535" 
                  ResizeMode="CanMinimize"
                  Icon="{StaticResource AppIcon}">
     <mah:MetroWindow.RightWindowCommands>
@@ -61,7 +61,7 @@
             </Button>
         </mah:WindowCommands>
     </mah:MetroWindow.RightWindowCommands>
-    <TabControl x:Name="MenuTabControl" mah:TabControlHelper.Underlined="TabPanel" 
+    <TabControl x:Name="MenuTabControl" SelectedIndex="0" mah:TabControlHelper.Underlined="TabPanel" 
                 Style="{DynamicResource MahApps.Styles.TabControl.AnimatedSingleRow}">
         <TabItem>
             <TabItem.Header>

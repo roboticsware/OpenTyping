@@ -36,22 +36,27 @@
     </UserControl.Resources>
     
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <!-- Keyboard keys -->
-            <RowDefinition Height="Auto"/> <!-- Spacer for hand wrists -->
-        </Grid.RowDefinitions>
-
         <!-- Centered Container for Keyboard and Hands -->
-        <Grid Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Center">
+        <Grid HorizontalAlignment="Center">
             <!-- Centered Keyboard Panel -->
             <StackPanel Orientation="Vertical">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Margin" Value="0,0,0,5" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Visibility, ElementName=HandsOverlay}" Value="Visible">
+                                <Setter Property="Margin" Value="0,30,0,5" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
                 <StackPanel Orientation="Horizontal">
                     <StackPanel x:Name="NumberRow"
                                 Style="{StaticResource KeyRowStyle}"/>
                     <local:KeyBox x:Name="BackspaceKey" 
                                   Style="{StaticResource ModKeyBoxStyle}"
                                   Key="{StaticResource BackspaceKey}"
-                                  MinWidth="100"/>
+                                  MinWidth="100"/>       
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <local:KeyBox x:Name="TabKey"
@@ -89,18 +94,30 @@
                     <StackPanel x:Name="ForthRow"
                                 Style="{StaticResource KeyRowStyle}"/>
                 </StackPanel>
+
+                <!-- Spacer to push height to accommodate wrists only when HandsOverlay is visible -->
+                <FrameworkElement>
+                    <FrameworkElement.Style>
+                        <Style TargetType="FrameworkElement">
+                            <Setter Property="Height" Value="0" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Visibility, ElementName=HandsOverlay}" Value="Visible">
+                                    <Setter Property="Height" Value="{Binding WidthRatio, ElementName=SelfControl, Converter={local:MathConverter}, ConverterParameter=@VALUE*60}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </FrameworkElement.Style>
+                </FrameworkElement>
             </StackPanel>
 
             <!-- Native WPF Hands Overlay on top of the keyboard keys -->
             <local:HandsOverlay x:Name="HandsOverlay" 
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top"
+                                Height="0"
+                                Margin="0,30,0,0"
                                 Visibility="Collapsed"
                                 IsHitTestVisible="False"/>
         </Grid>
-
-        <!-- Spacer to push parent height to accommodate wrists -->
-        <FrameworkElement Grid.Row="1" 
-                          Height="{Binding WidthRatio, ElementName=SelfControl, Converter={local:MathConverter}, ConverterParameter=@VALUE*60}" />
     </Grid>
 </UserControl>
