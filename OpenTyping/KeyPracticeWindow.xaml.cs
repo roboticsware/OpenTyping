@@ -79,9 +79,8 @@ namespace OpenTyping
         private static readonly Random Randomizer = new Random();
         private static readonly ThicknessAnimationUsingKeyFrames ShakeAnimation = new ThicknessAnimationUsingKeyFrames();
 
-        private readonly MediaPlayer playMedia = new MediaPlayer();
+        private SoundPlayer playMedia;
         private readonly SoundPlayer playSound = new SoundPlayer(Properties.Resources.Pressed);
-        private readonly Uri uri = new Uri("pack://siteoforigin:,,,/Resources/Sounds/WrongPressed.mp3");
         private readonly Volume volume;
 
         // Magnify window
@@ -102,6 +101,18 @@ namespace OpenTyping
             this.FontAssignByLang();
 
             this.volume = (Volume)Settings.Default["Volume"];
+
+            // Initialize wrong-press sound (WAV, no WMP dependency)
+            try
+            {
+                string wrongPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Sounds", "WrongPressed.wav");
+                if (System.IO.File.Exists(wrongPath))
+                {
+                    playMedia = new SoundPlayer(wrongPath);
+                    playMedia.Load();
+                }
+            }
+            catch { }
 
             this.keyList = keyList;
             this.noShiftMode = noShiftMode;
@@ -237,10 +248,9 @@ namespace OpenTyping
             }
             else // Wrong pressed
             {
-                playMedia.Open(uri);
                 if (this.volume != Volume.Off)
                 {
-                    playMedia.Play();
+                    playMedia?.Play();
                 }
 
                 IncorrectCount++;

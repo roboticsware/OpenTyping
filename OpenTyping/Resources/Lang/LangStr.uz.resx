@@ -1,110 +1,52 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -360,8 +302,8 @@
   <data name="Anonymous" xml:space="preserve">
     <value>Anonim</value>
   </data>
-  <data name="CongratMsg" xml:space="preserve">
-    <value>O'ringa kirganingiz bilan tabriklaymiz.</value>
+  <data name="CongratLocalMsg" xml:space="preserve">
+    <value>Lokaldagi reytingga kirganingiz bilan tabriklaymiz!!</value>
   </data>
   <data name="ElapsedTime" xml:space="preserve">
     <value>Umumiy vaqt (Soniya)</value>
@@ -398,5 +340,221 @@
   </data>
   <data name="UnhandledError" xml:space="preserve">
     <value>Kutilmagan error yuz berdi. Error yana takrorlansa Telegram @entry_uz ga xabar bering, rahmat.</value>
+  </data>
+  <data name="RankLimit1" xml:space="preserve">
+    <value>Lokaldagi reytingga kirish uchun, mashq qilgan so'zlar soni jami so'zlarning 10% dan oshish kerak.</value>
+  </data>
+  <data name="CongratServerMsg" xml:space="preserve">
+    <value>Serverdagi reytingga kirganingiz bilan tabriklaymiz!!</value>
+  </data>
+  <data name="FetchServerData" xml:space="preserve">
+    <value>Serverdan ma'lumotlar olinishi kutilmoqda...</value>
+  </data>
+  <data name="NoInternet" xml:space="preserve">
+    <value>Internet yo'q!</value>
+  </data>
+  <data name="NoInternetWarn" xml:space="preserve">
+    <value>Internet yo'q! Internetga ulaning.</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Fuqarolik</value>
+  </data>
+  <data name="Keyboard" xml:space="preserve">
+    <value>Klaviatura</value>
+  </data>
+  <data name="RankLimit2" xml:space="preserve">
+    <value>Serverga kirish uchun esa jamining 30% dan oshish kerak.</value>
+  </data>
+  <data name="NoServerResponse" xml:space="preserve">
+    <value>Server javobi yo'q!</value>
+  </data>
+  <data name="NoServerResWarn" xml:space="preserve">
+    <value>Server faol emas keyinchalik urinib ko'ring!</value>
+  </data>
+  <data name="ServerAuthFail" xml:space="preserve">
+    <value>Server autentifikatsiyasi amalga oshmadi! Iltimos, ilovaning so'nggi versiyasini o'rnatgandan so'ng qayta urinib ko'ring.</value>
+  </data>
+  <data name="SamarkandTabHeader" xml:space="preserve">
+    <value>Samarqand meteorlari</value>
+  </data>
+  <data name="SamarkandTitle" xml:space="preserve">
+    <value>Samarqand Meteor Mudofaasi</value>
+  </data>
+  <data name="SamarkandDesc" xml:space="preserve">
+    <value>:Meteorlarni yo'q qilib, Samarqandning moviy gumbazini himoya qiling.</value>
+  </data>
+  <data name="SamarkandStart" xml:space="preserve">
+    <value>O'yinni boshlash</value>
+  </data>
+  <data name="SamarkandStage" xml:space="preserve">
+    <value>Bosqich</value>
+  </data>
+  <data name="SamarkandScore" xml:space="preserve">
+    <value>Ball</value>
+  </data>
+  <data name="SamarkandCombo" xml:space="preserve">
+    <value>Kombo</value>
+  </data>
+  <data name="SamarkandFever" xml:space="preserve">
+    <value>Olovqalb palla!</value>
+  </data>
+  <data name="SamarkandShield" xml:space="preserve">
+    <value>Qalqon</value>
+  </data>
+  <data name="SamarkandSlowMotion" xml:space="preserve">
+    <value>Vaqtni sekinlashtirish</value>
+  </data>
+  <data name="SamarkandDoubleScore" xml:space="preserve">
+    <value>Ikki barobar ball</value>
+  </data>
+  <data name="SamarkandBomb" xml:space="preserve">
+    <value>Barchasini parchalash!</value>
+  </data>
+  <data name="SamarkandFreeze" xml:space="preserve">
+    <value>Vaqt muzlatildi!</value>
+  </data>
+  <data name="SamarkandHeal" xml:space="preserve">
+    <value>Koshin tiklandi!</value>
+  </data>
+  <data name="SamarkandTrap" xml:space="preserve">
+    <value>Tuzoq!</value>
+  </data>
+  <data name="SamarkandGameOver" xml:space="preserve">
+    <value>O'yin tugadi</value>
+  </data>
+  <data name="SamarkandSubmit" xml:space="preserve">
+    <value>Saqlash</value>
+  </data>
+  <data name="SamarkandSkip" xml:space="preserve">
+    <value>O'tkazib yuborish</value>
+  </data>
+  <data name="SamarkandHelp" xml:space="preserve">
+    <value>Keyingi bosqich uchun Probel (Space) tugmasini bosing.</value>
+  </data>
+  <data name="SamarkandIntro" xml:space="preserve">
+    <value>Go'zal moviy obidalar shahri Samarqand.
+Buyuk astronom Ulug'bek tungi osmonni yulduzlar bilan bezagan makon...
+Milodiy 1420-yil.
+Ko'p asrlik Ulug'bek rasadxonasi va
+Samarqand ramzi bo'lmish moviy koshinli gumbazli masjid qad ko'targan.
+Biroq, Samarqand osmonida ulkan 'Meteorlar to'dasi' paydo bo'ladi.
+Ko'kdan tushayotgan bu meteorlar yerga yoki rasadxonaga urilgan lahzada,
+rasadxonani ushlab turgan moviy sopol g'ishtlarni birma-bir parchalaydi.
+Rasadxonani ushlab turgan barcha g'ishtlar parchalansa,
+shonli tarix va astronomiya merosi izsiz yo'q bo'lib ketadi.
+Aql-zakovatingiz va yozish tezligingiz bilan meteorlar to'dasini urib tushirib, Samarqandni himoya qiling!
+
+[O'yin Qoidalari]
+• Oq meteorlar: Oddiy meteorlar (100 ball).
+• Sariq meteorlar: Yordam beruvchi maxsus elementlar (Qalqon, Muzlatish, Tuzatish va h.k.).
+• Qizil meteorlar: Tez tushadigan meteorlar. Urilganda 2 ta g'ishtni buzadi (200 ball).
+• Oltin kometalar: Juda tez tushadi. Yozilganda 500 ball beradi va olovqalb rejimni faollashtiradi (zarar yetkazmaydi).
+
+(O'tkazib yuborish uchun ESC tugmasini bosing)</value>
+  </data>
+  <data name="SamarkandRulesButton" xml:space="preserve">
+    <value>Qoidalar</value>
+  </data>
+  <data name="SamarkandRulesTitle" xml:space="preserve">
+    <value>O'yin Qoidalari</value>
+  </data>
+  <data name="SamarkandRulesObjTitle" xml:space="preserve">
+    <value>Maqsad</value>
+  </data>
+  <data name="SamarkandRulesObjDesc" xml:space="preserve">
+    <value>Rasadxonaga meteorlar urilishidan oldin ularni yozib yo'q qiling va moviy gumbazni himoya qiling.</value>
+  </data>
+  <data name="SamarkandRulesTypesTitle" xml:space="preserve">
+    <value>Meteor va Element Turlari</value>
+  </data>
+  <data name="SamarkandRulesNormal" xml:space="preserve">
+    <value>● Oddiy Meteor</value>
+  </data>
+  <data name="SamarkandRulesNormalDesc" xml:space="preserve">
+    <value>Oddiy oq meteor. Yozilganda 100 ball beradi.</value>
+  </data>
+  <data name="SamarkandRulesMeteor" xml:space="preserve">
+    <value>● Meteor</value>
+  </data>
+  <data name="SamarkandRulesMeteorDesc" xml:space="preserve">
+    <value>Tez tushadigan qizil meteor. Urilganda 2 ta g'ishtni buzadi, yozilganda 200 ball beradi.</value>
+  </data>
+  <data name="SamarkandRulesShield" xml:space="preserve">
+    <value>● Qalqon</value>
+  </data>
+  <data name="SamarkandRulesShieldDesc" xml:space="preserve">
+    <value>Minora atrofida qalqon hosil qilib, 1 marta to'qnashuv zararini qaytaradi.</value>
+  </data>
+  <data name="SamarkandRulesFreeze" xml:space="preserve">
+    <value>● Muzlatish</value>
+  </data>
+  <data name="SamarkandRulesFreezeDesc" xml:space="preserve">
+    <value>Ekrandagi barcha meteorlarni 5 soniyaga muzlatib qo'yadi.</value>
+  </data>
+  <data name="SamarkandRulesSlow" xml:space="preserve">
+    <value>● Sekinlashtirish</value>
+  </data>
+  <data name="SamarkandRulesSlowDesc" xml:space="preserve">
+    <value>Tushayotgan barcha meteorlar tezligini 8 soniyaga sekinlashtiradi.</value>
+  </data>
+  <data name="SamarkandRulesBomb" xml:space="preserve">
+    <value>● Bombardimon</value>
+  </data>
+  <data name="SamarkandRulesBombDesc" xml:space="preserve">
+    <value>Ekrandagi barcha meteorlarni portlatib yo'q qiladi. (har biri uchun 50 ball)</value>
+  </data>
+  <data name="SamarkandRulesHealDouble" xml:space="preserve">
+    <value>● Tiklash / 2X Ball</value>
+  </data>
+  <data name="SamarkandRulesHealDoubleDesc" xml:space="preserve">
+    <value>Koshin tiklash 1 ta singan g'ishtni tuzatadi. 2X ball 10 soniyada ballarni ikki barobar oshiradi.</value>
+  </data>
+  <data name="SamarkandRulesComet" xml:space="preserve">
+    <value>● Oltin kometa</value>
+  </data>
+  <data name="SamarkandRulesCometDesc" xml:space="preserve">
+    <value>Juda tez tushadigan oltin kometadir. Yozilganda 500 ball beradi va darhol olovqalb rejimni faollashtiradi! Urilganda zarar yetkazmaydi.</value>
+  </data>
+  <data name="SamarkandRulesComboTitle" xml:space="preserve">
+    <value>Kombo va olovqalb rejim</value>
+  </data>
+  <data name="SamarkandRulesComboDesc" xml:space="preserve">
+    <value>• Xatosiz ketma-ket yozilganda kombo ortadi.
+• Har 5 komboda ball +0.25 barobarga ortadi (maksimal 2.5x).
+• 15 komboda olovqalb rejim ishga tushib qalqon faollashadi.
+• Xato yozilganda yoki minora shikastlanganda kombo 0 ga qaytadi.</value>
+  </data>
+  <data name="SamarkandClose" xml:space="preserve">
+    <value>Yopish</value>
+  </data>
+  <data name="SamarkandDate" xml:space="preserve">
+    <value>Sana</value>
+  </data>
+  <data name="SamarkandFinalScore" xml:space="preserve">
+    <value>Yakuniy ball:</value>
+  </data>
+  <data name="SamarkandMaxStage" xml:space="preserve">
+    <value>Maksimal bosqich:</value>
+  </data>
+  <data name="SamarkandTypeHere" xml:space="preserve">
+    <value>Bu yerga yozing...</value>
+  </data>
+  <data name="SamarkandBuffShield" xml:space="preserve">
+    <value>QALQON</value>
+  </data>
+  <data name="SamarkandBuffSlow" xml:space="preserve">
+    <value>SEKINLASHTIRISH</value>
+  </data>
+  <data name="SamarkandBuffDouble" xml:space="preserve">
+    <value>2X BALL</value>
+  </data>
+  <data name="SamarkandBuffFreeze" xml:space="preserve">
+    <value>MUZLASH</value>
+  </data>
+  <data name="SamarkandLevelUp" xml:space="preserve">
+    <value>{0}-BOSQICH</value>
+  </data>
+  <data name="SamarkandComet" xml:space="preserve">
+    <value>OLTIN KOMETA</value>
   </data>
 </root>

@@ -38,6 +38,7 @@
     <PackageReference Include="Microsoft-WindowsAPICodePack-Sensors" Version="1.1.3.3" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.3.3" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-ShellExtensions" Version="1.1.3.3" />
+    <PackageReference Include="NAudio" Version="2.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="NLog" Version="4.7.15" />
     <PackageReference Include="sqlite-net-sqlcipher" Version="1.6.292" />
@@ -163,11 +164,23 @@
     <Content Include="Resources\Sounds\Pressed.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Sounds\Combo.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sounds\Break.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sounds\GameOverSound.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sounds\bgm.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sounds\WrongPressed.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Resources\Fonts\LabDigital.ttf" />
     <Resource Include="Resources\Fonts\PTMono.ttf" />
-    <None Include="Resources\Sounds\WrongPressed.mp3">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

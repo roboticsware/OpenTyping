@@ -1,110 +1,52 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -241,7 +183,7 @@
     <value>를 삭제하시겠습니까?</value>
   </data>
   <data name="WarnMsg4" xml:space="preserve">
-    <value>의 통계 정보를 삭제하시겠습니까?</value>
+    <value>의 통계 정보를 초기화 하시겠습니까?</value>
   </data>
   <data name="Accuracy" xml:space="preserve">
     <value>정확도</value>
@@ -357,8 +299,8 @@
   <data name="Anonymous" xml:space="preserve">
     <value>무명</value>
   </data>
-  <data name="CongratMsg" xml:space="preserve">
-    <value>새로운 기록갱신을 축하합니다!!</value>
+  <data name="CongratLocalMsg" xml:space="preserve">
+    <value>로컬에서 새로운 기록갱신을 축하합니다!!</value>
   </data>
   <data name="ElapsedTime" xml:space="preserve">
     <value>소요시간(초)</value>
@@ -392,5 +334,221 @@
   </data>
   <data name="UnhandledError" xml:space="preserve">
     <value>예기치 않은 에러가 발생하였습니다. 에러가 반복되면 텔레그램 @entry_uz로 신고해 주시면 감사합니다.</value>
+  </data>
+  <data name="RankLimit1" xml:space="preserve">
+    <value>당신의 기록을 로컬에 등재하기 위해선 연습한 단어 수가 전체 단어 수의 10% 이상</value>
+  </data>
+  <data name="CongratServerMsg" xml:space="preserve">
+    <value>서버에서 새로운 기록갱신을 축하합니다!!</value>
+  </data>
+  <data name="FetchServerData" xml:space="preserve">
+    <value>서버에서 데이터를 가져오는 중입니다. 잠시만 기다려 주세요...</value>
+  </data>
+  <data name="NoInternet" xml:space="preserve">
+    <value>인터넷 연결 없음!</value>
+  </data>
+  <data name="NoInternetWarn" xml:space="preserve">
+    <value>인터넷 연결 없음! 인터넷에 연결해 주세요.</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>국적</value>
+  </data>
+  <data name="Keyboard" xml:space="preserve">
+    <value>자판</value>
+  </data>
+  <data name="RankLimit2" xml:space="preserve">
+    <value>서버에 등재를 위해서는 전체 단어 수의 30% 이상 되어야 합니다.</value>
+  </data>
+  <data name="NoServerResponse" xml:space="preserve">
+    <value>서버가 응답하지 않습니다.</value>
+  </data>
+  <data name="NoServerResWarn" xml:space="preserve">
+    <value>죄송하지만, 서버문제가 해결될 때까지 기다려 주세요.</value>
+  </data>
+  <data name="ServerAuthFail" xml:space="preserve">
+    <value>서버 인증 실패! 죄송하지만, 앱 최신 버전 설치 후 다시 이용해 주세요.</value>
+  </data>
+  <data name="SamarkandTabHeader" xml:space="preserve">
+    <value>사마르칸트</value>
+  </data>
+  <data name="SamarkandTitle" xml:space="preserve">
+    <value>사마르칸트 유성우 방어</value>
+  </data>
+  <data name="SamarkandDesc" xml:space="preserve">
+    <value>:떨어지는 유성을 요격하여 사마르칸트의 푸른 돔 사원을 지킵니다.</value>
+  </data>
+  <data name="SamarkandStart" xml:space="preserve">
+    <value>게임 시작</value>
+  </data>
+  <data name="SamarkandStage" xml:space="preserve">
+    <value>단계</value>
+  </data>
+  <data name="SamarkandScore" xml:space="preserve">
+    <value>점수</value>
+  </data>
+  <data name="SamarkandCombo" xml:space="preserve">
+    <value>콤보</value>
+  </data>
+  <data name="SamarkandFever" xml:space="preserve">
+    <value>피버 타임!</value>
+  </data>
+  <data name="SamarkandShield" xml:space="preserve">
+    <value>방어막</value>
+  </data>
+  <data name="SamarkandSlowMotion" xml:space="preserve">
+    <value>시간 감속</value>
+  </data>
+  <data name="SamarkandDoubleScore" xml:space="preserve">
+    <value>점수 2배</value>
+  </data>
+  <data name="SamarkandBomb" xml:space="preserve">
+    <value>일괄 파괴!</value>
+  </data>
+  <data name="SamarkandFreeze" xml:space="preserve">
+    <value>시간 정지!</value>
+  </data>
+  <data name="SamarkandHeal" xml:space="preserve">
+    <value>사원 복구!</value>
+  </data>
+  <data name="SamarkandTrap" xml:space="preserve">
+    <value>함정!</value>
+  </data>
+  <data name="SamarkandGameOver" xml:space="preserve">
+    <value>게임 종료</value>
+  </data>
+  <data name="SamarkandSubmit" xml:space="preserve">
+    <value>등록</value>
+  </data>
+  <data name="SamarkandSkip" xml:space="preserve">
+    <value>건너뛰기</value>
+  </data>
+  <data name="SamarkandHelp" xml:space="preserve">
+    <value>스페이스바를 누르면 다음 단계가 시작됩니다.</value>
+  </data>
+  <data name="SamarkandIntro" xml:space="preserve">
+    <value>아름다운 푸른 유적의 도시 사마르칸트.
+천문학의 거장 울루그벡이 밤하늘의 우주를 수놓던 곳...
+서기 1420년.
+오랜 세월을 견뎌온 울루그베크 천문대와
+사마르칸트의 상징인 푸른 모자이크 돔 사원이 자리하고 있습니다.
+그런데, 사마르칸트의 밤하늘에 대규모 '유성우 군단'이 나타납니다.
+하늘에서 떨어지는 이 유성들은 바닥이나 천문대에 떨어지는 순간,
+천문대를 지탱하고 있는 푸른 세라믹 벽돌을 하나씩 하나씩 깨뜨립니다.
+천문대를 지탱하고 있는 벽돌이 모두 깨지면
+찬란한 역사와 천문학의 유산마저 흔적 없이 사라지게 됩니다.
+우리의 지혜와 타자 속도로 유성우를 요격하여 사마르칸트를 수호해 주세요!
+
+[게임 방법]
+• 하얀색 유성: 일반 유성입니다 (100점).
+• 노란색 유성: 도움을 주는 특수 아이템(방어막, 시간정지, 복구 등)입니다.
+• 빨간색 유성: 빠르게 떨어지며 성벽 충돌 시 2개의 벽돌을 파괴합니다 (200점).
+• 황금 별똥별: 매우 빠르며 입력 시 500점을 획득하고 즉시 피버 모드를 발동합니다 (충돌 피해 없음).
+
+(ESC 글쇠를 누르면 건너뜁니다)</value>
+  </data>
+  <data name="SamarkandRulesButton" xml:space="preserve">
+    <value>게임 방법</value>
+  </data>
+  <data name="SamarkandRulesTitle" xml:space="preserve">
+    <value>게임 방법 &amp; 규칙</value>
+  </data>
+  <data name="SamarkandRulesObjTitle" xml:space="preserve">
+    <value>목표</value>
+  </data>
+  <data name="SamarkandRulesObjDesc" xml:space="preserve">
+    <value>하늘에서 떨어지는 유성우가 성벽에 닿기 전에 단어를 타이핑하여 파괴하고 푸른 사원을 지켜야 합니다.</value>
+  </data>
+  <data name="SamarkandRulesTypesTitle" xml:space="preserve">
+    <value>유성과 아이템 종류</value>
+  </data>
+  <data name="SamarkandRulesNormal" xml:space="preserve">
+    <value>● 일반 유성</value>
+  </data>
+  <data name="SamarkandRulesNormalDesc" xml:space="preserve">
+    <value>기본적인 흰색 유성입니다. 타이핑 시 100점을 획득합니다.</value>
+  </data>
+  <data name="SamarkandRulesMeteor" xml:space="preserve">
+    <value>● 메테오</value>
+  </data>
+  <data name="SamarkandRulesMeteorDesc" xml:space="preserve">
+    <value>빠르게 떨어지는 붉은 메테오입니다. 성벽 충돌 시 2개의 벽돌을 파괴하며 타이핑 시 200점을 얻습니다.</value>
+  </data>
+  <data name="SamarkandRulesShield" xml:space="preserve">
+    <value>● 방어막</value>
+  </data>
+  <data name="SamarkandRulesShieldDesc" xml:space="preserve">
+    <value>타워에 녹색 유막 형태의 보호막을 생성하여 충돌 피해를 1회 막아줍니다.</value>
+  </data>
+  <data name="SamarkandRulesFreeze" xml:space="preserve">
+    <value>● 시간 정지</value>
+  </data>
+  <data name="SamarkandRulesFreezeDesc" xml:space="preserve">
+    <value>5초 동안 화면의 모든 유성을 꽁꽁 얼려 움직이지 못하게 만듭니다.</value>
+  </data>
+  <data name="SamarkandRulesSlow" xml:space="preserve">
+    <value>● 시간 감속</value>
+  </data>
+  <data name="SamarkandRulesSlowDesc" xml:space="preserve">
+    <value>8초 동안 떨어지는 모든 유성의 속도를 절반으로 감속합니다.</value>
+  </data>
+  <data name="SamarkandRulesBomb" xml:space="preserve">
+    <value>● 일괄 파괴</value>
+  </data>
+  <data name="SamarkandRulesBombDesc" xml:space="preserve">
+    <value>화면의 모든 유성을 차례대로 폭파시킵니다. (개당 50점)</value>
+  </data>
+  <data name="SamarkandRulesHealDouble" xml:space="preserve">
+    <value>● 복구 / 점수 2배</value>
+  </data>
+  <data name="SamarkandRulesHealDoubleDesc" xml:space="preserve">
+    <value>사원 복구는 깨진 벽돌 1개를 복구합니다. 점수 2배는 10초 동안 획득하는 점수가 2배가 됩니다.</value>
+  </data>
+  <data name="SamarkandRulesComet" xml:space="preserve">
+    <value>● 황금 별똥별</value>
+  </data>
+  <data name="SamarkandRulesCometDesc" xml:space="preserve">
+    <value>매우 빠른 속도의 황금색 유성입니다. 입력 시 500점을 획득하며 즉시 피버 모드를 발동합니다! 성벽 충돌 피해는 없습니다.</value>
+  </data>
+  <data name="SamarkandRulesComboTitle" xml:space="preserve">
+    <value>콤보 &amp; 피버 모드</value>
+  </data>
+  <data name="SamarkandRulesComboDesc" xml:space="preserve">
+    <value>• 오타 없이 연속으로 단어를 입력하면 콤보가 늘어납니다.
+• 5콤보마다 점수 획득 배율이 +0.25배 증가합니다 (최대 2.5배).
+• 15콤보 달성 시 성벽을 보호하는 피버 모드가 시작됩니다.
+• 오타를 치거나 성벽이 파괴되면 콤보가 0으로 초기화됩니다.</value>
+  </data>
+  <data name="SamarkandClose" xml:space="preserve">
+    <value>닫기</value>
+  </data>
+  <data name="SamarkandDate" xml:space="preserve">
+    <value>날짜</value>
+  </data>
+  <data name="SamarkandFinalScore" xml:space="preserve">
+    <value>최종 점수:</value>
+  </data>
+  <data name="SamarkandMaxStage" xml:space="preserve">
+    <value>최대 스테이지:</value>
+  </data>
+  <data name="SamarkandTypeHere" xml:space="preserve">
+    <value>여기에 입력하세요...</value>
+  </data>
+  <data name="SamarkandBuffShield" xml:space="preserve">
+    <value>보호막</value>
+  </data>
+  <data name="SamarkandBuffSlow" xml:space="preserve">
+    <value>슬로우</value>
+  </data>
+  <data name="SamarkandBuffDouble" xml:space="preserve">
+    <value>2배 점수</value>
+  </data>
+  <data name="SamarkandBuffFreeze" xml:space="preserve">
+    <value>빙결</value>
+  </data>
+  <data name="SamarkandLevelUp" xml:space="preserve">
+    <value>스테이지 {0}</value>
+  </data>
+  <data name="SamarkandComet" xml:space="preserve">
+    <value>황금 별똥별</value>
   </data>
 </root>

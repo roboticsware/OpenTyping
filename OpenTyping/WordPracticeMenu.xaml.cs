@@ -1,4 +1,4 @@
-﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using OpenTyping.Properties;
 using OpenTyping.Resources.Lang;
@@ -67,6 +67,7 @@ namespace OpenTyping
             TBname.Text = (string)Settings.Default["Name"];
             TBorg.Text = (string)Settings.Default["Org"];
         }
+
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {

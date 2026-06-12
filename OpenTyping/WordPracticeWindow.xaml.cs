@@ -1,4 +1,4 @@
-﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls;
 using OpenTyping.Properties;
 using OpenTyping.Resources.Lang;
 using System;
@@ -91,8 +91,7 @@ namespace OpenTyping
         public List<int> AccuracyList { get; set; } = new List<int>();
 
         // Sound
-        private readonly MediaPlayer playMedia = new MediaPlayer();
-        private readonly Uri wrongPressedUri = new Uri("pack://siteoforigin:,,,/Resources/Sounds/WrongPressed.mp3");
+        private SoundPlayer playMedia;
 
         private readonly SoundPlayer playPressedSound = new SoundPlayer(Properties.Resources.Pressed);
         private readonly SoundPlayer playBellSound = new SoundPlayer(Properties.Resources.Bell);
@@ -133,6 +132,18 @@ namespace OpenTyping
             this.ShuffleWords();
             this.Loaded += WordPracticeWindow_Loaded;
             this.volume = (Volume)Settings.Default["Volume"];
+
+            // Initialize wrong-press sound (WAV, no WMP dependency)
+            try
+            {
+                string wrongPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Sounds", "WrongPressed.wav");
+                if (System.IO.File.Exists(wrongPath))
+                {
+                    playMedia = new SoundPlayer(wrongPath);
+                    playMedia.Load();
+                }
+            }
+            catch { }
 
             double shakiness = 30;
             const double shakeDiff = 3;
@@ -296,10 +307,9 @@ namespace OpenTyping
                 if (isWrongWord)
                 {
                     KeyGrid.BeginAnimation(MarginProperty, ShakeAnimation);
-                    playMedia.Open(wrongPressedUri);
                     if (this.volume != Volume.Off)
                     {
-                        playMedia.Play();
+                        playMedia?.Play();
                     }
                     IncorrectCount++;
                 }

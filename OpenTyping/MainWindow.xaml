@@ -1,4 +1,4 @@
-﻿<mah:MetroWindow x:Class="OpenTyping.MainWindow"
+<mah:MetroWindow x:Class="OpenTyping.MainWindow"
                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -153,6 +153,24 @@
                 </StackPanel>
             </TabItem.Header>
             <local:WordPracticeMenu x:Name="WordPracticeMenu"/>
+        </TabItem>
+        <TabItem x:Name="VeneziaTabItem">
+            <TabItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Style="{StaticResource TabItemIconRectangle}" 
+                               Width="32" 
+                               Height="25"
+                               Margin="0 0 2 0">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Uniform" 
+                                         Visual="{iconPacks:FontAwesome Kind=StarSolid}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <Label x:Name="MenuLblVenezia" Style="{StaticResource TabItemLabel}"
+                           Content="사마르칸트"/>
+                </StackPanel>
+            </TabItem.Header>
+            <local:VeneziaMenu x:Name="VeneziaMenu"/>
         </TabItem>
         <TabItem>
             <TabItem.Header>

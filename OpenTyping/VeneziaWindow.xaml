@@ -1,0 +1,336 @@
+<mah:MetroWindow x:Class="OpenTyping.VeneziaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:OpenTyping"
+        mc:Ignorable="d"
+        Title="사마르칸트 유성우 방어"
+        Height="550" 
+        Width="800"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Style="{StaticResource WindowTitleStyle}"
+        Background="#0e8a7c"
+        PreviewKeyDown="Window_PreviewKeyDown">
+
+    <Grid x:Name="MainGrid">
+        <!-- GAMEPLAY SCREEN -->
+        <Grid x:Name="GameGrid" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Top Header Bar -->
+            <Border Grid.Row="0" Background="#114e44" Padding="15 8">
+                <DockPanel LastChildFill="False">
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                        <TextBlock x:Name="TxtStageLabel" Text="Stage: " Foreground="White" FontSize="16pt" FontWeight="Bold" FontFamily="{StaticResource PTMono}"/>
+                        <TextBlock x:Name="TxtStage" Text="1" Foreground="#ffd43b" FontSize="16pt" FontWeight="Bold" FontFamily="{StaticResource PTMono}" Margin="0 0 25 0"/>
+                        
+                        <TextBlock x:Name="TxtScoreLabel" Text="Score: " Foreground="White" FontSize="16pt" FontWeight="Bold" FontFamily="{StaticResource PTMono}"/>
+                        <TextBlock x:Name="TxtScore" Text="0" Foreground="#ffd43b" FontSize="16pt" FontWeight="Bold" FontFamily="{StaticResource PTMono}" Margin="0 0 25 0"/>
+
+                        <TextBlock x:Name="TxtComboLabel" Text="Combo: " Foreground="White" FontSize="16pt" FontWeight="Bold" FontFamily="{StaticResource PTMono}"/>
+                        <TextBlock x:Name="TxtCombo" Text="0" Foreground="#ffd43b" FontSize="16pt" FontWeight="Bold" FontFamily="{StaticResource PTMono}" RenderTransformOrigin="0.5,0.5">
+                            <TextBlock.RenderTransform>
+                                <ScaleTransform x:Name="TxtComboScale" ScaleX="1" ScaleY="1"/>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                        <!-- Active Item Buff Indicators -->
+                        <Border x:Name="BuffShield" Background="#37b24d" CornerRadius="4" Padding="8 2" Margin="5 0" Visibility="Collapsed">
+                            <TextBlock x:Name="TxtBuffShield" Text="SHIELD" Foreground="White" FontWeight="Bold" FontSize="10pt"/>
+                        </Border>
+                        <Border x:Name="BuffSlow" Background="#1c7ed6" CornerRadius="4" Padding="8 2" Margin="5 0" Visibility="Collapsed">
+                            <TextBlock x:Name="TxtBuffSlow" Text="SLOW" Foreground="White" FontWeight="Bold" FontSize="10pt"/>
+                        </Border>
+                        <Border x:Name="BuffDouble" Background="#fcc419" CornerRadius="4" Padding="8 2" Margin="5 0" Visibility="Collapsed">
+                            <TextBlock x:Name="TxtBuffDouble" Text="2X SCORE" Foreground="DarkSlateGray" FontWeight="Bold" FontSize="10pt"/>
+                        </Border>
+                        <Border x:Name="BuffFreeze" Background="#74c0fc" CornerRadius="4" Padding="8 2" Margin="5 0" Visibility="Collapsed">
+                            <TextBlock x:Name="TxtBuffFreeze" Text="FREEZE" Foreground="DarkSlateGray" FontWeight="Bold" FontSize="10pt"/>
+                        </Border>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <!-- Gameplay Canvas Area -->
+            <Canvas Grid.Row="1" x:Name="GameCanvas" ClipToBounds="True" Background="#0e8a7c">
+                <!-- Stars in background will be dynamically spawned -->
+
+                <!-- Water Waves (Left) -->
+                <Canvas x:Name="LeftWaterCanvas" Canvas.Bottom="0" Canvas.Left="0" Height="40" Width="280">
+                    <Path Fill="#226b80" Data="M 0 40 L 280 40 L 280 15 C 240 5, 200 25, 160 15 C 120 5, 80 25, 40 15 C 20 10, 10 15, 0 15 Z"/>
+                    <Path Fill="#438a9d" Data="M 0 40 L 280 40 L 280 25 C 250 20, 220 30, 190 25 C 150 15, 110 35, 70 25 C 40 15, 20 25, 0 25 Z" Opacity="0.6"/>
+                </Canvas>
+
+                <!-- Water Waves (Right) -->
+                <Canvas x:Name="RightWaterCanvas" Canvas.Bottom="0" Canvas.Right="0" Height="40" Width="280">
+                    <Path Fill="#226b80" Data="M 0 40 L 280 40 L 280 15 C 240 5, 200 25, 160 15 C 120 5, 80 25, 40 15 C 20 10, 10 15, 0 15 Z"/>
+                    <Path Fill="#438a9d" Data="M 0 40 L 280 40 L 280 25 C 250 20, 220 30, 190 25 C 150 15, 110 35, 70 25 C 40 15, 20 25, 0 25 Z" Opacity="0.6"/>
+                </Canvas>
+
+                <!-- Bricks Tower Grid -->
+                <UniformGrid x:Name="TowerGrid" Canvas.Bottom="0" Canvas.Left="280" Width="240" Height="100" Rows="4" Columns="3">
+                    <!-- 12 bricks dynamically rendered in code-behind -->
+                </UniformGrid>
+
+                <!-- Tower Observatory Dome Platform (Input Area) -->
+                <Border x:Name="DomePlatform" Canvas.Bottom="100" Canvas.Left="260" Width="280" Height="45" 
+                        Background="#dfd2bc" BorderBrush="#4a3e2a" BorderThickness="3" CornerRadius="15,15,0,0">
+                    <Grid>
+                        <!-- TextBox for player typing input -->
+                        <TextBox x:Name="InputTextBox" 
+                                 Background="Transparent" 
+                                 BorderThickness="0" 
+                                 Foreground="#343a40" 
+                                 FontSize="16pt" 
+                                 FontWeight="Bold" 
+                                 FontFamily="{StaticResource PTMono}" 
+                                 HorizontalAlignment="Center" 
+                                 VerticalAlignment="Center" 
+                                 TextAlignment="Center"
+                                 Width="260"
+                                 GotFocus="InputTextBox_GotFocus"
+                                 LostFocus="InputTextBox_LostFocus"
+                                 PreviewKeyDown="InputTextBox_PreviewKeyDown"
+                                 TextChanged="InputTextBox_TextChanged"/>
+                        <TextBlock x:Name="InputPlaceholder" 
+                                   Text="Type here..." 
+                                   Foreground="#868e96" 
+                                   FontSize="14pt" 
+                                   FontStyle="Italic"
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" 
+                                   IsHitTestVisible="False"
+                                   Visibility="Visible"/>
+                    </Grid>
+                </Border>
+
+                <!-- Tower Shield Effect -->
+                <Border x:Name="TowerShieldVisual" 
+                        Canvas.Bottom="-10" Canvas.Left="185" 
+                        Width="430" Height="225" 
+                        BorderBrush="#40c057" BorderThickness="4" 
+                        CornerRadius="215,215,0,0" 
+                        Background="#2040c057"
+                        Visibility="Collapsed"
+                        Opacity="0">
+                    <Border.Effect>
+                        <BlurEffect Radius="8"/>
+                    </Border.Effect>
+                </Border>
+            </Canvas>
+        </Grid>
+
+        <Grid x:Name="IntroGrid" Visibility="Visible">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="#031613" Offset="0"/>
+                    <GradientStop Color="#0c3c33" Offset="0.6"/>
+                    <GradientStop Color="#145d50" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Canvas x:Name="IntroCanvas" ClipToBounds="True">
+                <!-- Center Observatory Silhouette in Intro Canvas -->
+                <Canvas Canvas.Bottom="0" Canvas.Left="330" Width="140" Height="120" Opacity="0.45" IsHitTestVisible="False">
+                    <!-- Tower building -->
+                    <Border Width="80" Height="60" Background="#0c3c33" BorderBrush="#07221d" BorderThickness="2" Canvas.Bottom="0" Canvas.Left="30"/>
+                    <!-- Bricks design on the tower -->
+                    <StackPanel Canvas.Bottom="5" Canvas.Left="35" Width="70" Orientation="Vertical">
+                        <UniformGrid Rows="3" Columns="4" Height="40" Opacity="0.3">
+                            <Border BorderBrush="#07221d" BorderThickness="1" Margin="1" Background="#092d26"/>
+                            <Border BorderBrush="#07221d" BorderThickness="1" Margin="1" Background="#092d26"/>
+                            <Border BorderBrush="#07221d" BorderThickness="1" Margin="1" Background="#092d26"/>
+                            <Border BorderBrush="#07221d" BorderThickness="1" Margin="1" Background="#092d26"/>
+                            <Border BorderBrush="#07221d" BorderThickness="1" Margin="1" Background="#092d26"/>
+                            <Border BorderBrush="#07221d" BorderThickness="1" Margin="1" Background="#092d26"/>
+                            <Border BorderBrush="#07221d" BorderThickness="1" Margin="1" Background="#092d26"/>
+                            <Border BorderBrush="#07221d" BorderThickness="1" Margin="1" Background="#092d26"/>
+                            <Border BorderBrush="#07221d" BorderThickness="1" Margin="1" Background="#092d26"/>
+                            <Border BorderBrush="#07221d" BorderThickness="1" Margin="1" Background="#092d26"/>
+                            <Border BorderBrush="#07221d" BorderThickness="1" Margin="1" Background="#092d26"/>
+                            <Border BorderBrush="#07221d" BorderThickness="1" Margin="1" Background="#092d26"/>
+                        </UniformGrid>
+                    </StackPanel>
+                    <!-- Dome platform -->
+                    <Border Width="100" Height="35" Background="#145d50" BorderBrush="#07221d" BorderThickness="2" CornerRadius="50,50,0,0" Canvas.Bottom="60" Canvas.Left="20"/>
+                    <!-- Telescope tube -->
+                    <Path Fill="#07221d" Data="M 65 65 L 40 95 L 48 99 L 73 69 Z" Canvas.Bottom="55" Canvas.Left="20"/>
+                </Canvas>
+
+                <!-- Upward Scrolling TextBlock -->
+                <TextBlock x:Name="TxtIntro" 
+                           Foreground="#e9ecef" 
+                           FontSize="14pt" 
+                           FontWeight="Medium"
+                           LineHeight="32"
+                           TextAlignment="Center" 
+                           Width="700" 
+                           Canvas.Left="50" 
+                           Canvas.Top="550"
+                           TextWrapping="Wrap"/>
+            </Canvas>
+            <!-- View Rules Button -->
+            <Button x:Name="BtnViewRules" Content="Game Rules" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20" Padding="15 8" Click="BtnViewRules_Click"
+                    Background="#114e44" Foreground="#ffd43b" BorderBrush="#20c997" BorderThickness="1.5" FontWeight="Bold"/>
+            <!-- Skip Button -->
+            <Button x:Name="BtnSkip" Content="Skip" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20" Padding="15 8" Click="BtnSkip_Click"/>
+        </Grid>
+
+        <!-- RULES OVERLAY -->
+        <Grid x:Name="RulesGrid" Background="#d0051e1a" Visibility="Collapsed">
+            <Border Background="#103c36" BorderBrush="#20c997" BorderThickness="2.5" CornerRadius="12" 
+                    Width="650" Height="480" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Header -->
+                    <TextBlock x:Name="TxtRulesTitle" Grid.Row="0" Text="Game Rules" Foreground="#20c997" FontSize="20pt" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 0 0 15"/>
+
+                    <!-- Scrollable Content -->
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,0,0,15">
+                        <StackPanel Orientation="Vertical" Margin="5">
+                            <!-- Rule Section 1: Objective -->
+                            <TextBlock x:Name="TxtRulesObjTitle" Text="Objective" Foreground="#ffd43b" FontSize="14pt" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <TextBlock x:Name="TxtRulesObjDesc" Text="Type the falling words before they hit the tower. Protect the bricks!" Foreground="White" FontSize="11pt" TextWrapping="Wrap" Margin="0,0,0,15"/>
+
+                            <!-- Rule Section 2: Word Types -->
+                            <TextBlock x:Name="TxtRulesTypesTitle" Text="Meteorite &amp; Word Types" Foreground="#ffd43b" FontSize="14pt" FontWeight="Bold" Margin="0,0,0,8"/>
+                            
+                            <Grid Margin="0,0,0,15">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="135"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- Normal -->
+                                <TextBlock x:Name="TxtRulesNormal" Grid.Row="0" Grid.Column="0" Text="● Normal" Foreground="White" FontSize="11pt" FontWeight="Bold" Margin="0,4"/>
+                                <TextBlock x:Name="TxtRulesNormalDesc" Grid.Row="0" Grid.Column="1" Text="Standard word. Awards 100 points." Foreground="#ced4da" FontSize="10.5pt" TextWrapping="Wrap" Margin="0,4"/>
+
+                                <!-- Meteor -->
+                                <TextBlock x:Name="TxtRulesMeteor" Grid.Row="1" Grid.Column="0" Text="● Meteor" Foreground="White" FontSize="11pt" FontWeight="Bold" Margin="0,4"/>
+                                <TextBlock x:Name="TxtRulesMeteorDesc" Grid.Row="1" Grid.Column="1" Text="Falls faster, deals double damage to the tower. Awards 200 points." Foreground="#ced4da" FontSize="10.5pt" TextWrapping="Wrap" Margin="0,4"/>
+
+                                <!-- Shield -->
+                                <TextBlock x:Name="TxtRulesShield" Grid.Row="2" Grid.Column="0" Text="● Shield" Foreground="#55be61" FontSize="11pt" FontWeight="Bold" Margin="0,4"/>
+                                <TextBlock x:Name="TxtRulesShieldDesc" Grid.Row="2" Grid.Column="1" Text="Adds a protective shield that absorbs one collision damage." Foreground="#ced4da" FontSize="10.5pt" TextWrapping="Wrap" Margin="0,4"/>
+
+                                <!-- Freeze -->
+                                <TextBlock x:Name="TxtRulesFreeze" Grid.Row="3" Grid.Column="0" Text="● Freeze" Foreground="#74c0fc" FontSize="11pt" FontWeight="Bold" Margin="0,4"/>
+                                <TextBlock x:Name="TxtRulesFreezeDesc" Grid.Row="3" Grid.Column="1" Text="Freezes all falling meteorites for 5 seconds." Foreground="#ced4da" FontSize="10.5pt" TextWrapping="Wrap" Margin="0,4"/>
+
+                                <!-- Slow Motion -->
+                                <TextBlock x:Name="TxtRulesSlow" Grid.Row="4" Grid.Column="0" Text="● Slow Motion" Foreground="#1c7ed6" FontSize="11pt" FontWeight="Bold" Margin="0,4"/>
+                                <TextBlock x:Name="TxtRulesSlowDesc" Grid.Row="4" Grid.Column="1" Text="Slows down all falling words for 8 seconds." Foreground="#ced4da" FontSize="10.5pt" TextWrapping="Wrap" Margin="0,4"/>
+
+                                <!-- Bomb -->
+                                <TextBlock x:Name="TxtRulesBomb" Grid.Row="5" Grid.Column="0" Text="● Bomb" Foreground="#e64949" FontSize="11pt" FontWeight="Bold" Margin="0,4"/>
+                                <TextBlock x:Name="TxtRulesBombDesc" Grid.Row="5" Grid.Column="1" Text="Explodes and clears all words currently on the screen." Foreground="#ced4da" FontSize="10.5pt" TextWrapping="Wrap" Margin="0,4"/>
+
+                                <!-- Heal / Double Score -->
+                                <TextBlock x:Name="TxtRulesHealDouble" Grid.Row="6" Grid.Column="0" Text="● Heal / 2x Score" Foreground="#ffd43b" FontSize="11pt" FontWeight="Bold" Margin="0,4"/>
+                                <TextBlock x:Name="TxtRulesHealDoubleDesc" Grid.Row="6" Grid.Column="1" Text="Heal restores 1 brick. Double Score grants double points for 10 seconds." Foreground="#ced4da" FontSize="10.5pt" TextWrapping="Wrap" Margin="0,4"/>
+
+                                <!-- Comet -->
+                                <TextBlock x:Name="TxtRulesComet" Grid.Row="7" Grid.Column="0" Text="● Golden Comet" Foreground="#ffd43b" FontSize="11pt" FontWeight="Bold" Margin="0,4"/>
+                                <TextBlock x:Name="TxtRulesCometDesc" Grid.Row="7" Grid.Column="1" Text="Extremely fast golden comet. Typing awards 500 points and instantly triggers Fever Mode! Deals 0 damage." Foreground="#ced4da" FontSize="10.5pt" TextWrapping="Wrap" Margin="0,4"/>
+                            </Grid>
+
+                            <!-- Rule Section 3: Combos & Fever -->
+                            <TextBlock x:Name="TxtRulesComboTitle" Text="Combo &amp; Fever Mode" Foreground="#ffd43b" FontSize="14pt" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <TextBlock x:Name="TxtRulesComboDesc" Text="• Type correctly without typos to build a combo. Every 5 combos increase the score multiplier by +0.25x (up to 2.5x).&#x0a;• Achieving 15 combos triggers Fever Mode.&#x0a;• Typos or structural damage resets your combo to 0." Foreground="White" FontSize="11pt" TextWrapping="Wrap" Margin="0,0,0,5"/>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <!-- Close Button -->
+                    <Button x:Name="BtnCloseRules" Grid.Row="2" Content="Close" HorizontalAlignment="Center" Padding="25 8" Click="BtnCloseRules_Click"
+                            Background="#114e44" Foreground="#ffd43b" BorderBrush="#20c997" BorderThickness="1.5" FontWeight="Bold"/>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- PAUSE / LEVEL UP OVERLAY -->
+        <Grid x:Name="PauseGrid" Background="#a0000000" Visibility="Collapsed">
+            <Border Background="#114e44" BorderBrush="#ffd43b" BorderThickness="2" CornerRadius="10" 
+                    Width="400" Height="180" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock x:Name="TxtPauseLevel" Text="STAGE 2" Foreground="#ffd43b" FontSize="26pt" FontWeight="Bold" HorizontalAlignment="Center" Margin="10"/>
+                    <TextBlock x:Name="TxtPauseMessage" Text="Press SPACEBAR to continue" Foreground="White" FontSize="14pt" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" Margin="15 10"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- GAME OVER / HIGH SCORE SUBMIT POPUP -->
+        <Grid x:Name="GameOverGrid" Background="#c0000000" Visibility="Collapsed">
+            <Border Background="#114e44" BorderBrush="#f03e3e" BorderThickness="3" CornerRadius="12" 
+                    Width="500" Height="400" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock x:Name="TxtGameOverTitle" Grid.Row="0" Text="GAME OVER" Foreground="#f03e3e" FontSize="28pt" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 0 0 10"/>
+
+                    <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                            <TextBlock x:Name="TxtFinalScoreLabel" Text="Final Score: " Foreground="White" FontSize="16pt" FontWeight="Bold"/>
+                            <TextBlock x:Name="TxtFinalScore" Text="12500" Foreground="#ffd43b" FontSize="16pt" FontWeight="Bold"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                            <TextBlock x:Name="TxtFinalStageLabel" Text="Max Stage reached: " Foreground="White" FontSize="14pt"/>
+                            <TextBlock x:Name="TxtFinalStage" Text="6" Foreground="#ffd43b" FontSize="14pt"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <Button x:Name="BtnCloseGame" Grid.Row="2" Content="Exit to Menu" HorizontalAlignment="Center" Margin="0 10 0 0" Padding="30 10" Click="BtnCloseGame_Click"/>
+                </Grid>
+            </Border>
+        </Grid>
+        
+        <!-- DRAMATIC EFFECT OVERLAY -->
+        <Grid x:Name="EffectOverlayGrid" IsHitTestVisible="False" Background="Transparent">
+            <!-- Screen Flash Border -->
+            <Border x:Name="ScreenFlashBorder" Background="Transparent" Opacity="0"/>
+            
+            <!-- Popup Message Text -->
+            <TextBlock x:Name="TxtEffectPopup" 
+                       Foreground="White" 
+                       FontSize="36pt" 
+                       FontWeight="ExtraBold" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       Opacity="0"
+                       RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <ScaleTransform x:Name="TxtEffectScale" ScaleX="1" ScaleY="1"/>
+                </TextBlock.RenderTransform>
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="3"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Grid>
+    </Grid>
+</mah:MetroWindow>

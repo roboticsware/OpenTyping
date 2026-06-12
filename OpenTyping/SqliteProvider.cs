@@ -28,6 +28,7 @@ namespace OpenTyping
             if (!File.Exists(filename))
             {
                 await _db.CreateTableAsync<User>();
+                await _db.CreateTableAsync<VeneziaUser>();
                 Debug.WriteLine("New database! Table created!");
             }
             else // Check it's broken DB
@@ -35,6 +36,7 @@ namespace OpenTyping
                 try
                 {
                     await _db.GetTableInfoAsync("Users");
+                    await _db.CreateTableAsync<VeneziaUser>();
                 }
                 catch (Exception ex)
                 {
@@ -87,6 +89,22 @@ namespace OpenTyping
 
             await _db.InsertAllAsync(users);
             Debug.WriteLine("Rewrited all users");
+        }
+
+        public async Task<int> AddVeneziaUserAsync(VeneziaUser user)
+        {
+            return await _db.InsertAsync(user);
+        }
+
+        public async Task<List<VeneziaUser>> GetVeneziaUsersAsync()
+        {
+            return await _db.QueryAsync<VeneziaUser>("Select * From VeneziaUsers");
+        }
+
+        public async Task ReWriteAllVeneziaAsync(List<VeneziaUser> users)
+        {
+            await _db.DeleteAllAsync<VeneziaUser>();
+            await _db.InsertAllAsync(users);
         }
     }
 }

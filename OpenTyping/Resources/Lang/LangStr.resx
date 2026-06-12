@@ -1,110 +1,52 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -151,7 +93,7 @@
     <value>Delete</value>
   </data>
   <data name="ErrMsg1" xml:space="preserve">
-<value>Please select 2 or more keys to practice</value>
+    <value>Please select 2 or more keys to practice</value>
   </data>
   <data name="ErrMsg10" xml:space="preserve">
     <value>Duplicate names exist</value>
@@ -313,7 +255,7 @@
     <value>Are you sure you want to delete?</value>
   </data>
   <data name="WarnMsg4" xml:space="preserve">
-    <value>Are you sure you want to delete statistical information?</value>
+    <value>Are you sure you want to reset statistical information?</value>
   </data>
   <data name="ErrMsg23" xml:space="preserve">
     <value>Forth row</value>
@@ -363,8 +305,8 @@
   <data name="Anonymous" xml:space="preserve">
     <value>Anonymous</value>
   </data>
-  <data name="CongratMsg" xml:space="preserve">
-    <value>Congratulations. Your new record!! </value>
+  <data name="CongratServerMsg" xml:space="preserve">
+    <value>Congratulations. Your new record in server!! </value>
   </data>
   <data name="WordCount" xml:space="preserve">
     <value>Words</value>
@@ -401,5 +343,221 @@
   </data>
   <data name="UnhandledError" xml:space="preserve">
     <value>An unexpected error has occurred. If the error repeats, please report it on Telegram @enty_uz, thank you</value>
+  </data>
+  <data name="RankLimit1" xml:space="preserve">
+    <value>To rank your record in local, the count of practiced words should be over 10% of the total</value>
+  </data>
+  <data name="CongratLocalMsg" xml:space="preserve">
+    <value>Congratulations. Your new record in local!! </value>
+  </data>
+  <data name="FetchServerData" xml:space="preserve">
+    <value>Waiting for feching data from Server...</value>
+  </data>
+  <data name="NoInternet" xml:space="preserve">
+    <value>No Internet!</value>
+  </data>
+  <data name="NoInternetWarn" xml:space="preserve">
+    <value>No Internet! Please connect to Internet.</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="Keyboard" xml:space="preserve">
+    <value>Keyboard</value>
+  </data>
+  <data name="RankLimit2" xml:space="preserve">
+    <value>For server, over 30% of the total</value>
+  </data>
+  <data name="NoServerResponse" xml:space="preserve">
+    <value>No Server reponse!</value>
+  </data>
+  <data name="NoServerResWarn" xml:space="preserve">
+    <value>No Server reponse! Please wait until server is avaliable.</value>
+  </data>
+  <data name="ServerAuthFail" xml:space="preserve">
+    <value>Server Authentication is failed! Please retry after install the lastest App version.</value>
+  </data>
+  <data name="SamarkandTabHeader" xml:space="preserve">
+    <value>Samarkand</value>
+  </data>
+  <data name="SamarkandTitle" xml:space="preserve">
+    <value>Samarkand Meteor Defense</value>
+  </data>
+  <data name="SamarkandDesc" xml:space="preserve">
+    <value>:Destroy falling meteorites to protect the blue dome of Samarkand.</value>
+  </data>
+  <data name="SamarkandStart" xml:space="preserve">
+    <value>Start Game</value>
+  </data>
+  <data name="SamarkandStage" xml:space="preserve">
+    <value>Stage</value>
+  </data>
+  <data name="SamarkandScore" xml:space="preserve">
+    <value>Score</value>
+  </data>
+  <data name="SamarkandCombo" xml:space="preserve">
+    <value>Combo</value>
+  </data>
+  <data name="SamarkandFever" xml:space="preserve">
+    <value>Fever Time!</value>
+  </data>
+  <data name="SamarkandShield" xml:space="preserve">
+    <value>Shield</value>
+  </data>
+  <data name="SamarkandSlowMotion" xml:space="preserve">
+    <value>Slow Motion</value>
+  </data>
+  <data name="SamarkandDoubleScore" xml:space="preserve">
+    <value>2x Score</value>
+  </data>
+  <data name="SamarkandBomb" xml:space="preserve">
+    <value>BOMB DETONATED!</value>
+  </data>
+  <data name="SamarkandFreeze" xml:space="preserve">
+    <value>TIME FREEZE!</value>
+  </data>
+  <data name="SamarkandHeal" xml:space="preserve">
+    <value>OBSERVATORY HEALED!</value>
+  </data>
+  <data name="SamarkandTrap" xml:space="preserve">
+    <value>TRAP!</value>
+  </data>
+  <data name="SamarkandGameOver" xml:space="preserve">
+    <value>Game Over</value>
+  </data>
+  <data name="SamarkandSubmit" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SamarkandSkip" xml:space="preserve">
+    <value>Skip</value>
+  </data>
+  <data name="SamarkandHelp" xml:space="preserve">
+    <value>Press Spacebar to start the next stage.</value>
+  </data>
+  <data name="SamarkandIntro" xml:space="preserve">
+    <value>The beautiful blue city of Samarkand.
+Where the great astronomer Ulugh Beg mapped the stars...
+Year 1420.
+Stands the long-enduring Ulugh Beg Observatory and
+the iconic blue mosaic dome of Samarkand.
+However, a massive swarm of meteorites appears in the sky.
+As these meteorites fall onto the ground or the observatory,
+they shatter the blue ceramic bricks supporting the observatory one by one.
+If all the bricks supporting the observatory are broken,
+the glorious history and the legacy of astronomy will vanish without a trace.
+Please protect Samarkand by intercepting the meteorites with your wisdom and typing speed!
+
+[How to Play]
+• White Meteors: Normal meteorite (100 pts).
+• Yellow Meteors: Special items that help you (Shield, Freeze, Heal, etc.).
+• Red Meteors: Fast-falling meteorites. Shatter 2 bricks on hit, award 200 pts.
+• Golden Comets: Extremely fast. Award 500 pts and trigger Fever Mode! (0 damage on hit).
+
+(Press ESC to skip)</value>
+  </data>
+  <data name="SamarkandRulesButton" xml:space="preserve">
+    <value>View Rules</value>
+  </data>
+  <data name="SamarkandRulesTitle" xml:space="preserve">
+    <value>Game Rules &amp; How to Play</value>
+  </data>
+  <data name="SamarkandRulesObjTitle" xml:space="preserve">
+    <value>Objective</value>
+  </data>
+  <data name="SamarkandRulesObjDesc" xml:space="preserve">
+    <value>Type the falling words before they hit the tower. Protect the blue dome of Samarkand!</value>
+  </data>
+  <data name="SamarkandRulesTypesTitle" xml:space="preserve">
+    <value>Meteor &amp; Item Types</value>
+  </data>
+  <data name="SamarkandRulesNormal" xml:space="preserve">
+    <value>● Normal</value>
+  </data>
+  <data name="SamarkandRulesNormalDesc" xml:space="preserve">
+    <value>Standard white meteor. Awards 100 points.</value>
+  </data>
+  <data name="SamarkandRulesMeteor" xml:space="preserve">
+    <value>● Meteor</value>
+  </data>
+  <data name="SamarkandRulesMeteorDesc" xml:space="preserve">
+    <value>Falls faster, shatters 2 bricks on hit. Awards 200 points.</value>
+  </data>
+  <data name="SamarkandRulesShield" xml:space="preserve">
+    <value>● Shield</value>
+  </data>
+  <data name="SamarkandRulesShieldDesc" xml:space="preserve">
+    <value>Creates a green energy dome that absorbs 1 collision damage.</value>
+  </data>
+  <data name="SamarkandRulesFreeze" xml:space="preserve">
+    <value>● Freeze</value>
+  </data>
+  <data name="SamarkandRulesFreezeDesc" xml:space="preserve">
+    <value>Freezes all falling words on screen for 5 seconds.</value>
+  </data>
+  <data name="SamarkandRulesSlow" xml:space="preserve">
+    <value>● Slow Motion</value>
+  </data>
+  <data name="SamarkandRulesSlowDesc" xml:space="preserve">
+    <value>Slows down all falling words on screen for 8 seconds.</value>
+  </data>
+  <data name="SamarkandRulesBomb" xml:space="preserve">
+    <value>● Bomb</value>
+  </data>
+  <data name="SamarkandRulesBombDesc" xml:space="preserve">
+    <value>Explodes all active words on the screen. (50 points each)</value>
+  </data>
+  <data name="SamarkandRulesHealDouble" xml:space="preserve">
+    <value>● Heal / 2x Score</value>
+  </data>
+  <data name="SamarkandRulesHealDoubleDesc" xml:space="preserve">
+    <value>Heal restores 1 broken brick. Double Score doubles gained points for 10 seconds.</value>
+  </data>
+  <data name="SamarkandRulesComet" xml:space="preserve">
+    <value>● Golden Comet</value>
+  </data>
+  <data name="SamarkandRulesCometDesc" xml:space="preserve">
+    <value>Extremely fast golden comet. Typing awards 500 points and instantly triggers Fever Mode! Deals 0 damage on hit.</value>
+  </data>
+  <data name="SamarkandRulesComboTitle" xml:space="preserve">
+    <value>Combo &amp; Fever Mode</value>
+  </data>
+  <data name="SamarkandRulesComboDesc" xml:space="preserve">
+    <value>• Type correctly without typos to build your combo.
+• Every 5 combos increase the score multiplier by +0.25x (up to 2.5x).
+• Reaching 15 combos triggers Fever Mode with shield activation.
+• Making a typo or taking tower damage resets the combo to 0.</value>
+  </data>
+  <data name="SamarkandClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="SamarkandDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="SamarkandFinalScore" xml:space="preserve">
+    <value>Final Score:</value>
+  </data>
+  <data name="SamarkandMaxStage" xml:space="preserve">
+    <value>Max Stage reached:</value>
+  </data>
+  <data name="SamarkandTypeHere" xml:space="preserve">
+    <value>Type here...</value>
+  </data>
+  <data name="SamarkandBuffShield" xml:space="preserve">
+    <value>SHIELD</value>
+  </data>
+  <data name="SamarkandBuffSlow" xml:space="preserve">
+    <value>SLOW</value>
+  </data>
+  <data name="SamarkandBuffDouble" xml:space="preserve">
+    <value>2X SCORE</value>
+  </data>
+  <data name="SamarkandBuffFreeze" xml:space="preserve">
+    <value>FREEZE</value>
+  </data>
+  <data name="SamarkandLevelUp" xml:space="preserve">
+    <value>STAGE {0}</value>
+  </data>
+  <data name="SamarkandComet" xml:space="preserve">
+    <value>GOLDEN COMET</value>
   </data>
 </root>

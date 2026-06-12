@@ -1,4 +1,4 @@
-﻿using NLog;
+using NLog;
 using OpenTyping.Resources.Lang;
 using System.Windows;
 using System.Windows.Threading;
@@ -10,7 +10,7 @@ namespace OpenTyping
     /// </summary>
     public partial class App : Application
     {
-        private readonly static Logger logger = LogManager.GetCurrentClassLogger();
+        public readonly static Logger logger = LogManager.GetCurrentClassLogger();
 
         public App()
         {

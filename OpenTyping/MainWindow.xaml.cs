@@ -328,6 +328,13 @@ namespace OpenTyping
             ArticlePracticeMenu.MenuDesc.Text = LangStr.ArtPracDesc;
             ArticlePracticeMenu.MenuHelp.Text = LangStr.SenPracHelp;
             ArticlePracticeMenu.StartBtn.Text = LangStr.StartPrac;
+
+            // Venezia menu
+            MenuLblVenezia.Content = LangStr.SamarkandTabHeader;
+            if (VeneziaMenu != null)
+            {
+                VeneziaMenu.SetTextBylanguage();
+            }
         }
     }
 }
