@@ -248,9 +248,13 @@ namespace OpenTyping
             // Calc elapsedTime
             if (countdownTime != 0)
             {
-                if (elapsedTime != 0)
+                if (timer != null)
                 {
-                    elapsedTime--; // timing issue, Should be -1
+                    elapsedTime = (uint)(TimeSpan.FromMinutes(countdownTime) - timeSpan).TotalSeconds;
+                }
+                else
+                {
+                    elapsedTime = 0;
                 }
             } 
             else 

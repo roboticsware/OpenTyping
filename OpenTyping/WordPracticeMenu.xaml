@@ -1,4 +1,4 @@
-﻿<UserControl x:Name="SelfControl"
+<UserControl x:Name="SelfControl"
              x:Class="OpenTyping.WordPracticeMenu"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -75,7 +75,7 @@
                                     <GridViewColumn x:Name="Header4" DisplayMemberBinding="{Binding Accuracy}" Header="Accuracy" Width="75"/>
                                     <GridViewColumn x:Name="Header5" DisplayMemberBinding="{Binding Speed}" Header="Speed" Width="95"/>
                                     <GridViewColumn x:Name="Header6" DisplayMemberBinding="{Binding Count}" Header="Count" Width="75"/>
-                                    <GridViewColumn x:Name="Header7" DisplayMemberBinding="{Binding Time, StringFormat='{}{0:0.0}'}" Header="Time" Width="114"/>
+                                    <GridViewColumn x:Name="Header7" DisplayMemberBinding="{Binding Time, StringFormat='{}{0:0}'}" Header="Time" Width="114"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
