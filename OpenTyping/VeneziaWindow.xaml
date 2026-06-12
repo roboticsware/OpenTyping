@@ -303,6 +303,14 @@
                             <TextBlock x:Name="TxtFinalStageLabel" Text="Max Stage reached: " Foreground="White" FontSize="14pt"/>
                             <TextBlock x:Name="TxtFinalStage" Text="6" Foreground="#ffd43b" FontSize="14pt"/>
                         </StackPanel>
+                        <TextBlock x:Name="TxtRegisterStatus" 
+                                   Text="" 
+                                   Foreground="#e9ecef" 
+                                   FontSize="11.5pt" 
+                                   TextWrapping="Wrap" 
+                                   TextAlignment="Center" 
+                                   HorizontalAlignment="Center" 
+                                   Margin="15,20,15,0"/>
                     </StackPanel>
 
                     <Button x:Name="BtnCloseGame" Grid.Row="2" Content="Exit to Menu" HorizontalAlignment="Center" Margin="0 10 0 0" Padding="30 10" Click="BtnCloseGame_Click"/>

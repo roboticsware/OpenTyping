@@ -1,4 +1,5 @@
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using OpenTyping.Properties;
 using OpenTyping.Resources.Lang;
 using System;
@@ -846,15 +847,15 @@ namespace OpenTyping
 
             // Filter words by length based on current stage
             // Variety Guard: ensure the candidate pool has at least 50 words to avoid excessive repetition
-            int minAllowedLength = currentStage + 1;
-            int maxAllowedLength = currentStage + 2;
+            int minAllowedLength = currentStage + 2;
+            int maxAllowedLength = currentStage + 3;
             List<string> candidates;
             do
             {
                 int minLen = minAllowedLength;
                 int maxLen = maxAllowedLength;
                 candidates = wordList.Where(w => w.Length >= minLen && w.Length <= maxLen).ToList();
-                if (candidates.Count >= 50 || (maxAllowedLength >= 15 && minAllowedLength <= 2))
+                if (candidates.Count >= 50 || (maxAllowedLength >= 15 && minAllowedLength <= 3))
                 {
                     break;
                 }
@@ -863,7 +864,7 @@ namespace OpenTyping
                 {
                     maxAllowedLength++;
                 }
-                else if (minAllowedLength > 2)
+                else if (minAllowedLength > 3)
                 {
                     minAllowedLength--;
                 }
@@ -1466,6 +1467,7 @@ namespace OpenTyping
         {
             TxtFinalScore.Text = currentScore.ToString();
             TxtFinalStage.Text = currentStage.ToString();
+            TxtRegisterStatus.Text = LangStr.ResourceManager.GetString("FetchServerData") ?? "Registering score...";
 
             GameOverGrid.Visibility = Visibility.Visible;
 
@@ -1507,30 +1509,50 @@ namespace OpenTyping
                 dateStr
             );
 
-            try
+            bool localRegistered = false;
+            bool serverRegistered = false;
+
+            // Local cutoff: Score >= 1000 and Stage >= 2
+            if (currentScore >= 1000 && currentStage >= 2)
             {
-                if (await Sqlite.OpenDatabase())
+                try
                 {
-                    // Save to local SQLite
-                    List<VeneziaUser> localRecords = await Sqlite.GetVeneziaUsersAsync();
-                    localRecords.Add(scoreRecord);
-                    localRecords.Sort();
-
-                    // Keep top 10 only
-                    if (localRecords.Count > 10)
+                    if (await Sqlite.OpenDatabase())
                     {
-                        localRecords.RemoveRange(10, localRecords.Count - 10);
-                    }
+                        // Save to local SQLite
+                        List<VeneziaUser> localRecords = await Sqlite.GetVeneziaUsersAsync();
+                        localRecords.Add(scoreRecord);
+                        localRecords.Sort();
 
-                    await Sqlite.ReWriteAllVeneziaAsync(localRecords);
+                        // Keep top 10 only
+                        if (localRecords.Count > 10)
+                        {
+                            localRecords.RemoveRange(10, localRecords.Count - 10);
+                        }
+
+                        await Sqlite.ReWriteAllVeneziaAsync(localRecords);
+                        localRegistered = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    App.logger.Error("Failed to save high score: " + ex.ToString());
                 }
             }
-            catch (Exception ex)
+            // Display registration status message in the background Game Over screen
+            string msg = "";
+
+            if (localRegistered)
             {
-                App.logger.Error("Failed to save high score: " + ex.ToString());
+                msg = LangStr.ResourceManager.GetString("SamarkandRegisterLocalMsg") ?? "Registered locally!";
+            }
+            else
+            {
+                // Not registered because score/stage were too low
+                msg = LangStr.ResourceManager.GetString("SamarkandLocalLimitMsg") ?? "To register locally, you need at least 1000 points and Stage 2.";
             }
 
-
+            TxtRegisterStatus.Text = msg;
 
             // Trigger event for menu integration if needed
             RtnUserRecord?.Invoke(new Dictionary<string, string>
@@ -1604,6 +1626,19 @@ namespace OpenTyping
             {
                 PlaySfx(sfxPressedPlayer, sfxPressedReader);
             }
+        }
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            if (isGameOver)
+            {
+                base.OnClosing(e);
+                return;
+            }
+
+            e.Cancel = true;
+
+            // Trigger game over sequence directly (without tower collapse animation)
+            TriggerGameOver();
         }
 
         protected override void OnClosed(EventArgs e)

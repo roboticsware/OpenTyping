@@ -37,7 +37,7 @@
                     </Rectangle>
                     <TextBlock Style="{StaticResource NormalTextBlock}" 
                                Name="MenuName"
-                               Text="사마르칸트"
+                               Text="사마르칸트 유성"
                                FontSize="32pt"
                                Margin="0 2 0 0"/>
                 </StackPanel>
