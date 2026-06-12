@@ -932,7 +932,12 @@ namespace OpenTyping
             // Calculate width and set random X position (keeping within bounds of the canvas)
             tb.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
             double wordWidth = tb.DesiredSize.Width;
-            double posX = random.Next(20, (int)(GameCanvas.ActualWidth - wordWidth - 20));
+            int maxX = (int)(GameCanvas.ActualWidth - wordWidth - 20);
+            double posX = 20;
+            if (maxX > 20)
+            {
+                posX = random.Next(20, maxX);
+            }
 
             FallingWord fw = new FallingWord
             {

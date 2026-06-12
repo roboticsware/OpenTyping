@@ -18,7 +18,26 @@ namespace OpenTyping
 
         public async Task<bool> OpenDatabase()
         {
-            string filename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "db.db");
+            string appDataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "OpenTyping");
+            try
+            {
+                Directory.CreateDirectory(appDataDir);
+            }
+            catch { }
+
+            string filename = Path.Combine(appDataDir, "db.db");
+            string oldFilename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "db.db");
+
+            // Migrate database to AppData if old one exists and new one does not
+            if (!File.Exists(filename) && File.Exists(oldFilename))
+            {
+                try
+                {
+                    File.Copy(oldFilename, filename);
+                }
+                catch { }
+            }
+
             string password = GetMachineID() + "AddYourSalt";
             Debug.WriteLine(password);
 

@@ -20,7 +20,7 @@ namespace OpenTyping
         private void App_DispatcherUnhandledException(object sender,
             DispatcherUnhandledExceptionEventArgs e)
         {
-            logger.Error(e.Exception.ToString()); ; // leave the log to file
+            logger.Error(e.Exception.ToString()); // leave the log to file
             e.Handled = true; // prevent the application from crashing
 
             MessageBox.Show(LangStr.UnhandledError, "TezTer", MessageBoxButton.OK, MessageBoxImage.Error);

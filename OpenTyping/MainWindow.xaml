@@ -167,7 +167,7 @@
                         </Rectangle.OpacityMask>
                     </Rectangle>
                     <Label x:Name="MenuLblVenezia" Style="{StaticResource TabItemLabel}"
-                           Content="사마르칸트 유성"/>
+                           Content="사마르칸트 유성우"/>
                 </StackPanel>
             </TabItem.Header>
             <local:VeneziaMenu x:Name="VeneziaMenu"/>
