@@ -1510,7 +1510,6 @@ namespace OpenTyping
             );
 
             bool localRegistered = false;
-            bool serverRegistered = false;
 
             // Local cutoff: Score >= 1000 and Stage >= 2
             if (currentScore >= 1000 && currentStage >= 2)
