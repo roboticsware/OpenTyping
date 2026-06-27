@@ -381,6 +381,9 @@
   <data name="Local" xml:space="preserve">
     <value>Lokal</value>
   </data>
+  <data name="Server" xml:space="preserve">
+    <value>Server</value>
+  </data>
   <data name="WordCount" xml:space="preserve">
     <value>So'z soni</value>
   </data>

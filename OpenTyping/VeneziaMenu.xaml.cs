@@ -1,7 +1,3 @@
-using MahApps.Metro.Controls;
-using MahApps.Metro.Controls.Dialogs;
-using OpenTyping.Properties;
-using OpenTyping.Resources.Lang;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,6 +6,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using FamFamFam.Flags.Wpf;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+using OpenTyping.Properties;
+using OpenTyping.Resources.Lang;
 
 namespace OpenTyping
 {

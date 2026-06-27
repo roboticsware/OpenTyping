@@ -372,6 +372,12 @@
   <data name="Org" xml:space="preserve">
     <value>소속</value>
   </data>
+  <data name="Local" xml:space="preserve">
+    <value>로컬</value>
+  </data>
+  <data name="Server" xml:space="preserve">
+    <value>서버</value>
+  </data>
   <data name="Rank" xml:space="preserve">
     <value>순위</value>
   </data>

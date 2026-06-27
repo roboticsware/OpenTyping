@@ -78,6 +78,7 @@ namespace OpenTyping
         private List<string> wordList = new List<string>();
         private List<FallingWord> activeWords = new List<FallingWord>();
         private Random random = new Random();
+        private bool isMagnified = false;
 
         // Intro Screen Stars & Meteors state
         private class IntroMeteor
@@ -132,7 +133,11 @@ namespace OpenTyping
                 string soundsDir = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Sounds");
 
                 // BGM (loops via PlaybackStopped event)
-                string bgmPath = System.IO.Path.Combine(soundsDir, "bgm.wav");
+                string bgmPath = System.IO.Path.Combine(soundsDir, "bgm.mp3");
+                if (!System.IO.File.Exists(bgmPath))
+                {
+                    bgmPath = System.IO.Path.Combine(soundsDir, "bgm.wav");
+                }
                 if (System.IO.File.Exists(bgmPath))
                 {
                     bgmReader = new AudioFileReader(bgmPath) { Volume = GetBgmVolume() };
@@ -151,7 +156,13 @@ namespace OpenTyping
                 sfxBellPlayer     = InitSfx(System.IO.Path.Combine(soundsDir, "Bell.wav"),        sfxVol, out sfxBellReader);
                 sfxComboPlayer    = InitSfx(System.IO.Path.Combine(soundsDir, "Combo.wav"),       sfxVol, out sfxComboReader);
                 sfxBreakPlayer    = InitSfx(System.IO.Path.Combine(soundsDir, "Break.wav"),       sfxVol, out sfxBreakReader);
-                sfxGameOverPlayer = InitSfx(System.IO.Path.Combine(soundsDir, "GameOverSound.wav"), sfxVol, out sfxGameOverReader);
+
+                string gameOverPath = System.IO.Path.Combine(soundsDir, "GameOverSound.mp3");
+                if (!System.IO.File.Exists(gameOverPath))
+                {
+                    gameOverPath = System.IO.Path.Combine(soundsDir, "GameOverSound.wav");
+                }
+                sfxGameOverPlayer = InitSfx(gameOverPath, sfxVol, out sfxGameOverReader);
                 sfxWrongPlayer    = InitSfx(System.IO.Path.Combine(soundsDir, "WrongPressed.wav"), sfxVol, out sfxWrongReader);
             }
             catch (Exception ex)
@@ -923,7 +934,7 @@ namespace OpenTyping
             {
                 Text = text,
                 Foreground = textColor,
-                FontSize = (type == WordType.Meteor || type == WordType.Comet) ? 18 : 14,
+                FontSize = (type == WordType.Meteor || type == WordType.Comet) ? 22 : 17,
                 FontWeight = weight,
                 FontStyle = type == WordType.Comet ? FontStyles.Italic : FontStyles.Normal,
                 FontFamily = new FontFamily("NanumBarunGothic, PTMono")
@@ -1657,6 +1668,27 @@ namespace OpenTyping
             DisposeNAudio(sfxBreakPlayer,   sfxBreakReader);
             DisposeNAudio(sfxGameOverPlayer, sfxGameOverReader);
             DisposeNAudio(sfxWrongPlayer,   sfxWrongReader);
+        }
+
+        private void MagnifyButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!isMagnified)
+            {
+                var scale = new ScaleTransform(1.5, 1.5);
+                MainGrid.LayoutTransform = scale;
+                this.Width = 800 * 1.5;
+                this.Height = 550 * 1.5;
+                MagnifyIcon.Kind = MahApps.Metro.IconPacks.PackIconModernKind.MagnifyMinus;
+                isMagnified = true;
+            }
+            else
+            {
+                MainGrid.LayoutTransform = Transform.Identity;
+                this.Width = 800;
+                this.Height = 550;
+                MagnifyIcon.Kind = MahApps.Metro.IconPacks.PackIconModernKind.MagnifyAdd;
+                isMagnified = false;
+            }
         }
     }
 }

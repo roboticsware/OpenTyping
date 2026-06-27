@@ -16,6 +16,15 @@
         Background="#0e8a7c"
         PreviewKeyDown="Window_PreviewKeyDown">
 
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <Button Name="MagnifyButton" 
+                    Click="MagnifyButton_Click">
+                <iconPacks:PackIconModern x:Name="MagnifyIcon" Kind="MagnifyAdd" />
+            </Button>
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
+
     <Grid x:Name="MainGrid">
         <!-- GAMEPLAY SCREEN -->
         <Grid x:Name="GameGrid" Visibility="Visible">
