@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -67,7 +67,6 @@ namespace OpenTyping
         private static readonly Differ Differ = new Differ();
 
         // Sound
-        private readonly SoundPlayer playSound = new SoundPlayer(Properties.Resources.Pressed);
         private readonly Volume volume;
 
         // Magnify window
@@ -250,7 +249,7 @@ namespace OpenTyping
         {
             if (this.volume == Volume.Up)
             {
-                playSound.Play(); // Key pressing sound
+                SfxManager.PlayPressed(this.volume);
             }
 
             if (freeze)

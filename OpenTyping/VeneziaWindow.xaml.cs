@@ -1637,7 +1637,7 @@ namespace OpenTyping
                 return;
             }
 
-            if (this.volume == Volume.Up)
+            if (this.volume != Volume.Off)
             {
                 PlaySfx(sfxPressedPlayer, sfxPressedReader);
             }

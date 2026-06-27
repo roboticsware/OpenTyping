@@ -93,8 +93,6 @@ namespace OpenTyping
         // Sound
         private SoundPlayer playMedia;
 
-        private readonly SoundPlayer playPressedSound = new SoundPlayer(Properties.Resources.Pressed);
-        private readonly SoundPlayer playBellSound = new SoundPlayer(Properties.Resources.Bell);
 
         private readonly Volume volume;
 
@@ -319,10 +317,7 @@ namespace OpenTyping
                 }
                 else
                 {
-                    if (this.volume != Volume.Off)
-                    {
-                        playBellSound.Play();
-                    }
+                    SfxManager.PlayBell(this.volume);
                     CorrectCount++;
                 }
                 isWrongWord = false;
@@ -405,9 +400,9 @@ namespace OpenTyping
                 }
 
                 KeyLayoutBox.PressCorrectKey(currKeyPos);
-                if (this.volume == Volume.Up)
+                if (this.volume != Volume.Off)
                 {
-                    playPressedSound.Play();
+                    SfxManager.PlayPressed(this.volume);
                 }
                 await Task.Delay(10);
                 KeyLayoutBox.ReleaseKey(currKeyPos);

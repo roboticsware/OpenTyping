@@ -63,7 +63,6 @@ namespace OpenTyping
         private bool freeze = false;
 
         // Sound
-        private readonly SoundPlayer playSound = new SoundPlayer(Properties.Resources.Pressed);
         private readonly Volume volume;
 
         // Magnify window
@@ -218,9 +217,9 @@ namespace OpenTyping
                 return;
             }
 
-            if (this.volume == Volume.Up)
+            if (this.volume != Volume.Off)
             {
-                playSound.Play(); // Key pressing sound
+                SfxManager.PlayPressed(this.volume);
             }
 
             if (e.Key == System.Windows.Input.Key.Enter)
