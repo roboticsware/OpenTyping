@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using LiveCharts;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using OpenTyping.Properties;
 using OpenTyping.Resources.Lang;
 
@@ -58,6 +59,8 @@ namespace OpenTyping
         private int? currentSentenceIndex;
 
         private static readonly Differ Differ = new Differ();
+
+        private bool freeze = false;
 
         // Sound
         private readonly SoundPlayer playSound = new SoundPlayer(Properties.Resources.Pressed);
@@ -185,15 +188,36 @@ namespace OpenTyping
             if (!string.IsNullOrEmpty(CurrentTextBox.Text) || currentSentenceIndex is null) // 입력이 비어있지 않거나 첫 번째 호출인 경우
             {
                 if (currentSentenceIndex is null) currentSentenceIndex = 0; // 첫 호출인 경우
-                else if (currentSentenceIndex == practiceData.TextData.Count - 1) currentSentenceIndex = 0; // 마지막 인덱스인 경우, 순환
+                else if (currentSentenceIndex == practiceData.TextData.Count - 1)
+                {
+                    FinishPracticeAsync();
+                    return;
+                }
                 else currentSentenceIndex++;
 
                 CurrentText = practiceData.TextData[currentSentenceIndex.Value];
             }
         }
 
+        private async void FinishPracticeAsync()
+        {
+            freeze = true;
+            await this.ShowMessageAsync(LangStr.FinishedPrac + " ",
+                                         LangStr.LastSpeed + " " + AverageTypingSpeed + ", " + LangStr.Accuracy + ": " + TypingAccuracy + "%",
+                                         MessageDialogStyle.Affirmative,
+                                         new MetroDialogSettings { AnimateHide = false });
+
+            this.Close();
+        }
+
         private void CurrentTextBox_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
+            if (freeze)
+            {
+                e.Handled = true;
+                return;
+            }
+
             if (this.volume == Volume.Up)
             {
                 playSound.Play(); // Key pressing sound
@@ -215,6 +239,12 @@ namespace OpenTyping
 
         private void CurrentTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
+            if (freeze)
+            {
+                e.Handled = true;
+                return;
+            }
+
             string input = CurrentTextBox.Text;
             var diffs
                 = new List<Differ.DiffData>(Differ.Diff(CurrentText.Substring(0, Math.Min(input.Length, CurrentText.Length)),
