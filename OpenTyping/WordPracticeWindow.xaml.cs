@@ -22,7 +22,6 @@ namespace OpenTyping
     public partial class WordPracticeWindow : MetroWindow, INotifyPropertyChanged
     {
         // Key pressing
-        private KeyPos currKeyPos;
         private static readonly ThicknessAnimationUsingKeyFrames ShakeAnimation = new ThicknessAnimationUsingKeyFrames();
 
         // Practice data
@@ -184,6 +183,20 @@ namespace OpenTyping
             ShakeAnimation.KeyFrames = keyFrames;
 
             this.countdownTime = countdownTime;
+
+            // Pre-create and configure the timer to avoid allocation latency on the first keystroke
+            timer = new System.Windows.Threading.DispatcherTimer();
+            if (countdownTime != 0)
+            {
+                timeSpan = TimeSpan.FromMinutes(countdownTime);
+                timer.Interval = TimeSpan.FromSeconds(1);
+                timer.Tick += CountdownTick;
+            }
+            else
+            {
+                timer.Interval = new TimeSpan(0, 0, 0, 0, 100); // 100ms
+                timer.Tick += new EventHandler(StopWatchTick);
+            }
         }
 
         private void SetTextBylanguage()
@@ -369,7 +382,7 @@ namespace OpenTyping
         {
             if (e.IsRepeat) return;
 
-            currKeyPos = KeyPos.FromKeyCode(e.Key == System.Windows.Input.Key.ImeProcessed ? e.ImeProcessedKey : e.Key);
+            KeyPos currKeyPos = KeyPos.FromKeyCode(e.Key == System.Windows.Input.Key.ImeProcessed ? e.ImeProcessedKey : e.Key);
 
             if (e.Key == System.Windows.Input.Key.LeftShift ||
                 e.Key == System.Windows.Input.Key.RightShift ||
@@ -421,12 +434,7 @@ namespace OpenTyping
 
         private void StartStopWatch()
         {
-            if (timer != null) return;
-
-            timer = new System.Windows.Threading.DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 0, 0, 100); // 100ms
-            timer.Tick += new EventHandler(StopWatchTick);
-            timer.Start();
+            timer?.Start();
         }
 
         private void StopWatchTick(object sender, EventArgs e)
@@ -456,13 +464,7 @@ namespace OpenTyping
 
         private void StartCountdown(int countdownTime)
         {
-            if (timer != null) return;
-
-            timer = new System.Windows.Threading.DispatcherTimer();
-            timeSpan = TimeSpan.FromMinutes(countdownTime);
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += CountdownTick;
-            timer.Start();
+            timer?.Start();
         }
 
         private void CountdownTick(object sender, EventArgs e)

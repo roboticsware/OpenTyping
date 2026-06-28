@@ -15,6 +15,9 @@ namespace OpenTyping
         private static WaveFileReader bellReader;
         private static WaveOutEvent bellPlayer;
 
+        private static AudioFileReader wrongReader;
+        private static WaveOutEvent wrongPlayer;
+
         static SfxManager()
         {
             try
@@ -50,6 +53,15 @@ namespace OpenTyping
                         bellPlayer.Init(bellReader);
                     }
                 }
+
+                // Init Wrong Player
+                string wrongPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Sounds", "WrongPressed.wav");
+                if (File.Exists(wrongPath))
+                {
+                    wrongReader = new AudioFileReader(wrongPath);
+                    wrongPlayer = new WaveOutEvent { DesiredLatency = 100 };
+                    wrongPlayer.Init(wrongReader);
+                }
             }
             catch (Exception ex)
             {
@@ -69,7 +81,13 @@ namespace OpenTyping
             PlaySfx(bellPlayer, bellReader, volume);
         }
 
-        private static void PlaySfx(WaveOutEvent player, WaveFileReader reader, Volume volume)
+        public static void PlayWrong(Volume volume)
+        {
+            if (volume == Volume.Off || wrongPlayer == null || wrongReader == null) return;
+            PlaySfx(wrongPlayer, wrongReader, volume);
+        }
+
+        private static void PlaySfx(WaveOutEvent player, WaveStream reader, Volume volume)
         {
             try
             {
