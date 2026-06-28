@@ -30,7 +30,7 @@ namespace OpenTyping
                         pressedStream = ms;
                         pressedReader = new WaveFileReader(pressedStream);
 
-                        pressedPlayer = new WaveOutEvent();
+                        pressedPlayer = new WaveOutEvent { DesiredLatency = 80 };
                         pressedPlayer.Init(pressedReader);
                     }
                 }
@@ -46,7 +46,7 @@ namespace OpenTyping
                         bellStream = ms;
                         bellReader = new WaveFileReader(bellStream);
 
-                        bellPlayer = new WaveOutEvent();
+                        bellPlayer = new WaveOutEvent { DesiredLatency = 150 };
                         bellPlayer.Init(bellReader);
                     }
                 }

@@ -51,7 +51,6 @@ namespace OpenTyping
         private readonly Brush incorrectBackground = Brushes.Pink;
 
         // Sound
-        private SoundPlayer playSound;
         private readonly Volume volume;
 
         // Magnify window
@@ -81,17 +80,6 @@ namespace OpenTyping
             MoveSyllable();
 
             this.volume = (Volume)Settings.Default["Volume"];
-
-            try
-            {
-                string pressedPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Sounds", "Pressed.wav");
-                if (System.IO.File.Exists(pressedPath))
-                {
-                    playSound = new SoundPlayer(pressedPath);
-                    playSound.Load();
-                }
-            }
-            catch { }
         }
 
         private void SetTextBylanguage()
@@ -128,10 +116,7 @@ namespace OpenTyping
 
         private void CurrentTextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            if (this.volume != Volume.Off)
-            {
-                playSound?.Play(); // Key pressing sound
-            }
+            SfxManager.PlayPressed(this.volume); // Key pressing sound
 
             switch (CurrentTextBox.Text.Length)
             {

@@ -152,7 +152,7 @@ namespace OpenTyping
 
                 // SFX — each gets its own independent WaveOutEvent for true mixing
                 float sfxVol = GetSfxVolume();
-                sfxPressedPlayer  = InitSfx(System.IO.Path.Combine(soundsDir, "Pressed.wav"),     sfxVol, out sfxPressedReader);
+                sfxPressedPlayer  = InitSfx(System.IO.Path.Combine(soundsDir, "Pressed.wav"),     sfxVol, out sfxPressedReader, 80);
                 sfxBellPlayer     = InitSfx(System.IO.Path.Combine(soundsDir, "Bell.wav"),        sfxVol, out sfxBellReader);
                 sfxComboPlayer    = InitSfx(System.IO.Path.Combine(soundsDir, "Combo.wav"),       sfxVol, out sfxComboReader);
                 sfxBreakPlayer    = InitSfx(System.IO.Path.Combine(soundsDir, "Break.wav"),       sfxVol, out sfxBreakReader);
@@ -163,7 +163,7 @@ namespace OpenTyping
                     gameOverPath = System.IO.Path.Combine(soundsDir, "GameOverSound.wav");
                 }
                 sfxGameOverPlayer = InitSfx(gameOverPath, sfxVol, out sfxGameOverReader);
-                sfxWrongPlayer    = InitSfx(System.IO.Path.Combine(soundsDir, "WrongPressed.wav"), sfxVol, out sfxWrongReader);
+                sfxWrongPlayer    = InitSfx(System.IO.Path.Combine(soundsDir, "WrongPressed.wav"), sfxVol, out sfxWrongReader, 100);
             }
             catch (Exception ex)
             {
@@ -171,11 +171,11 @@ namespace OpenTyping
             }
         }
 
-        private WaveOutEvent InitSfx(string path, float volume, out AudioFileReader reader)
+        private WaveOutEvent InitSfx(string path, float volume, out AudioFileReader reader, int latency = 150)
         {
             if (!System.IO.File.Exists(path)) { reader = null; return null; }
             reader = new AudioFileReader(path) { Volume = volume };
-            var player = new WaveOutEvent();
+            var player = new WaveOutEvent { DesiredLatency = latency };
             player.Init(reader);
             return player;
         }

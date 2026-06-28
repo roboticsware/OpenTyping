@@ -80,7 +80,6 @@ namespace OpenTyping
         private static readonly ThicknessAnimationUsingKeyFrames ShakeAnimation = new ThicknessAnimationUsingKeyFrames();
 
         private SoundPlayer playMedia;
-        private SoundPlayer playSound;
         private readonly Volume volume;
 
         // Magnify window
@@ -110,17 +109,6 @@ namespace OpenTyping
                 {
                     playMedia = new SoundPlayer(wrongPath);
                     playMedia.Load();
-                }
-            }
-            catch { }
-
-            try
-            {
-                string pressedPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Sounds", "Pressed.wav");
-                if (System.IO.File.Exists(pressedPath))
-                {
-                    playSound = new SoundPlayer(pressedPath);
-                    playSound.Load();
                 }
             }
             catch { }
@@ -250,10 +238,7 @@ namespace OpenTyping
             
             if (CurrentKey.Pos == pos && CurrentKey.IsShift == isShift)
             {
-                if (this.volume != Volume.Off)
-                {
-                    playSound?.Play();
-                }
+                SfxManager.PlayPressed(this.volume);
                 CorrectCount++;
                 MoveKey();
             }
