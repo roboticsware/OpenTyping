@@ -171,6 +171,18 @@ namespace OpenTyping
             accuracyList.Add(Convert.ToInt32(accuracy * 100));
             typingSpeedList.Add(Convert.ToInt32(typingMeasurer.Finish(currentTextBox.Text) * accuracy));
 
+            if (this.volume != Volume.Off)
+            {
+                if (currentTextBox.Text == currentText)
+                {
+                    SfxManager.PlayBell(this.volume);
+                }
+                else
+                {
+                    SfxManager.PlayWrong(this.volume);
+                }
+            }
+
             TypingAccuracy = Convert.ToInt32(accuracyList.Average());
             TypingSpeed = Convert.ToInt32(typingSpeedList.Average());
 
@@ -247,7 +259,7 @@ namespace OpenTyping
 
         private void LineTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (this.volume == Volume.Up)
+            if (this.volume != Volume.Off)
             {
                 SfxManager.PlayPressed(this.volume);
             }

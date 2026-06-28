@@ -77,8 +77,26 @@ public class PracticeData
             }
         }
 
-        public static PracticeData LoadWordData()
+        public static PracticeData LoadWordData(bool ignoreTopik = false)
         {
+            string targetResName = "WordData-ko";
+            if (MainWindow.CurrentKeyLayout.Character == "한글")
+            {
+                string topik = ignoreTopik ? "0" : (string)Settings.Default["TopikLevel"];
+                if (!string.IsNullOrEmpty(topik) && topik != "0" && topik != "All")
+                {
+                    targetResName = "WordData-ko-topik" + topik;
+                }
+            }
+            else if (MainWindow.CurrentKeyLayout.Character == "UZB")
+            {
+                targetResName = "WordData-uz-lot";
+            }
+            else if (MainWindow.CurrentKeyLayout.Character == "ENG")
+            {
+                targetResName = "WordData-uz-qty";
+            }
+
             List<string> wordDataResList = new List<string> {};
             var assembly = Assembly.GetExecutingAssembly();
             string[] resList = assembly.GetManifestResourceNames();

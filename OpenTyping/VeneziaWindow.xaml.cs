@@ -347,7 +347,7 @@ namespace OpenTyping
         {
             try
             {
-                PracticeData data = PracticeData.LoadWordData();
+                PracticeData data = PracticeData.LoadWordData(ignoreTopik: true);
                 if (data != null && data.TextData != null)
                 {
                     wordList = data.TextData.ToList();

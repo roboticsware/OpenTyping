@@ -182,6 +182,18 @@ namespace OpenTyping
                 TypingSpeed = Convert.ToInt32(typingMeasurer.Finish(CurrentTextBox.Text) * accuracy);
                 TypingSpeedList.Add(TypingSpeed);
                 AverageTypingSpeed = Convert.ToInt32(TypingSpeedList.Average());
+
+                if (this.volume != Volume.Off)
+                {
+                    if (input == CurrentText)
+                    {
+                        SfxManager.PlayBell(this.volume);
+                    }
+                    else
+                    {
+                        SfxManager.PlayWrong(this.volume);
+                    }
+                }
             }
 
             if (!string.IsNullOrEmpty(CurrentTextBox.Text) || currentSentenceIndex is null) // 입력이 비어있지 않거나 첫 번째 호출인 경우
