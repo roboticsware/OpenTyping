@@ -120,64 +120,6 @@ namespace OpenTyping
             App.BaseFontSize = ((SystemParameters.PrimaryScreenWidth / 12) / 3 * 2) / 5 * 0.7;
             App.BaseFontSize = Math.Round(App.BaseFontSize);
             Debug.WriteLine(App.BaseFontSize, "BaseFontSize");
-
-            // Pre-initialize sound engine and pre-warm methods when application is idle to prevent UI JIT stutter
-            _ = Dispatcher.BeginInvoke(new Action(async () =>
-            {
-                // Guard: Only pre-warm if no other window has been opened yet
-                foreach (System.Windows.Window win in Application.Current.Windows)
-                {
-                    if (win != this && win.IsVisible)
-                    {
-                        return; // A practice or game window is already open/active, skip to avoid device conflicts
-                    }
-                }
-
-                try
-                {
-                    // 1. Force static constructor of SfxManager
-                    System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(SfxManager).TypeHandle);
-
-                    // 2. Pre-JIT compile critical sound methods
-                    var playSfxMethod = typeof(SfxManager).GetMethod("PlaySfx", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
-                    if (playSfxMethod != null)
-                    {
-                        System.Runtime.CompilerServices.RuntimeHelpers.PrepareMethod(playSfxMethod.MethodHandle);
-                    }
-
-                    var playPressedMethod = typeof(SfxManager).GetMethod("PlayPressed", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                    if (playPressedMethod != null)
-                    {
-                        System.Runtime.CompilerServices.RuntimeHelpers.PrepareMethod(playPressedMethod.MethodHandle);
-                    }
-
-                    var playBellMethod = typeof(SfxManager).GetMethod("PlayBell", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                    if (playBellMethod != null)
-                    {
-                        System.Runtime.CompilerServices.RuntimeHelpers.PrepareMethod(playBellMethod.MethodHandle);
-                    }
-
-                    // 3. Pre-JIT compile KeyPos & Differ methods
-                    var fromKeyCodeMethod = typeof(KeyPos).GetMethod("FromKeyCode", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                    if (fromKeyCodeMethod != null)
-                    {
-                        System.Runtime.CompilerServices.RuntimeHelpers.PrepareMethod(fromKeyCodeMethod.MethodHandle);
-                    }
-
-                    var diffMethod = typeof(Differ).GetMethod("Diff", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-                    if (diffMethod != null)
-                    {
-                        System.Runtime.CompilerServices.RuntimeHelpers.PrepareMethod(diffMethod.MethodHandle);
-                    }
-
-                    // 4. Pre-warm async infrastructure
-                    await Task.Delay(1);
-                }
-                catch (Exception ex)
-                {
-                    App.logger.Error("Idle pre-warm failed: " + ex.Message);
-                }
-            }), System.Windows.Threading.DispatcherPriority.ApplicationIdle);
         }
 
         private static void MainWindow_Closed(object sender, EventArgs e)

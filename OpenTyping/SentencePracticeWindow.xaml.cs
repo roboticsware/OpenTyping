@@ -172,7 +172,10 @@ namespace OpenTyping
 
                 if (input.Length < CurrentText.Length)
                 {
-                    PreviousTextBlock.Inlines.Add(new Run(CurrentText.Substring(input.Length)));
+                    PreviousTextBlock.Inlines.Add(new Run(CurrentText.Substring(input.Length))
+                    {
+                        Background = Differ.incorrectBackground
+                    });
                 }
 
                 double accuracy = Differ.CalculateAccuracy(diffs);

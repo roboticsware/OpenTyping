@@ -166,6 +166,39 @@ namespace OpenTyping
 
             var diffs = new List<Differ.DiffData>(Differ.Diff(currentTextBox.Text, currentText, currentTextBox.Text));
 
+            // Update the completed line to show correct/incorrect highlights, and make untyped text pink
+            currentTextBlock.Inlines.Clear();
+            var typedLength = currentTextBox.Text.Length;
+            var targetLength = currentText.Length;
+            var typedDiffs = new List<Differ.DiffData>(
+                Differ.Diff(currentText.Substring(0, Math.Min(typedLength, targetLength)),
+                            currentTextBox.Text,
+                            currentText));
+
+            for (int i = 0; i < typedDiffs.Count() - 1; i++)
+            {
+                if (typedDiffs[i].State == Differ.DiffData.DiffState.Intermediate)
+                {
+                    typedDiffs[i].State = Differ.DiffData.DiffState.Unequal;
+                }
+            }
+
+            foreach (var diff in typedDiffs)
+            {
+                var run = new Run(diff.Text)
+                {
+                    Background = Differ.MapDiffState(diff.State)
+                };
+                currentTextBlock.Inlines.Add(run);
+            }
+
+            if (typedLength < targetLength)
+            {
+                currentTextBlock.Inlines.Add(new Run(currentText.Substring(typedLength))
+                {
+                    Background = Differ.incorrectBackground
+                });
+            }
 
             double accuracy = Differ.CalculateAccuracy(diffs);
             accuracyList.Add(Convert.ToInt32(accuracy * 100));
