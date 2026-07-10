@@ -53,6 +53,13 @@ namespace OpenTyping
             private set => SetField(ref typingAccuracy, value);
         }
 
+        private int averageAccuracy;
+        public int AverageAccuracy
+        {
+            get => averageAccuracy;
+            private set => SetField(ref averageAccuracy, value);
+        }
+
         public ChartValues<int> TypingSpeedList { get; set; } = new ChartValues<int>();
         public ChartValues<int> AccuracyList { get; set; } = new ChartValues<int>();
 
@@ -106,6 +113,7 @@ namespace OpenTyping
             Speed.Text = LangStr.Speed;
             AvgSpeed.Text = LangStr.AvgSpeed;
             Accuracy.Text = LangStr.Accuracy;
+            AvgAccuracy.Text = LangStr.AvgAccuracy;
             GphSpeed.Title = LangStr.Speed;
             GphCorrect.Title = LangStr.Accuracy;
         }
@@ -178,9 +186,20 @@ namespace OpenTyping
                     });
                 }
 
-                double accuracy = Differ.CalculateAccuracy(diffs);
+                int correctCount = 0;
+                for (int i = 0; i < Math.Min(input.Length, CurrentText.Length); i++)
+                {
+                    if (input[i] == CurrentText[i])
+                    {
+                        correctCount++;
+                    }
+                }
+                double accuracy = Math.Max(input.Length, CurrentText.Length) > 0 
+                    ? (double)correctCount / Math.Max(input.Length, CurrentText.Length) 
+                    : 0;
                 TypingAccuracy = Convert.ToInt32(accuracy * 100);
                 AccuracyList.Add(TypingAccuracy);
+                AverageAccuracy = Convert.ToInt32(AccuracyList.Average());
 
                 TypingSpeed = Convert.ToInt32(typingMeasurer.Finish(CurrentTextBox.Text) * accuracy);
                 TypingSpeedList.Add(TypingSpeed);
@@ -217,7 +236,7 @@ namespace OpenTyping
         {
             freeze = true;
             await this.ShowMessageAsync(LangStr.FinishedPrac + " ",
-                                         LangStr.LastSpeed + " " + AverageTypingSpeed + ", " + LangStr.Accuracy + ": " + TypingAccuracy + "%",
+                                         LangStr.LastSpeed + " " + AverageTypingSpeed + ", " + LangStr.Accuracy + ": " + TypingAccuracy + "%, " + LangStr.AvgAccuracy + ": " + AverageAccuracy + "%",
                                          MessageDialogStyle.Affirmative,
                                          new MetroDialogSettings { AnimateHide = false });
 

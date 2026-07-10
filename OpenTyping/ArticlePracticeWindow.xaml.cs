@@ -49,11 +49,25 @@ namespace OpenTyping
             private set => SetField(ref typingSpeed, value);
         }
 
+        private int averageTypingSpeed;
+        public int AverageTypingSpeed
+        {
+            get => averageTypingSpeed;
+            private set => SetField(ref averageTypingSpeed, value);
+        }
+
         private int typingAccuracy;
         public int TypingAccuracy
         {
             get => typingAccuracy;
             private set => SetField(ref typingAccuracy, value);
+        }
+
+        private int averageAccuracy;
+        public int AverageAccuracy
+        {
+            get => averageAccuracy;
+            private set => SetField(ref averageAccuracy, value);
         }
 
         private readonly List<int> typingSpeedList = new List<int>();
@@ -100,7 +114,9 @@ namespace OpenTyping
             SelfWindow.Title = LangStr.AppName;
             InPage.Text = LangStr.InPage;
             Speed.Text = LangStr.Speed;
+            AvgSpeed.Text = LangStr.AvgSpeed;
             Accuracy.Text = LangStr.Accuracy;
+            AvgAccuracy.Text = LangStr.AvgAccuracy;
         }
 
         private void FontAssignByLang()
@@ -201,8 +217,11 @@ namespace OpenTyping
             }
 
             double accuracy = Differ.CalculateAccuracy(diffs);
-            accuracyList.Add(Convert.ToInt32(accuracy * 100));
-            typingSpeedList.Add(Convert.ToInt32(typingMeasurer.Finish(currentTextBox.Text) * accuracy));
+            int currentAcc = Convert.ToInt32(accuracy * 100);
+            accuracyList.Add(currentAcc);
+            
+            int currentSpeed = Convert.ToInt32(typingMeasurer.Finish(currentTextBox.Text) * accuracy);
+            typingSpeedList.Add(currentSpeed);
 
             if (this.volume != Volume.Off)
             {
@@ -216,8 +235,10 @@ namespace OpenTyping
                 }
             }
 
-            TypingAccuracy = Convert.ToInt32(accuracyList.Average());
-            TypingSpeed = Convert.ToInt32(typingSpeedList.Average());
+            TypingAccuracy = currentAcc;
+            AverageAccuracy = Convert.ToInt32(accuracyList.Average());
+            TypingSpeed = currentSpeed;
+            AverageTypingSpeed = Convert.ToInt32(typingSpeedList.Average());
 
             if (currentLine == 2) // 다음 페이지로 이동
             {
@@ -254,7 +275,7 @@ namespace OpenTyping
         {
             freeze = true;
             await this.ShowMessageAsync(LangStr.FinishedPrac + " ",
-                                         LangStr.LastSpeed + " " + TypingSpeed + ", " + LangStr.Accuracy + ": "+ TypingAccuracy + "%",
+                                         LangStr.LastSpeed + " " + AverageTypingSpeed + ", " + LangStr.Accuracy + ": " + TypingAccuracy + "%, " + LangStr.AvgAccuracy + ": " + AverageAccuracy + "%",
                                          MessageDialogStyle.Affirmative,
                                          new MetroDialogSettings{ AnimateHide = false });
 
