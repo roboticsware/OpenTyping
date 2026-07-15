@@ -133,8 +133,10 @@ namespace OpenTyping
                 {
                     tx_base = HandCalibrationX[currentRightActive];
                 }
-                double tx = tx_base * WidthRatio;
-                double ty = -180.0 * WidthRatio;
+                
+                // Shift right hand slightly right (+13.0) and lower it (+10.0) to align with left hand horizontally and split horizontal error
+                double tx = (tx_base + 13.0) * WidthRatio;
+                double ty = (-180.0 + 10.0) * WidthRatio;
 
                 var group = new TransformGroup();
                 group.Children.Add(new ScaleTransform(scaleX, scaleY));
