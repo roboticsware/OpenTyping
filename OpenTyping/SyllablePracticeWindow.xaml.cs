@@ -80,6 +80,7 @@ namespace OpenTyping
 
             TextCompositionManager.AddPreviewTextInputUpdateHandler(CurrentTextBox, CurrentTextBox_PreviewTextInputUpdate);
             CurrentTextBox.PreviewKeyDown += CurrentTextBox_PreviewKeyDown;
+            UpdateTextBoxPadding();
 
             this.syllablesList = syllablesList;
 
@@ -210,6 +211,15 @@ namespace OpenTyping
 
                 isMagnified = false;
             }
+
+            UpdateTextBoxPadding();
+        }
+
+        private void UpdateTextBoxPadding()
+        {
+            // 한글 폰트의 내장 상단 여백을 보정하여 텍스트박스 수직 정중앙에 배치
+            double topOffset = -BaseFontSize * 1.25;
+            CurrentTextBox.Padding = new Thickness(0, topOffset, 0, 0);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

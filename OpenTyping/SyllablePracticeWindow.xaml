@@ -105,7 +105,8 @@
                              VerticalContentAlignment="Center"
                              HorizontalContentAlignment="Center"
                              TextAlignment="Center"
-                             Padding="0"
+                             ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                              SelectionBrush="Transparent"
                              TextChanged="CurrentTextBox_TextChanged"/>
                 </StackPanel>
