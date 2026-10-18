@@ -89,27 +89,40 @@
                                VerticalAlignment="Center"
                                Margin="0 0 30 0"
                                Text="{Binding Path=CurrentSyllable}"/>
-                    <TextBox x:Name="CurrentTextBox"
-                             FontFamily="{StaticResource NanumBarunGothic}"
-                             FontSize="{Binding BaseFontSize,
+                    <Grid VerticalAlignment="Center">
+                        <Border x:Name="InputDisplayBorder"
+                                BorderBrush="#868e96"
+                                BorderThickness="1"
+                                Background="#f8f9fa"
+                                Width="{Binding BaseFontSize,
                                         Converter={local:MathConverter},
                                         ConverterParameter=@VALUE*8}"
-                             Background="#f8f9fa"
-                             Width="{Binding BaseFontSize,
-                                     Converter={local:MathConverter},
-                                     ConverterParameter=@VALUE*8}"
-                             Height="{Binding BaseFontSize,
-                                     Converter={local:MathConverter},
-                                     ConverterParameter=@VALUE*10}"
-                             VerticalAlignment="Center"
-                             VerticalContentAlignment="Center"
-                             HorizontalContentAlignment="Center"
-                             TextAlignment="Center"
-                             ClipToBounds="True"
-                             ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                             SelectionBrush="Transparent"
-                             TextChanged="CurrentTextBox_TextChanged"/>
+                                Height="{Binding BaseFontSize,
+                                        Converter={local:MathConverter},
+                                        ConverterParameter=@VALUE*9}"
+                                VerticalAlignment="Center">
+                            <TextBlock x:Name="InputDisplayTextBlock"
+                                       FontFamily="{StaticResource NanumBarunGothic}"
+                                       FontSize="{Binding BaseFontSize,
+                                                  Converter={local:MathConverter},
+                                                  ConverterParameter=@VALUE*8}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       TextAlignment="Center"/>
+                        </Border>
+                        <TextBox x:Name="CurrentTextBox"
+                                 Opacity="0"
+                                 CaretBrush="Transparent"
+                                 Width="{Binding BaseFontSize,
+                                         Converter={local:MathConverter},
+                                         ConverterParameter=@VALUE*8}"
+                                 Height="{Binding BaseFontSize,
+                                         Converter={local:MathConverter},
+                                         ConverterParameter=@VALUE*9}"
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Center"
+                                 TextChanged="CurrentTextBox_TextChanged"/>
+                    </Grid>
                 </StackPanel>
             </Border>
         </StackPanel>

@@ -80,7 +80,6 @@ namespace OpenTyping
 
             TextCompositionManager.AddPreviewTextInputUpdateHandler(CurrentTextBox, CurrentTextBox_PreviewTextInputUpdate);
             CurrentTextBox.PreviewKeyDown += CurrentTextBox_PreviewKeyDown;
-            UpdateTextBoxPadding();
 
             this.syllablesList = syllablesList;
 
@@ -116,6 +115,8 @@ namespace OpenTyping
 
             Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() =>
             {
+                InputDisplayTextBlock.Text = "";
+                InputDisplayBorder.Background = Brushes.White;
                 CurrentTextBox.IsEnabled = false;
                 CurrentTextBox.Clear();
                 CurrentTextBox.IsEnabled = true;
@@ -161,10 +162,12 @@ namespace OpenTyping
         {
             if (isAdvancing) return;
 
+            InputDisplayTextBlock.Text = input;
+
             switch (input.Length)
             {
                 case 0:
-                    CurrentTextBox.Background = Brushes.White;
+                    InputDisplayBorder.Background = Brushes.White;
                     return;
                 case 1:
                     List<char> decomposedCurrentSyllable = new List<char>(Differ.DecomposeHangul(CurrentSyllable)),
@@ -179,14 +182,14 @@ namespace OpenTyping
                     if (decomposedInput.Any() &&
                         decomposedInput.SequenceEqual(decomposedCurrentSyllable.Take(decomposedInput.Count))) // 부분 일치
                     {
-                        CurrentTextBox.Background = Brushes.White;
+                        InputDisplayBorder.Background = Brushes.White;
                         return;
                     }
 
                     break;
             }
 
-            CurrentTextBox.Background = incorrectBackground;
+            InputDisplayBorder.Background = incorrectBackground;
         }
 
         private void MagnifyButton_Click(object sender, RoutedEventArgs e)
@@ -211,15 +214,6 @@ namespace OpenTyping
 
                 isMagnified = false;
             }
-
-            UpdateTextBoxPadding();
-        }
-
-        private void UpdateTextBoxPadding()
-        {
-            // Caret과 글자가 사각박스 내에서 상하 여백을 균등하게 유지하며 초과하지 않도록 보정
-            double topOffset = -BaseFontSize * 0.7;
-            CurrentTextBox.Padding = new Thickness(0, topOffset, 0, 0);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
