@@ -1,4 +1,4 @@
-﻿<mah:MetroWindow x:Name="SelfWindow"
+<mah:MetroWindow x:Name="SelfWindow"
                  x:Class="OpenTyping.SyllablePracticeWindow"
                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -80,12 +80,14 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
                 <StackPanel DataContext="{Binding ElementName=SelfWindow}"
-                            Orientation="Horizontal">
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center">
                     <TextBlock FontFamily="{StaticResource NanumBarunGothic}"
                                FontSize="{Binding BaseFontSize,
                                           Converter={local:MathConverter},
                                           ConverterParameter=@VALUE*8}"
-                               Margin="0 8 30 0"
+                               VerticalAlignment="Center"
+                               Margin="0 0 30 0"
                                Text="{Binding Path=CurrentSyllable}"/>
                     <TextBox x:Name="CurrentTextBox"
                              FontFamily="{StaticResource NanumBarunGothic}"
@@ -99,6 +101,11 @@
                              Height="{Binding BaseFontSize,
                                      Converter={local:MathConverter},
                                      ConverterParameter=@VALUE*9}"
+                             VerticalAlignment="Center"
+                             VerticalContentAlignment="Center"
+                             HorizontalContentAlignment="Center"
+                             TextAlignment="Center"
+                             Padding="0"
                              SelectionBrush="Transparent"
                              TextChanged="CurrentTextBox_TextChanged"/>
                 </StackPanel>
