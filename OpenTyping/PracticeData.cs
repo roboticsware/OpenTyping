@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -69,6 +70,8 @@ public class PracticeData
                 PracticeData practiceData = Parse(dataLines);
                 practiceData.Location = dataFileLocation;
 
+
+
                 return practiceData;
             }
             catch (InvalidPracticeDataException ex)
@@ -87,6 +90,10 @@ public class PracticeData
                 {
                     targetResName = "WordData-ko-topik" + topik;
                 }
+            }
+            else if (string.Equals(Settings.Default.ProgramLang, "kaa", StringComparison.OrdinalIgnoreCase))
+            {
+                targetResName = "WordData-kaa";
             }
             else if (MainWindow.CurrentKeyLayout.Character == "UZB")
             {
@@ -120,7 +127,9 @@ public class PracticeData
                     PracticeData practiceData = Parse(dataLines);
                     practiceData.Location = res;
 
-                    if (practiceData.Character == MainWindow.CurrentKeyLayout.Character)
+                    if (practiceData.Character == MainWindow.CurrentKeyLayout.Character ||
+                        (string.Equals(practiceData.Character, "KAA", StringComparison.OrdinalIgnoreCase) &&
+                         (MainWindow.CurrentKeyLayout.Character == "UZB" || MainWindow.CurrentKeyLayout.Character == "ENG")))
                     {
                         return practiceData;
                     }
@@ -150,10 +159,26 @@ public class PracticeData
 
             foreach (string practiceDataFile in practiceDataFiles)
             {
-                PracticeData practiceData = Load(practiceDataFile);
-                if (character != null && practiceData.Character != character)
+                PracticeData practiceData;
+                try
                 {
-                    continue; 
+                    practiceData = Load(practiceDataFile);
+                }
+                catch (PracticeDataLoadFail)
+                {
+                    string content = File.ReadAllText(practiceDataFile, Encoding.UTF8);
+                    if (content.Contains("\"Prompts\""))
+                    {
+                        continue;
+                    }
+                    throw;
+                }
+
+                if (character != null && 
+                    !string.Equals(practiceData.Character, character, StringComparison.OrdinalIgnoreCase) && 
+                    !string.Equals(practiceData.Character, "All", StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
                 }
 
                 PracticeData duplicate = practiceDataList.Find(data => data.Name == practiceData.Name);

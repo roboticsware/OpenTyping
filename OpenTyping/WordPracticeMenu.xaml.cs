@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using FamFamFam.Flags.Wpf;
 
 namespace OpenTyping
 {
@@ -48,10 +49,24 @@ namespace OpenTyping
             new Timer("∞")
         };
 
+        public List<CountryData> CustomCountries { get; }
+
         public WordPracticeMenu()
         {
+            CustomCountries = new List<CountryData>(CountryData.AllCountries);
+            try
+            {
+                CustomCountries.Add(CreateCountryData("kaa", "Qaraqalpaqstan"));
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to add custom country: {ex}");
+            }
+
             InitializeComponent();
             SetTextBylanguage();
+
+            this.Loaded += WordPracticeMenu_Loaded;
 
             LoadDatabase();
         }
@@ -60,6 +75,103 @@ namespace OpenTyping
         {
             await Rank.GetUsersAsync();
             LVusers.ItemsSource = Rank.users;
+        }
+
+        private void WordPracticeMenu_Loaded(object sender, RoutedEventArgs e)
+        {
+            UpdateDefaultCountry();
+        }
+
+        public void UpdateDefaultCountry()
+        {
+            string currentLayoutChar = MainWindow.CurrentKeyLayout.Character;
+            string recommendedCountry = "";
+
+            if (currentLayoutChar == "KAA")
+            {
+                recommendedCountry = "kaa";
+            }
+            else
+            {
+                recommendedCountry = "uz";
+            }
+
+            string currentSelectedCode = "";
+            if (CountryPicker.SelectedItem is CountryData currentCountry)
+            {
+                currentSelectedCode = currentCountry.Iso2.ToLower();
+            }
+            else
+            {
+                currentSelectedCode = ((string)Settings.Default["Country"]).ToLower();
+            }
+
+            var defaultRecommendedCountries = new List<string> { "uz", "kaa", "kr", "gb", "" };
+
+            if (defaultRecommendedCountries.Contains(currentSelectedCode))
+            {
+                CountryPicker.SelectedItem = GetCountryData(recommendedCountry);
+            }
+        }
+
+        private CountryData CreateCountryData(string iso2, string name)
+        {
+            var ctor = typeof(CountryData).GetConstructor(
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public,
+                null,
+                new[] { typeof(string), typeof(string) },
+                null);
+            if (ctor != null)
+            {
+                var parameters = ctor.GetParameters();
+                if (parameters[0].Name.ToLower().Contains("name"))
+                {
+                    return (CountryData)ctor.Invoke(new object[] { name, iso2 });
+                }
+                else
+                {
+                    return (CountryData)ctor.Invoke(new object[] { iso2, name });
+                }
+            }
+
+            var country = (CountryData)Activator.CreateInstance(typeof(CountryData));
+
+            var iso2Prop = typeof(CountryData).GetProperty("Iso2");
+            if (iso2Prop != null && iso2Prop.CanWrite)
+            {
+                iso2Prop.SetValue(country, iso2, null);
+            }
+            else
+            {
+                var field = typeof(CountryData).GetField("<Iso2>k__BackingField", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                if (field != null) field.SetValue(country, iso2);
+            }
+
+            var nameProp = typeof(CountryData).GetProperty("Name");
+            if (nameProp != null && nameProp.CanWrite)
+            {
+                nameProp.SetValue(country, name, null);
+            }
+            else
+            {
+                var field = typeof(CountryData).GetField("<Name>k__BackingField", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                if (field != null) field.SetValue(country, name);
+            }
+
+            return country;
+        }
+
+        private CountryData? GetCountryData(string countryName)
+        {
+            foreach (var country in CustomCountries)
+            {
+                if (country.Iso2.ToLower() == countryName)
+                {
+                    return country;
+                }
+            }
+
+            return null;
         }
 
         private void SetTextBylanguage()
@@ -73,6 +185,10 @@ namespace OpenTyping
         {
             Settings.Default["Name"] = TBname.Text;
             Settings.Default["Org"] = TBorg.Text;
+            if (CountryPicker.SelectedItem is CountryData country)
+            {
+                Settings.Default["Country"] = country.Iso2.ToLower();
+            }
 
             WordPracticeWindow wordPracticeWindow = new WordPracticeWindow(countdownTime);
             wordPracticeWindow.Closed += new EventHandler(WordPracticeWindow_Closed);

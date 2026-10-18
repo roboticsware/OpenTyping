@@ -61,6 +61,15 @@ namespace OpenTyping.Resources.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  (Qaraqalpaqsha).
+        /// </summary>
+        internal static string KarakalpakSuffix {
+            get {
+                return ResourceManager.GetString("KarakalpakSuffix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accuracy.
         /// </summary>
         internal static string Accuracy {

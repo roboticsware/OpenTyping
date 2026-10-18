@@ -95,7 +95,17 @@
     <None Include="data\Madhiya.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="data\Gimn.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <EmbeddedResource Include="data\WordData-uz-lot.json" />
+    <EmbeddedResource Include="data\WordData-kaa.json" />
+    <None Include="data\JerjangaqDoktor1.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\JerjangaqDoktor2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="data\YeryongoqDoktor1.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -115,6 +125,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="layouts\UzbLatin.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="layouts\KaaLatin.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="NLog.config">
@@ -141,6 +154,7 @@
     <Resource Include="Resources\Fonts\NanumBarunGothicUltraLight.ttf" />
     <None Include="App.config" />
     <Resource Include="Resources\icon.png" />
+    <Resource Include="Resources\Flags\kaa.png" />
     <Resource Include="FodyWeavers.xml" />
     <Resource Include="Resources\logo.png" />
     <Resource Include="icon.ico" />

@@ -13,7 +13,7 @@
              d:DesignWidth="800">
     <UserControl.Resources>
         <local:IndexConverter x:Key="IndexConverter"/>
-        <flags:CountryIdToFlagImageSourceConverter x:Key="CountryIdToFlagImageSourceConverter" />
+        <local:LocalCountryIdToFlagImageSourceConverter x:Key="CountryIdToFlagImageSourceConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -131,7 +131,7 @@
                 <TextBlock Name="TBlblName" Margin="0" FontWeight="Bold" FontSize="15" Text="Name:" VerticalAlignment="Center"/>
                 <TextBox Name="TBname" MaxLength="30" Width="130" Margin="0 0 0 0" FontSize="20"></TextBox>
 
-                <ComboBox Width="60" x:Name="CountryPicker" ItemsSource="{Binding Source={x:Static flags:CountryData.AllCountries}}">
+                <ComboBox Width="60" x:Name="CountryPicker" ItemsSource="{Binding ElementName=SelfControl, Path=CustomCountries}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate DataType="flags:CountryData">
                             <StackPanel Orientation="Horizontal">

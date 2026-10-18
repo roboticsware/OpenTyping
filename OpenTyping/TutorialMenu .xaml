@@ -1,4 +1,4 @@
-﻿<local:PracticeMenuBase x:Name="SelfControl"
+<local:PracticeMenuBase x:Name="SelfControl"
                         x:Class="OpenTyping.TutorialMenu"
                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -21,7 +21,8 @@
                   NavigationButtonsPosition="Outside">
         <mah:FlipView.Items>
             <Grid>
-                <StackPanel>
+                <!-- Uzbek Version -->
+                <StackPanel x:Name="Page1Uz" Visibility="Visible">
                     <TextBlock TextWrapping="Wrap" FontSize="20" Margin="0 20 0 0">
                         Barcha ishlarda boʻlgani kabi klaviaturada yozishning ham oʻz qoidalari bor. Bu qoidalarga amal qilmasdan ham yozish mumkin, albatta. Lekin siz toʻgʻri va tez yozishni istasangiz qoidalarga amal qilishingiz shart!
                     </TextBlock>
@@ -34,19 +35,42 @@
                         <Bold>2) F va J tugmalaridagi belgilar bekorga qoʻyilmagan!</Bold> Koʻrsatkich barmoqlar shu harflarda turishi kerak. Shunda qolgan barmoqlar oʻz oʻrinini topadi. Pianino chalishdagi qoidalar Barcha ishlarda boʻlgani kabi klaviaturada yozishning ham oʻz qoidalari bor. Bu qoidalarga amal qilmasdan ham yozish mumkin, albatta. Lekin siz toʻgʻri va tez yozishni istasangiz qoidalarga amal qilishingiz shart!
                     </TextBlock>
                 </StackPanel>
+
+                <!-- Karakalpak Version -->
+                <StackPanel x:Name="Page1Kaa" Visibility="Collapsed">
+                    <TextBlock TextWrapping="Wrap" FontSize="20" Margin="0 20 0 0">
+                        Barlıq jumıslarda bolǵanınday, klaviaturada jazıwdıń da óz qaǵıydaları bar. Bul qaǵıydalarǵa ámel etpey-aq jazıw da múmkin, álbette. Biraq siz durıs hám tez jazıwdı qáleseńiz, qaǵıydalarǵa ámel etiwińiz shárt!
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap">
+                        <LineBreak/>
+                        <LineBreak/>
+                        <Bold>1) Hesh qashan klaviaturaǵa qaramáń!</Bold> Bul álbette biraz qızıq esitiliwi múmkin. Biraq dál qaramaw sizdiń tezligińizdiń artıwına sebep boladı. Bunıń ushın túymelerdiń jaylasıwın yadtan biliwińiz kerek. Basında biraz qıyın bolıwı múmkin. Sonlıqtan da TezTer baǵdarlamasında klaviatura hám basqan túymelerińiz kórinedi.
+                        <LineBreak/>
+                        <LineBreak/>                    
+                        <Bold>2) F hám J túymelerindegi belgiler biykarǵa qoyılmaǵan!</Bold> Kórsetkish barmaqlar sol háriplerde turıwı kerek. Sonda qalǵan barmaqlar óz ornın tabadı. Pianino shertiwdegi qaǵıydalar sıyaqlı, klaviaturada jazıwdıń da óz qaǵıydaları bar. Bul qaǵıydalarǵa ámel etpey-aq jazıw da múmkin, álbette. Biraq siz durıs hám tez jazıwdı qáleseńiz, qaǵıydalarǵa ámel etiwińiz shárt!
+                    </TextBlock>
+                </StackPanel>
             </Grid>
             <Grid>
                 <StackPanel>
                     <Image Source="Resources/Imgs/typing_tutorial.png"/>
-                    
                 </StackPanel>
             </Grid>
             <Grid>
-                <TextBlock TextWrapping="Wrap" Margin="0 20 0 0">
-                        <Bold>3) Klaviaturada 2 ta shift tugmasi bor!</Bold> Koʻpchilik eʻtibor bermaydigan yana bir qoida shuki, siz shift tugmasini asosiy tugmani bosayotgan qoʻlingiz bilan emas, narigi qoʻlingiz bilan bosishingiz kerak. Misol uchun siz katta “A” termoqchi boʻlsangiz, oʻng qoʻlingiz bilan shiftni bosasiz, agar “L” ni bosmoqchi boʻlsangiz shiftni chap qoʻlingiz bilan bosishingiz kerak.
+                <!-- Uzbek Version -->
+                <TextBlock x:Name="Page3Uz" Visibility="Visible" TextWrapping="Wrap" Margin="0 20 0 0">
+                        <Bold>3) Klaviaturada 2 ta shift tugmasi bor!</Bold> Koʻpchilik eʻtibor bermaydigan yana bir qoida shuki, siz shift tugmasini asosiy tugmani bosayotgan qoʻlingiz bilan emas, narigi qoʻlingiz bilan bosishingiz kerek. Misol uchun siz katta “A” termoqchi boʻlsangiz, oʻng qoʻlingiz bilan shiftni bosasiz, agar “L” ni bosmoqchi boʻlsangiz shiftni chap qoʻlingiz bilan bosishingiz kerak.
                         <LineBreak/>
                         <LineBreak/>
                         <Bold>4) Mashq muvaffaqiyat kalitidir!</Bold> Tepadagi qoidalarga amal qilgan holda koʻp mashq qilsangiz, klaviaturada yozish tezligingiz oshishi aniq. Mashq qilishda matn tanlashga ham eʻtibor berish kerak. Siz tanlagan matn faqatgina harflardan emas, katta va kichik harflar, sonlar va belgilardan iborat boʻlishi kerak.
+                </TextBlock>
+
+                <!-- Karakalpak Version -->
+                <TextBlock x:Name="Page3Kaa" Visibility="Collapsed" TextWrapping="Wrap" Margin="0 20 0 0">
+                        <Bold>3) Klaviaturada 2 shift túymesi bar!</Bold> Kópshilik itibar bermeytuǵın jáne bir qaǵıyda sol, siz shift túymesin tiykarǵı túymeni basıp atırǵan qolıńız benen emes, ekinshi qolıńız benen basıwıńız kerek. Misal ushın, siz bas "A" hárpin jazbaqshı bolsańız, oń qolıńız benen shift-ti basasız, eger "L" hárpin baspaqshı bolsańız, shift-ti sol qolıńız benen basıwıńız kerek.
+                        <LineBreak/>
+                        <LineBreak/>
+                        <Bold>4) Shınıǵıw - tabıs gilti!</Bold> Joqarıdaǵı qaǵıydalarǵa ámel etken halda kóp shınıqsańız, klaviaturada jazıw tezligińiz artıwı anıq. Shınıǵıwda matn tańlawǵa da itibar beriw kerek. Siz tańlaǵan matn tek háriplerden emes, bas hám kishi háripler, sanlar hám belgilerden ibarat bolıwı kerek.
                 </TextBlock>
             </Grid>
         </mah:FlipView.Items>

@@ -18,8 +18,8 @@
             <BitmapImage x:Key="AppIcon">pack://application:,,,/Resources/icon.png</BitmapImage>
             <BitmapImage x:Key="AppLogo">pack://application:,,,/Resources/logo.png</BitmapImage>
 
-            <FontFamily x:Key="NanumBarunGothic">pack://application:,,,/Resources/Fonts/#나눔바른고딕</FontFamily>
-            <FontFamily x:Key="NanumGothic">pack://application:,,,/Resources/Fonts/#나눔고딕</FontFamily>
+            <FontFamily x:Key="NanumBarunGothic">Segoe UI, /Resources/Fonts/#나눔바른고딕, Tahoma, Arial</FontFamily>
+            <FontFamily x:Key="NanumGothic">Segoe UI, /Resources/Fonts/#나눔고딕, Tahoma, Arial</FontFamily>
             <FontFamily x:Key="LabDigital">pack://application:,,,/Resources/Fonts/#LAB디지털</FontFamily>
             <FontFamily x:Key="PTMono">pack://application:,,,/Resources/Fonts/#PTMono</FontFamily>
 

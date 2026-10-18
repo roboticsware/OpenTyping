@@ -46,6 +46,18 @@ namespace OpenTyping
                 string layoutsDirectory = Path.Combine(exeDirectory, "layouts");
                 Settings.Default[KeyLayoutDataDirStr] = layoutsDirectory;
             }
+            else
+            {
+                // AppData path is already set — but still sync any newer/new files
+                // from the exe's bundled layouts folder (e.g. newly added KaaLatin data files).
+                string exeLayoutsDir = Path.Combine(exeDirectory, "layouts");
+                string savedLayoutsDir = (string)Settings.Default[KeyLayoutDataDirStr];
+                if (!string.Equals(exeLayoutsDir, savedLayoutsDir, StringComparison.OrdinalIgnoreCase)
+                    && Directory.Exists(exeLayoutsDir))
+                {
+                    MigrateDirectory(exeLayoutsDir, savedLayoutsDir, "*.json");
+                }
+            }
 
             try
             {
@@ -140,6 +152,8 @@ namespace OpenTyping
                 CurrentKeyLayout = settingsWindow.SelectedKeyLayout;
 
                 KeyPracticeMenu.KeyLayoutBox.LoadKeyLayout();
+                WordPracticeMenu.UpdateDefaultCountry();
+                VeneziaMenu.UpdateDefaultCountry();
 
                 var currentKeyLayoutNameBinding = new Binding
                 {
@@ -216,7 +230,8 @@ namespace OpenTyping
 
         private void CheckTutorial()
         {
-            if ((string)Settings.Default[ProgramLang] == "uz")
+            string programLang = (string)Settings.Default[ProgramLang];
+            if (programLang == "uz" || programLang == "kaa")
             {
                 TutorialTabItem.Visibility = Visibility.Visible;
             }
@@ -334,6 +349,53 @@ namespace OpenTyping
             if (VeneziaMenu != null)
             {
                 VeneziaMenu.SetTextBylanguage();
+            }
+
+            if (TutorialMenu != null)
+            {
+                TutorialMenu.SetTextBylanguage(langCode);
+            }
+        }
+
+        private static bool IsDirectoryWritable(string dirPath)
+        {
+            try
+            {
+                if (!Directory.Exists(dirPath))
+                {
+                    Directory.CreateDirectory(dirPath);
+                }
+                string tempFile = Path.Combine(dirPath, Path.GetRandomFileName());
+                File.WriteAllText(tempFile, "test");
+                File.Delete(tempFile);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private static void MigrateDirectory(string sourceDir, string destDir, string searchPattern)
+        {
+            try
+            {
+                Directory.CreateDirectory(destDir);
+                if (Directory.Exists(sourceDir))
+                {
+                    foreach (string file in Directory.GetFiles(sourceDir, searchPattern))
+                    {
+                        string destFile = Path.Combine(destDir, Path.GetFileName(file));
+                        if (!File.Exists(destFile) || File.GetLastWriteTime(file) > File.GetLastWriteTime(destFile))
+                        {
+                            File.Copy(file, destFile, true);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                App.logger.Error($"Failed to migrate directory from {sourceDir} to {destDir}: {ex.Message}");
             }
         }
     }
