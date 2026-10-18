@@ -290,6 +290,7 @@
                     </TabItem.Header>
                     <StackPanel Orientation="Vertical" Margin="15">
                         <RadioButton x:Name="uz" GroupName="Lang" FontSize="18">O'zbekcha</RadioButton>
+                        <RadioButton x:Name="kaa" GroupName="Lang" FontSize="18">Qaraqalpaqsha</RadioButton>
                         <RadioButton x:Name="ru" GroupName="Lang" FontSize="18">Русский</RadioButton>
                         <RadioButton x:Name="en" GroupName="Lang" FontSize="18">English</RadioButton>
                         <RadioButton x:Name="ko" GroupName="Lang" FontSize="18">한국어</RadioButton>

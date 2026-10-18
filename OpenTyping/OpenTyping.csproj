@@ -70,14 +70,13 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Lang\LangStr.ko.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>LangStr.ko.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Lang\LangStr.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>LangStr.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Lang\LangStr.ko.resx" />
+    <EmbeddedResource Include="Resources\Lang\LangStr.resx" />
+    <EmbeddedResource Include="Resources\Lang\en.json" />
+    <EmbeddedResource Include="Resources\Lang\ko.json" />
+    <EmbeddedResource Include="Resources\Lang\ru.json" />
+    <EmbeddedResource Include="Resources\Lang\uz.json" />
+    <EmbeddedResource Include="Resources\Lang\kaa.json" />
   </ItemGroup>
 
   <ItemGroup>

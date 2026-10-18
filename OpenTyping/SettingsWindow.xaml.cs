@@ -104,6 +104,10 @@ namespace OpenTyping
             {
                 uz.IsChecked = true;
             }
+            else if (programLang == "kaa")
+            {
+                kaa.IsChecked = true;
+            }
             else if (programLang == "en")
             {
                 en.IsChecked = true;
@@ -353,6 +357,10 @@ namespace OpenTyping
             if ((bool)uz.IsChecked)
             {
                 programLang = "uz";
+            }
+            else if ((bool)kaa.IsChecked)
+            {
+                programLang = "kaa";
             }
             else if ((bool)en.IsChecked)
             {
