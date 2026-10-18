@@ -217,8 +217,8 @@ namespace OpenTyping
 
         private void UpdateTextBoxPadding()
         {
-            // 한글 폰트의 내장 상단 여백을 보정하여 텍스트박스 수직 정중앙에 배치
-            double topOffset = -BaseFontSize * 1.25;
+            // Caret과 글자가 사각박스 내에서 상하 여백을 균등하게 유지하며 초과하지 않도록 보정
+            double topOffset = -BaseFontSize * 0.7;
             CurrentTextBox.Padding = new Thickness(0, topOffset, 0, 0);
         }
 

@@ -100,11 +100,12 @@
                                      ConverterParameter=@VALUE*8}"
                              Height="{Binding BaseFontSize,
                                      Converter={local:MathConverter},
-                                     ConverterParameter=@VALUE*9}"
+                                     ConverterParameter=@VALUE*10}"
                              VerticalAlignment="Center"
                              VerticalContentAlignment="Center"
                              HorizontalContentAlignment="Center"
                              TextAlignment="Center"
+                             ClipToBounds="True"
                              ScrollViewer.VerticalScrollBarVisibility="Disabled"
                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                              SelectionBrush="Transparent"
